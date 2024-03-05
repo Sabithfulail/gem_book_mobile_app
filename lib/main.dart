@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/features/presentation/views/home_view/home_view.dart';
+import 'package:gem_book/features/presentation/views/splash/splash_view.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const HomeView());
+            home: const SplashScreen());
       },
     );
   }

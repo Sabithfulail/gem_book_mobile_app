@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gem_book/units/app_images.dart';
+import 'package:sizer/sizer.dart';
 
 import '../login/login_view.dart';
 class SplashScreen extends StatefulWidget {
@@ -16,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 5), () => Navigator.pushReplacement(
+    Timer(const Duration(seconds: 10), () => Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const LoginView()), // Replace with your login view widget
     ));
@@ -30,13 +33,25 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Container(
           decoration:  const BoxDecoration(
               gradient:  LinearGradient(
-                colors: [Colors.white, Color(0xFFE7E7E7)],
+                colors: [Colors.purple, Color(0xFFE7E7E7)],
                 stops: [0.0, 1.0],
                 begin: FractionalOffset.topCenter,
                 end: FractionalOffset.bottomCenter,
               )),
-          child: const Center(
-            child: Icon(Icons.ac_unit,color: Colors.deepOrangeAccent,),
+          child:  Center(
+            child: Container(
+              height: 14.h,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(50),
+                  
+                ),
+              ),
+              child: Image(
+                image: AssetImage(AppImages.icGem),
+              ),
+            ),
           ),
         ),
       ),
