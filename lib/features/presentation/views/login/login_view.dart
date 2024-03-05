@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/home_view/home_view.dart';
-import 'package:gem_book/features/presentation/views/login/sign_up_view.dart';
+import 'package:gem_book/features/presentation/views/intro/intro_page.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -103,7 +103,7 @@ class LoginView extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const SignUpView()), // Replace with your login view widget
+                MaterialPageRoute(builder: (context) => const IntroPage()), // Replace with your login view widget
               );
             },
             child: const Text("Sign Up", style: TextStyle(color: Colors.purple),)
