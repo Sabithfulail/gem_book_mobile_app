@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gem_book/features/presentation/views/home_view/home_view.dart';
 import 'package:gem_book/features/presentation/views/login/sign_up_view.dart';
 
 class LoginView extends StatelessWidget {
@@ -65,6 +66,10 @@ class LoginView extends StatelessWidget {
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeView()), // Replace with your login view widget
+            );
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
@@ -73,7 +78,7 @@ class LoginView extends StatelessWidget {
           ),
           child: const Text(
             "Login",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 20 ,color: Colors.white),
           ),
         )
       ],
