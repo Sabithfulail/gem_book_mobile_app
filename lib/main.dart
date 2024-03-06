@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gem_book/features/presentation/views/splash/splash_view.dart';
 import 'package:sizer/sizer.dart';
-
-import 'features/presentation/views/splash/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,6 +9,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Sizer(
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const SplashScreen());
+            home: const HomeView());
       },
     );
   }

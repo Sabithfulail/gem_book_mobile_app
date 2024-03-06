@@ -6,6 +6,8 @@ import 'package:gem_book/units/app_strings.dart';
 
 import '../../widgets/btn_component.dart';
 
+import '../../../../units/app_colors.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
@@ -44,8 +46,31 @@ class LoginView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         CustomTextField(hintText: AppStrings.userName,icon: Icon(Icons.person),),
+        TextField(
+          decoration: InputDecoration(
+              hintText: "Username",
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide.none
+              ),
+              fillColor: AppColors.baseColor.withOpacity(0.1),
+              filled: true,
+              prefixIcon: const Icon(Icons.person)),
+        ),
         const SizedBox(height: 10),
         const CustomTextField(hintText: AppStrings.password,icon: Icon(Icons.remove_red_eye),),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Password",
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none),
+            fillColor: AppColors.baseColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.password),
+          ),
+          obscureText: true,
+        ),
         const SizedBox(height: 10),
         const BtnComponent(
           title: AppStrings.login,
@@ -60,7 +85,7 @@ class LoginView extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
-            backgroundColor: Colors.purple,
+            backgroundColor: AppColors.baseColor,
           ),
           child: const Text(
             "Login",
@@ -75,7 +100,7 @@ class LoginView extends StatelessWidget {
     return TextButton(
       onPressed: () {},
       child: const Text("Forgot password?",
-        style: TextStyle(color: Colors.purple),
+        style: TextStyle(color: AppColors.baseColor),
       ),
     );
   }
@@ -92,7 +117,7 @@ class LoginView extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const IntroPage()), // Replace with your login view widget
               );
             },
-            child: const Text("Sign Up", style: TextStyle(color: Colors.purple),)
+            child: const Text("Sign Up", style: TextStyle(color: AppColors.baseColor),)
         )
       ],
     );

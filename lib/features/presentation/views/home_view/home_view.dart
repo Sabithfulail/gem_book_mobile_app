@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
-
-
-import 'dart:io';
-import 'dart:typed_data';
-
+import '../../../../units/app_colors.dart';
 import '../../../../units/app_images.dart';
 
 class HomeView extends StatefulWidget {
@@ -26,14 +22,14 @@ class _HomeViewState extends State<HomeView> {
         child: drawerView(),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: AppColors.baseColor,
         title: const Center(child: Text("Gem Home")),
         leading: GestureDetector(
-          child:SvgPicture.asset(
+          child: SvgPicture.asset(
             AppImages.iconMenu,
             width: 0.5.w,
           ),
-          onTap: (){
+          onTap: () {
             _scaffoldKey.currentState!.openDrawer();
           },
         ),
@@ -45,21 +41,16 @@ class _HomeViewState extends State<HomeView> {
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-
-            ],
+            children: <Widget>[],
           ),
         ),
       ),
     );
   }
 
-
-   drawerView (){
+  drawerView() {
     return const Column(
-      children: [
-
-      ],
+      children: [],
     );
   }
- }
+}

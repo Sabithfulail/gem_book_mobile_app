@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/login/login_view.dart';
 
+import '../../../../units/app_colors.dart';
+
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
 
@@ -44,7 +46,7 @@ class SignUpView extends StatelessWidget {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
-                        fillColor: Colors.purple.withOpacity(0.1),
+                        fillColor: AppColors.baseColor.withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.person)),
                   ),
@@ -57,7 +59,7 @@ class SignUpView extends StatelessWidget {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
-                        fillColor: Colors.purple.withOpacity(0.1),
+                        fillColor: AppColors.baseColor.withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.email)),
                   ),
@@ -70,7 +72,7 @@ class SignUpView extends StatelessWidget {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
                           borderSide: BorderSide.none),
-                      fillColor: Colors.purple.withOpacity(0.1),
+                      fillColor: AppColors.baseColor.withOpacity(0.1),
                       filled: true,
                       prefixIcon: const Icon(Icons.password),
                     ),
@@ -85,7 +87,7 @@ class SignUpView extends StatelessWidget {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
                           borderSide: BorderSide.none),
-                      fillColor: Colors.purple.withOpacity(0.1),
+                      fillColor: AppColors.baseColor.withOpacity(0.1),
                       filled: true,
                       prefixIcon: const Icon(Icons.password),
                     ),
@@ -102,7 +104,7 @@ class SignUpView extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      backgroundColor: Colors.purple,
+                      backgroundColor: AppColors.baseColor,
                     ),
                     child:  const Text(
                       "Sign up",
@@ -116,7 +118,7 @@ class SignUpView extends StatelessWidget {
               //   decoration: BoxDecoration(
               //     borderRadius: BorderRadius.circular(25),
               //     border: Border.all(
-              //       color: Colors.purple,
+              //       color: AppColors.baseColor,
               //     ),
               //     boxShadow: [
               //       BoxShadow(
@@ -148,7 +150,7 @@ class SignUpView extends StatelessWidget {
               //         const Text("Sign In with Google",
               //           style: TextStyle(
               //             fontSize: 16,
-              //             color: Colors.purple,
+              //             color: AppColors.baseColor,
               //           ),
               //         ),
               //       ],
@@ -167,7 +169,7 @@ class SignUpView extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => const LoginView()), // Replace with your login view widget
                         );
                       },
-                      child: const Text("Login", style: TextStyle(color: Colors.purple),)
+                      child: const Text("Login", style: TextStyle(color: AppColors.baseColor),)
                   )
                 ],
               )
