@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/home_view/home_view.dart';
 import 'package:gem_book/features/presentation/views/intro/intro_page.dart';
+import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
+import 'package:gem_book/units/app_strings.dart';
+
+import '../../widgets/btn_component.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -27,10 +31,10 @@ class LoginView extends StatelessWidget {
     return const Column(
       children: [
         Text(
-          "Welcome Back",
+          "${AppStrings.welcome} ${AppStrings.back}",
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your credential to login"),
+        Text(AppStrings.enterCredentials),
       ],
     );
   }
@@ -39,31 +43,13 @@ class LoginView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TextField(
-          decoration: InputDecoration(
-              hintText: "Username",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none
-              ),
-              fillColor: Colors.purple.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.person)),
-        ),
+        CustomTextField(hintText: AppStrings.userName,icon: Icon(Icons.person),),
         const SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Password",
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none),
-            fillColor: Colors.purple.withOpacity(0.1),
-            filled: true,
-            prefixIcon: const Icon(Icons.password),
-          ),
-          obscureText: true,
-        ),
+        const CustomTextField(hintText: AppStrings.password,icon: Icon(Icons.remove_red_eye),),
         const SizedBox(height: 10),
+        const BtnComponent(
+          title: AppStrings.login,
+        ),
         ElevatedButton(
           onPressed: () {
             Navigator.pushReplacement(
