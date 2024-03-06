@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/home_view/home_view.dart';
 import 'package:gem_book/features/presentation/views/login/sign_up_view.dart';
 
+import '../../../../units/app_colors.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
@@ -46,7 +48,7 @@ class LoginView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none
               ),
-              fillColor: Colors.purple.withOpacity(0.1),
+              fillColor: AppColors.baseColor.withOpacity(0.1),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
         ),
@@ -57,7 +59,7 @@ class LoginView extends StatelessWidget {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
-            fillColor: Colors.purple.withOpacity(0.1),
+            fillColor: AppColors.baseColor.withOpacity(0.1),
             filled: true,
             prefixIcon: const Icon(Icons.password),
           ),
@@ -74,7 +76,7 @@ class LoginView extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
-            backgroundColor: Colors.purple,
+            backgroundColor: AppColors.baseColor,
           ),
           child: const Text(
             "Login",
@@ -89,7 +91,7 @@ class LoginView extends StatelessWidget {
     return TextButton(
       onPressed: () {},
       child: const Text("Forgot password?",
-        style: TextStyle(color: Colors.purple),
+        style: TextStyle(color: AppColors.baseColor),
       ),
     );
   }
@@ -106,7 +108,7 @@ class LoginView extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const SignUpView()), // Replace with your login view widget
               );
             },
-            child: const Text("Sign Up", style: TextStyle(color: Colors.purple),)
+            child: const Text("Sign Up", style: TextStyle(color: AppColors.baseColor),)
         )
       ],
     );
