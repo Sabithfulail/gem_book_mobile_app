@@ -8,5 +8,19 @@ class AppStrings {
   static const String userName = "Username";
   static const String password = "Password";
   static const String login = "Login";
+  static const String introDescription ="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse";
+  static const String register = "Register";
   static const String forgotPassword = "Forgot password";
+
+
+
+
+
+
+
+
+
+
+
+
 }

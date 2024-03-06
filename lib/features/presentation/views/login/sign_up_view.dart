@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/features/presentation/views/login/login_view.dart';
-
 import '../../../../units/app_colors.dart';
+import '../../../../units/routes.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -21,7 +20,6 @@ class SignUpView extends StatelessWidget {
               Column(
                 children: <Widget>[
                   const SizedBox(height: 60.0),
-
                   const Text(
                     "Sign up",
                     style: TextStyle(
@@ -149,7 +147,7 @@ class SignUpView extends StatelessWidget {
               //
               //         const Text("Sign In with Google",
               //           style: TextStyle(
-              //             fontSize: 16,
+              //             fontSize: 16,nbv
               //             color: AppColors.baseColor,
               //           ),
               //         ),
@@ -164,10 +162,7 @@ class SignUpView extends StatelessWidget {
                   const Text("Already have an account?"),
                   TextButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const LoginView()), // Replace with your login view widget
-                        );
+                        Navigator.popUntil(context, ModalRoute.withName(Routes.kLoginView));
                       },
                       child: const Text("Login", style: TextStyle(color: AppColors.baseColor),)
                   )

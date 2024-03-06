@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? hintText;
@@ -8,16 +9,20 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: hintText ?? "",
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide(color: Colors.grey),),
-
-        fillColor: Colors.white.withOpacity(0.1),
-        filled: true,
-        prefixIcon: icon,
+    return Padding(
+      padding:  EdgeInsets.only(
+        bottom: 2.h
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: hintText ?? "",
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: const BorderSide(color: Colors.grey),),
+          fillColor: Colors.white.withOpacity(0.1),
+          filled: true,
+          prefixIcon: icon,
+        ),
       ),
     );
   }

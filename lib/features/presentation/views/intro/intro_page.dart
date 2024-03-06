@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/btn_component.dart';
 import 'package:gem_book/units/app_images.dart';
 import 'package:gem_book/units/app_strings.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../units/routes.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -19,9 +19,7 @@ class IntroPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 5.h,
-                  ),
+                  SizedBox(height: 5.h),
                   Container(
                     height: 40.h,
                     width: double.infinity,
@@ -41,21 +39,29 @@ class IntroPage extends StatelessWidget {
                       fontSize: 40,
                     ),
                   ),
-                  SizedBox(height: 5.h,),
-                  Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse",
+                  SizedBox(height: 5.h),
+                  const Text(
+                    AppStrings.introDescription,
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
-           const BtnComponent(title: "Login"),
+            BtnComponent(
+              title: AppStrings.login,
+              color: Colors.grey,
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName(Routes.kLoginView));
+              },
+            ),
             const SizedBox(
               height: 8,
             ),
-            const BtnComponent(
-              title: "Register",
-              color: Colors.grey,
+            BtnComponent(
+              title: AppStrings.register,
+              onTap: () {
+                Navigator.pushNamed(context, Routes.kSignUpView);
+              },
             ),
           ],
         ),

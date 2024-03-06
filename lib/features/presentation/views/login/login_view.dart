@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/features/presentation/views/intro/intro_page.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
 import 'package:gem_book/units/app_strings.dart';
 
 import '../../../../units/app_colors.dart';
+import '../../../../units/routes.dart';
 import '../../widgets/btn_component.dart';
 
 class LoginView extends StatelessWidget {
@@ -40,7 +40,7 @@ class LoginView extends StatelessWidget {
   }
 
   _inputField(context) {
-    return Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const CustomTextField(
@@ -57,7 +57,6 @@ class LoginView extends StatelessWidget {
         //       filled: true,
         //       prefixIcon: const Icon(Icons.person)),
         // ),
-        const SizedBox(height: 10),
         const CustomTextField(
           hintText: AppStrings.password,
           icon: Icon(Icons.remove_red_eye),
@@ -74,9 +73,12 @@ class LoginView extends StatelessWidget {
         //   ),
         //   obscureText: true,
         // ),
-        const SizedBox(height: 10),
-        const BtnComponent(
+        BtnComponent(
           title: AppStrings.login,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.kHomeView);
+          },
+
         ),
         // ElevatedButton(
         //   onPressed: () {
@@ -118,12 +120,9 @@ class LoginView extends StatelessWidget {
         const Text("Dont have an account? "),
         TextButton(
             onPressed: () {
-              Navigator.pushReplacement(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        const IntroPage()), // Replace with your login view widget
-              );
+                Routes.kIntroPage);
             },
             child: const Text(
               "Sign Up",
