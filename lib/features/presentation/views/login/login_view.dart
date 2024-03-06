@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/features/presentation/views/home_view/home_view.dart';
 import 'package:gem_book/features/presentation/views/intro/intro_page.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
 import 'package:gem_book/units/app_strings.dart';
 
-import '../../widgets/btn_component.dart';
-
 import '../../../../units/app_colors.dart';
+import '../../widgets/btn_component.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -45,53 +43,60 @@ class LoginView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        CustomTextField(hintText: AppStrings.userName,icon: Icon(Icons.person),),
-        TextField(
-          decoration: InputDecoration(
-              hintText: "Username",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none
-              ),
-              fillColor: AppColors.baseColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.person)),
+        const CustomTextField(
+          hintText: AppStrings.userName,
+          icon: Icon(Icons.person),
         ),
+        // TextField(
+        //   decoration: InputDecoration(
+        //       hintText: "Username",
+        //       border: OutlineInputBorder(
+        //           borderRadius: BorderRadius.circular(18),
+        //           borderSide: BorderSide.none),
+        //       fillColor: AppColors.baseColor.withOpacity(0.1),
+        //       filled: true,
+        //       prefixIcon: const Icon(Icons.person)),
+        // ),
         const SizedBox(height: 10),
-        const CustomTextField(hintText: AppStrings.password,icon: Icon(Icons.remove_red_eye),),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Password",
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none),
-            fillColor: AppColors.baseColor.withOpacity(0.1),
-            filled: true,
-            prefixIcon: const Icon(Icons.password),
-          ),
-          obscureText: true,
+        const CustomTextField(
+          hintText: AppStrings.password,
+          icon: Icon(Icons.remove_red_eye),
         ),
+        // TextField(
+        //   decoration: InputDecoration(
+        //     hintText: "Password",
+        //     border: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(18),
+        //         borderSide: BorderSide.none),
+        //     fillColor: AppColors.baseColor.withOpacity(0.1),
+        //     filled: true,
+        //     prefixIcon: const Icon(Icons.password),
+        //   ),
+        //   obscureText: true,
+        // ),
         const SizedBox(height: 10),
         const BtnComponent(
           title: AppStrings.login,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeView()), // Replace with your login view widget
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            backgroundColor: AppColors.baseColor,
-          ),
-          child: const Text(
-            "Login",
-            style: TextStyle(fontSize: 20 ,color: Colors.white),
-          ),
-        )
+        // ElevatedButton(
+        //   onPressed: () {
+        //     Navigator.pushReplacement(
+        //       context,
+        //       MaterialPageRoute(
+        //           builder: (context) =>
+        //               const HomeView()), // Replace with your login view widget
+        //     );
+        //   },
+        //   style: ElevatedButton.styleFrom(
+        //     shape: const StadiumBorder(),
+        //     padding: const EdgeInsets.symmetric(vertical: 16),
+        //     backgroundColor: AppColors.baseColor,
+        //   ),
+        //   child: const Text(
+        //     "Login",
+        //     style: TextStyle(fontSize: 20, color: Colors.white),
+        //   ),
+        // )
       ],
     );
   }
@@ -99,7 +104,8 @@ class LoginView extends StatelessWidget {
   _forgotPassword(context) {
     return TextButton(
       onPressed: () {},
-      child: const Text("Forgot password?",
+      child: const Text(
+        "${AppStrings.forgotPassword}?",
         style: TextStyle(color: AppColors.baseColor),
       ),
     );
@@ -114,11 +120,15 @@ class LoginView extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const IntroPage()), // Replace with your login view widget
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const IntroPage()), // Replace with your login view widget
               );
             },
-            child: const Text("Sign Up", style: TextStyle(color: AppColors.baseColor),)
-        )
+            child: const Text(
+              "Sign Up",
+              style: TextStyle(color: AppColors.baseColor),
+            ))
       ],
     );
   }
