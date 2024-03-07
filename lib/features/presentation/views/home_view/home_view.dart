@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../units/app_colors.dart';
-import '../../../../units/app_images.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_images.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

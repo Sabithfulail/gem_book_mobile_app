@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/intro/intro_page.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
-import 'package:gem_book/units/app_strings.dart';
+import 'package:gem_book/utils/app_strings.dart';
 
-import '../../../../units/app_colors.dart';
+import '../../../../utils/app_colors.dart';
 import '../../widgets/btn_component.dart';
 
 class LoginView extends StatelessWidget {

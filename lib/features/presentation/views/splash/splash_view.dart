@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gem_book/units/app_images.dart';
+import 'package:gem_book/utils/app_images.dart';
 import 'package:sizer/sizer.dart';
 
 import '../login/login_view.dart';

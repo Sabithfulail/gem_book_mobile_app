@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/login/login_view.dart';
 
-import '../../../../units/app_colors.dart';
+import '../../../../utils/app_colors.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
