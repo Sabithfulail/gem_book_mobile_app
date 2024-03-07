@@ -8,7 +8,7 @@ import '../../widgets/btn_component.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
-
+  final bool obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +58,10 @@ class LoginView extends StatelessWidget {
         //       prefixIcon: const Icon(Icons.person)),
         // ),
         const SizedBox(height: 10),
-        const CustomTextField(
+        CustomTextField(
           hintText: AppStrings.password,
           icon: Icon(Icons.remove_red_eye),
+          obscureText: obscurePassword,
         ),
         // TextField(
         //   decoration: InputDecoration(
