@@ -9,4 +9,5 @@ class AppImages {
 
   /// SVG
   static const String iconMenu = '${kSVGImagePath}icon_menu$kSVGType';
+  static const String icNotificationBell = '${kSVGImagePath}notification_bell$kSVGType';
 }

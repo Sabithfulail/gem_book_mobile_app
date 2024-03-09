@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/features/presentation/views/splash/splash_view.dart';
+import 'package:gem_book/units/app_constants.dart';
+import 'package:gem_book/units/routes.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, screenType) {
         return MaterialApp(
-            title: 'Flutter Sizer Example',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            home: const SplashScreen());
+          title: kAppName,
+          theme: ThemeData(primarySwatch: Colors.blue),
+          initialRoute: Routes.kSplashView,
+          onGenerateRoute: Routes.generateRoute,
+        );
       },
     );
   }

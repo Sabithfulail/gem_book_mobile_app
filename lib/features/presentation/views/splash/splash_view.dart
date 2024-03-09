@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gem_book/utils/app_images.dart';
+import 'package:gem_book/units/app_images.dart';
+import 'package:gem_book/units/routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../login/login_view.dart';
@@ -20,12 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         const Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const LoginView()), // Replace with your login view widget
-            ));
+        () => Navigator.pushReplacementNamed(context, Routes.kLoginView));
   }
 
   @override

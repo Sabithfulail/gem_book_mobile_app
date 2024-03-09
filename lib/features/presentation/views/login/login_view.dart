@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/features/presentation/views/intro/intro_page.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
 import 'package:gem_book/utils/app_strings.dart';
 
+import '../../../../units/app_colors.dart';
+import '../../../../units/routes.dart';
 import '../../../../utils/app_colors.dart';
 import '../../widgets/btn_component.dart';
 
@@ -78,6 +79,10 @@ class LoginView extends StatelessWidget {
         const SizedBox(height: 10),
         const BtnComponent(
           title: AppStrings.login,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.kHomeView);
+          },
+
         ),
         // ElevatedButton(
         //   onPressed: () {
@@ -119,12 +124,9 @@ class LoginView extends StatelessWidget {
         const Text("Dont have an account? "),
         TextButton(
             onPressed: () {
-              Navigator.pushReplacement(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        const IntroPage()), // Replace with your login view widget
-              );
+                Routes.kIntroPage);
             },
             child: const Text(
               "Sign Up",
