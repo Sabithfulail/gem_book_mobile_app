@@ -41,6 +41,7 @@ class _HomeViewState extends State<HomeView> {
                       borderRadius: BorderRadius.all(Radius.circular(24))),
                   child: const TextField(
                       textAlignVertical: TextAlignVertical.center,
+                      autofocus: false,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Search Category",
@@ -59,6 +60,29 @@ class _HomeViewState extends State<HomeView> {
             _seeAllView(context, "Categories", () {
               print("Hi");
             }),
+            // Row(
+            //   children: [
+            //     _categoriesView(AppImages.icGem, "Ruby"),
+            //   ],
+            // ),
+            SizedBox(
+              height: 200,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                  _categoriesView(AppImages.icGem, "Ruby"),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -268,7 +292,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _seeAllView(BuildContext context, String name, Function function) {
     return Padding(
-      padding:  EdgeInsets.all(2.w),
+      padding: EdgeInsets.all(2.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -283,12 +307,42 @@ class _HomeViewState extends State<HomeView> {
             child: const Text(
               AppStrings.seeAll,
               style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.red,
-                  fontWeight: FontWeight.w600),
+                  fontSize: 14, color: Colors.red, fontWeight: FontWeight.w600),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _categoriesView(String imagePath, String catName) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Expanded(
+        flex: 1,
+        child: Column(
+          children: [
+            CircleAvatar(
+              backgroundColor: const Color(0xffF3F5F7),
+              radius: 32,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset(
+                  imagePath,
+                  scale: 4.0,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              catName,
+              style: const TextStyle(
+                  fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black),
+            )
+          ],
+        ),
       ),
     );
   }
