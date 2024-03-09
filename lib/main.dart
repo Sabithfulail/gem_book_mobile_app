@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/units/app_constants.dart';
-import 'package:gem_book/units/routes.dart';
+import 'package:gem_book/utils/app_constants.dart';
+import 'package:gem_book/utils/routes.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

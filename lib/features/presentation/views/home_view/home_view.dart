@@ -1,14 +1,13 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_images.dart';
-import '../../../../units/app_colors.dart';
-import '../../../../units/app_images.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-
-import '../../../../units/app_styling.dart';
-import '../../../../units/routes.dart';
+import '../../../../utils/app_strings.dart';
+import '../../../../utils/app_styling.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -268,7 +267,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _seeAllView(BuildContext context, String name, Function function) {
     return Padding(
-      padding:  EdgeInsets.all(2.w),
+      padding: EdgeInsets.all(2.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -283,9 +282,7 @@ class _HomeViewState extends State<HomeView> {
             child: const Text(
               AppStrings.seeAll,
               style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.red,
-                  fontWeight: FontWeight.w600),
+                  fontSize: 14, color: Colors.red, fontWeight: FontWeight.w600),
             ),
           ),
         ],

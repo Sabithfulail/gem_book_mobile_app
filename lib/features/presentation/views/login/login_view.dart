@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
 import 'package:gem_book/utils/app_strings.dart';
 
-import '../../../../units/app_colors.dart';
-import '../../../../units/routes.dart';
 import '../../../../utils/app_colors.dart';
+import '../../../../utils/routes.dart';
 import '../../widgets/btn_component.dart';
 
 class LoginView extends StatelessWidget {
@@ -77,7 +76,7 @@ class LoginView extends StatelessWidget {
         //   obscureText: true,
         // ),
         const SizedBox(height: 10),
-        const BtnComponent(
+        BtnComponent(
           title: AppStrings.login,
           onTap: () {
             Navigator.pushNamed(context, Routes.kHomeView);
