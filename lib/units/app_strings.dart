@@ -14,6 +14,7 @@ class AppStrings {
   static const String forgotPassword = "Forgot password";
   static const String contactUs = "Contact Us";
   static const String homeTitle = "Gem Home";
+  static const String seeAll = "See All";
 
 
 

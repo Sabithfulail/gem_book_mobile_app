@@ -30,11 +30,11 @@ class _HomeViewState extends State<HomeView> {
       key: _scaffoldKey,
       drawer: _drawerView(),
       appBar: _appBar(),
-      body:  SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-                padding:   EdgeInsets.all(2.w),
+                padding: EdgeInsets.all(2.w),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Color(0xffF3F5F7),
@@ -55,6 +55,10 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       )),
                 )),
+            const SizedBox(height: 10),
+            _seeAllView(context, "Categories", () {
+              print("Hi");
+            }),
           ],
         ),
       ),
@@ -197,23 +201,19 @@ class _HomeViewState extends State<HomeView> {
           ListTile(
             tileColor: AppColors.baseColor,
             leading: const SizedBox(
-              child: Icon(
-                  CupertinoIcons.arrow_down_left
-              ),
+              child: Icon(CupertinoIcons.arrow_down_left),
             ),
             title: Text(AppStrings.logout,
-                style: AppStyling.bold500TextSize16
-                    .copyWith(color:Colors.white)),
-            onTap: () {
-
-            },
+                style:
+                    AppStyling.bold500TextSize16.copyWith(color: Colors.white)),
+            onTap: () {},
           ),
         ],
       ),
     );
   }
 
-  _bottomNavigationBar(){
+  _bottomNavigationBar() {
     return CurvedNavigationBar(
       index: 1,
       items: const <Widget>[
@@ -241,9 +241,9 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: AppColors.baseColor,
       title: const Center(
           child: Text(
-            AppStrings.welcome,
-            style: TextStyle(color: Colors.white),
-          )),
+        AppStrings.welcome,
+        style: TextStyle(color: Colors.white),
+      )),
       leading: IconButton(
         icon: Icon(
           Icons.menu,
@@ -263,6 +263,33 @@ class _HomeViewState extends State<HomeView> {
           onPressed: () {}, // Call onTap function directly
         ),
       ],
+    );
+  }
+
+  Widget _seeAllView(BuildContext context, String name, Function function) {
+    return Padding(
+      padding:  EdgeInsets.all(2.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          InkWell(
+            onTap: () {
+              function();
+            },
+            child: const Text(
+              AppStrings.seeAll,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.red,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
