@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/login/login_view.dart';
 
+import '../features/presentation/views/contact_us/contact_us.dart';
 import '../features/presentation/views/home_view/home_view.dart';
 import '../features/presentation/views/intro/intro_page.dart';
 import '../features/presentation/views/login/sign_up_view.dart';
@@ -14,6 +15,7 @@ class Routes {
   static const String kHomeView = 'kHomeView';
   static const String kSignUpView = 'kSignUpView';
   static const String kIntroPage = 'kIntroPage';
+  static const String kContactUsPage = 'kContactUsPage';
 
 
 
@@ -44,6 +46,11 @@ class Routes {
       case Routes.kIntroPage:
         return MaterialPageRoute(
           builder: (_) => const IntroPage(),
+          settings: const RouteSettings(name: kIntroPage),
+        );
+      case Routes.kContactUsPage:
+        return MaterialPageRoute(
+          builder: (_) => const ContactUsPage(),
           settings: const RouteSettings(name: kIntroPage),
         );
 
