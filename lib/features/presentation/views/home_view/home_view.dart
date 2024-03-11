@@ -152,15 +152,28 @@ class _HomeViewState extends State<HomeView> {
             ),
             Row(
               children: [
+                InkWell(
+                  onTap: (){
+                    // setState(() {
+                    //   if(listGems[0].isFavourite == false){
+                    //     listGems[0].isFavourite =true;
+                    //   }else{
+                    //     listGems[0].isFavourite = false;
+                    //   }
+                    // });
+                  },
+                  child: GemCardWidget(
+                      imagePath: listGems[0].imagePath,
+                      name: listGems[0].name,
+                      price: listGems[0].price,
+                      isFavourite: true,
+                      onTapCallback: () {}),
+                ),
                 GemCardWidget(
                     imagePath: listGems[0].imagePath,
                     name: listGems[0].name,
                     price: listGems[0].price,
-                    onTapCallback: () {}),
-                GemCardWidget(
-                    imagePath: listGems[0].imagePath,
-                    name: listGems[0].name,
-                    price: listGems[0].price,
+                    isFavourite: true,
                     onTapCallback: () {}),
               ],
             ),
@@ -254,7 +267,7 @@ class _HomeViewState extends State<HomeView> {
             leading: const SizedBox(
               child: Icon(CupertinoIcons.profile_circled),
             ),
-            title: Text(AppStrings.forgotPassword,
+            title: Text(AppStrings.profile,
                 style: AppStyling.bold500TextSize16
                     .copyWith(color: AppColors.baseColor)),
             onTap: () {},
@@ -264,21 +277,9 @@ class _HomeViewState extends State<HomeView> {
           ),
           ListTile(
             leading: const SizedBox(
-              child: Icon(CupertinoIcons.profile_circled),
+              child: Icon(CupertinoIcons.settings),
             ),
-            title: Text(AppStrings.forgotPassword,
-                style: AppStyling.bold500TextSize16
-                    .copyWith(color: AppColors.baseColor)),
-            onTap: () {},
-            trailing: const Icon(
-              Icons.arrow_forward_ios,
-            ),
-          ),
-          ListTile(
-            leading: const SizedBox(
-              child: Icon(CupertinoIcons.profile_circled),
-            ),
-            title: Text(AppStrings.forgotPassword,
+            title: Text(AppStrings.settings,
                 style: AppStyling.bold500TextSize16
                     .copyWith(color: AppColors.baseColor)),
             onTap: () {},
@@ -347,7 +348,9 @@ class _HomeViewState extends State<HomeView> {
         if (index == 0) {
           // Navigator.pushNamed(context, Routes.kIntroPage);
         } else if (index == 1) {
-        } else if (index == 2) {}
+        } else if (index == 2) {
+
+        }
         setState(() {});
       },
       letIndexChange: (page) => true,
@@ -378,7 +381,9 @@ class _HomeViewState extends State<HomeView> {
             AppImages.icNotificationBell,
             height: 3.h,
           ),
-          onPressed: () {}, // Call onTap function directly
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.kNotificationView);
+          }, // Call onTap function directly
         ),
       ],
     );

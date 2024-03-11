@@ -7,13 +7,15 @@ class GemCardWidget extends StatelessWidget {
   final String name;
   final String price;
   final VoidCallback onTapCallback;
+  final bool isFavourite;
 
   const GemCardWidget(
       {super.key,
       required this.imagePath,
       required this.name,
       required this.price,
-      required this.onTapCallback});
+      required this.onTapCallback,
+      this.isFavourite = false});
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +61,16 @@ class GemCardWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                        SizedBox(width: 15.w),
-                       const Icon(
-                        CupertinoIcons.heart,
-                        size: 32,
-                      )
+                       isFavourite
+                           ?const Icon(
+                         CupertinoIcons.heart_fill,
+                         color: Colors.red,
+                         size: 32,
+                       )
+                           :const Icon(
+                         CupertinoIcons.heart,
+                         size: 32,
+                       )
                     ],
                   )
                 ],

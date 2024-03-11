@@ -5,6 +5,7 @@ import '../features/presentation/views/contact_us/contact_us.dart';
 import '../features/presentation/views/home_view/home_view.dart';
 import '../features/presentation/views/intro/intro_page.dart';
 import '../features/presentation/views/login/sign_up_view.dart';
+import '../features/presentation/views/notificaation/notification__view.dart';
 import '../features/presentation/views/splash/splash_view.dart';
 
 
@@ -16,8 +17,7 @@ class Routes {
   static const String kSignUpView = 'kSignUpView';
   static const String kIntroPage = 'kIntroPage';
   static const String kContactUsPage = 'kContactUsPage';
-
-
+  static const String kNotificationView = 'kNotificationView';
 
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -51,6 +51,11 @@ class Routes {
       case Routes.kContactUsPage:
         return MaterialPageRoute(
           builder: (_) => const ContactUsPage(),
+          settings: const RouteSettings(name: kIntroPage),
+        );
+      case Routes.kNotificationView:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationView(),
           settings: const RouteSettings(name: kIntroPage),
         );
 

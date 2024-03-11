@@ -15,6 +15,9 @@ class AppStrings {
   static const String contactUs = "Contact Us";
   static const String homeTitle = "Gem Home";
   static const String seeAll = "See All";
+  static const String notification = "Notification";
+  static const String profile = "Profile";
+  static const String settings = "Settings";
 
 
 

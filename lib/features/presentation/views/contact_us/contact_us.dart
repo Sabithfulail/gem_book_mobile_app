@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/units/app_strings.dart';
-import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../../units/app_colors.dart';
 import '../../widgets/common_appbar.dart';
 
 class ContactUsPage extends StatelessWidget {
