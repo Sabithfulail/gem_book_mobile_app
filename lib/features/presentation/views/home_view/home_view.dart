@@ -3,19 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gem_book/features/presentation/widgets/gem_card.dart';
-import 'package:gem_book/units/app_strings.dart';
+import 'package:gem_book/utils/app_strings.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../units/app_colors.dart';
-import '../../../../units/app_images.dart';
-import '../../../../units/app_styling.dart';
-import '../../../../units/routes.dart';
-import '../../widgets/common_dialog_box.dart';
-import '../../widgets/gem.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_images.dart';
-import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_styling.dart';
+import '../../../../utils/routes.dart';
+import '../../widgets/common_dialog_box.dart';
+import '../../widgets/gem.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

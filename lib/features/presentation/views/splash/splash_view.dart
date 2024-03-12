@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
           //   end: FractionalOffset.bottomCenter,
           // )),
           child: Center(
-            child: Container(
+            child: SizedBox(
               height: 15.h,
               width: 15.h,
               // decoration: const BoxDecoration(

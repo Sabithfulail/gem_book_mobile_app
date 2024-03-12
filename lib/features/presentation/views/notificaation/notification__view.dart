@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gem_book/units/app_strings.dart';
+import 'package:gem_book/utils/app_strings.dart';
 import '../../widgets/common_appbar.dart';
 
 class NotificationView extends StatefulWidget {

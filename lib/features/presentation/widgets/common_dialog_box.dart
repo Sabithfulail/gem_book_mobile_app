@@ -1,7 +1,8 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-import '../../../units/app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class CommonDialog extends StatelessWidget {
   const CommonDialog({
@@ -48,9 +49,10 @@ class CommonDialog extends StatelessWidget {
                     ),
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        color: AppColors.baseColor,
-                      ),
+                      style:
+                          Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                color: AppColors.baseColor,
+                              ),
                     ),
                     const SizedBox(
                       height: 21,
@@ -59,8 +61,8 @@ class CommonDialog extends StatelessWidget {
                       description ?? '',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: AppColors.appTextGrayColor,
-                      ),
+                            color: AppColors.appTextGrayColor,
+                          ),
                     ),
                     const SizedBox(
                       height: 21,
@@ -73,12 +75,15 @@ class CommonDialog extends StatelessWidget {
                           height: 50,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.baseColor ,width: 2)
-                          ),
+                              border: Border.all(
+                                  color: AppColors.baseColor, width: 2)),
                           child: Center(
                             child: TextButton(
                                 onPressed: onPressBtn1,
-                                child: Text(buttonTitle1 ,style: const TextStyle(color:Colors.black),)),
+                                child: Text(
+                                  buttonTitle1,
+                                  style: const TextStyle(color: Colors.black),
+                                )),
                           ),
                         ),
                         const SizedBox(
@@ -88,17 +93,20 @@ class CommonDialog extends StatelessWidget {
                           width: 133,
                           height: 50,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.baseColor ,width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: AppColors.baseColor, width: 2),
                             // gradient: AppColors.primaryGradient
                           ),
                           child: Center(
                             child: TextButton(
                                 onPressed: onPressBtn2,
-                                child: Text(buttonTitle2 ,style: const TextStyle(color:Colors.black),)),
+                                child: Text(
+                                  buttonTitle2,
+                                  style: const TextStyle(color: Colors.black),
+                                )),
                           ),
                         ),
-
                       ],
                     )
                   ],

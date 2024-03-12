@@ -60,7 +60,7 @@ class LoginView extends StatelessWidget {
         const SizedBox(height: 10),
         CustomTextField(
           hintText: AppStrings.password,
-          icon: Icon(Icons.remove_red_eye),
+          icon: const Icon(Icons.remove_red_eye),
           obscureText: obscurePassword,
         ),
         // TextField(
