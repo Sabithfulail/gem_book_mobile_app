@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gem_book/units/app_images.dart';
-import 'package:gem_book/units/routes.dart';
+import 'package:gem_book/utils/app_images.dart';
+import 'package:gem_book/utils/routes.dart';
 import 'package:sizer/sizer.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,8 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(
-        const Duration(seconds: 3),
+    Timer(const Duration(seconds: 3),
         () => Navigator.pushReplacementNamed(context, Routes.kLoginView));
   }
 
@@ -37,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
           //   end: FractionalOffset.bottomCenter,
           // )),
           child: Center(
-            child: Container(
+            child: SizedBox(
               height: 15.h,
               width: 15.h,
               // decoration: const BoxDecoration(

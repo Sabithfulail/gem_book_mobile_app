@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../units/app_colors.dart';
-import '../../../../units/routes.dart';
+
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/routes.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -48,9 +49,7 @@ class SignUpView extends StatelessWidget {
                         filled: true,
                         prefixIcon: const Icon(Icons.person)),
                   ),
-
                   const SizedBox(height: 20),
-
                   TextField(
                     decoration: InputDecoration(
                         hintText: "Email",
@@ -61,9 +60,7 @@ class SignUpView extends StatelessWidget {
                         filled: true,
                         prefixIcon: const Icon(Icons.email)),
                   ),
-
                   const SizedBox(height: 20),
-
                   TextField(
                     decoration: InputDecoration(
                       hintText: "Password",
@@ -76,9 +73,7 @@ class SignUpView extends StatelessWidget {
                     ),
                     obscureText: true,
                   ),
-
                   const SizedBox(height: 20),
-
                   TextField(
                     decoration: InputDecoration(
                       hintText: "Confirm Password",
@@ -95,21 +90,18 @@ class SignUpView extends StatelessWidget {
               ),
               Container(
                   padding: const EdgeInsets.only(top: 3, left: 3),
-
                   child: ElevatedButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       backgroundColor: AppColors.baseColor,
                     ),
-                    child:  const Text(
+                    child: const Text(
                       "Sign up",
-                      style: TextStyle(fontSize: 20,color: Colors.white),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
-                  )
-              ),
+                  )),
               // const Center(child: Text("Or")),
               // Container(
               //   height: 45,
@@ -147,7 +139,7 @@ class SignUpView extends StatelessWidget {
               //
               //         const Text("Sign In with Google",
               //           style: TextStyle(
-              //             fontSize: 16,nbv
+              //             fontSize: 16,
               //             color: AppColors.baseColor,
               //           ),
               //         ),
@@ -162,10 +154,13 @@ class SignUpView extends StatelessWidget {
                   const Text("Already have an account?"),
                   TextButton(
                       onPressed: () {
-                        Navigator.popUntil(context, ModalRoute.withName(Routes.kLoginView));
+                        Navigator.popUntil(
+                            context, ModalRoute.withName(Routes.kLoginView));
                       },
-                      child: const Text("Login", style: TextStyle(color: AppColors.baseColor),)
-                  )
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(color: AppColors.baseColor),
+                      ))
                 ],
               )
             ],

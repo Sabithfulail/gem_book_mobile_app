@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/btn_component.dart';
-import 'package:gem_book/units/app_images.dart';
-import 'package:gem_book/units/app_strings.dart';
+import 'package:gem_book/utils/app_images.dart';
+import 'package:gem_book/utils/app_strings.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../units/routes.dart';
+import '../../../../utils/routes.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});

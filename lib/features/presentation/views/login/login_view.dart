@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
-import 'package:gem_book/units/app_strings.dart';
+import 'package:gem_book/utils/app_strings.dart';
 
-import '../../../../units/app_colors.dart';
-import '../../../../units/routes.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/routes.dart';
 import '../../widgets/btn_component.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
-
+  final bool obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,7 @@ class LoginView extends StatelessWidget {
   }
 
   _inputField(context) {
-    return  Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const CustomTextField(
@@ -57,9 +57,11 @@ class LoginView extends StatelessWidget {
         //       filled: true,
         //       prefixIcon: const Icon(Icons.person)),
         // ),
-        const CustomTextField(
+        const SizedBox(height: 10),
+        CustomTextField(
           hintText: AppStrings.password,
-          icon: Icon(Icons.remove_red_eye),
+          icon: const Icon(Icons.remove_red_eye),
+          obscureText: obscurePassword,
         ),
         // TextField(
         //   decoration: InputDecoration(
@@ -73,6 +75,7 @@ class LoginView extends StatelessWidget {
         //   ),
         //   obscureText: true,
         // ),
+        const SizedBox(height: 10),
         BtnComponent(
           title: AppStrings.login,
           onTap: () {
