@@ -18,6 +18,9 @@ class AppStrings {
   static const String notification = "Notification";
   static const String profile = "Profile";
   static const String settings = "Settings";
+  static const String price = "Price";
+  static const String addPost = "Add Post";
+  static const String priceLKR = "Price (LKR)";
 
 
 

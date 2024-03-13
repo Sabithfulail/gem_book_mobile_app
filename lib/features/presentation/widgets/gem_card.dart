@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gem_book/units/app_strings.dart';
 import 'package:sizer/sizer.dart';
 
 class GemCardWidget extends StatelessWidget {
@@ -7,7 +8,6 @@ class GemCardWidget extends StatelessWidget {
   final String name;
   final String price;
   final VoidCallback onTapCallback;
-  final bool isFavourite;
 
   const GemCardWidget(
       {super.key,
@@ -15,7 +15,7 @@ class GemCardWidget extends StatelessWidget {
       required this.name,
       required this.price,
       required this.onTapCallback,
-      this.isFavourite = false});
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,16 @@ class GemCardWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 1.h),
                   Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      const Text(
+                        AppStrings.priceLKR,
+                        style: TextStyle(
+                            color: Color(0xffFF324B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+
                       Text(
                         price,
                         style: const TextStyle(
@@ -60,17 +69,6 @@ class GemCardWidget extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
-                       SizedBox(width: 15.w),
-                       isFavourite
-                           ?const Icon(
-                         CupertinoIcons.heart_fill,
-                         color: Colors.red,
-                         size: 32,
-                       )
-                           :const Icon(
-                         CupertinoIcons.heart,
-                         size: 32,
-                       )
                     ],
                   )
                 ],

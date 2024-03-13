@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
   List<Gem> listGems = [
     Gem(
         imagePath: AppImages.intoImg,
-        name: 'Sapphire ',
+        name: 'Sapphire',
         price: '12000',
         type: 'Sep'),
     Gem(
@@ -153,7 +153,7 @@ class _HomeViewState extends State<HomeView> {
             Row(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     // setState(() {
                     //   if(listGems[0].isFavourite == false){
                     //     listGems[0].isFavourite =true;
@@ -166,18 +166,25 @@ class _HomeViewState extends State<HomeView> {
                       imagePath: listGems[0].imagePath,
                       name: listGems[0].name,
                       price: listGems[0].price,
-                      isFavourite: true,
                       onTapCallback: () {}),
                 ),
                 GemCardWidget(
                     imagePath: listGems[0].imagePath,
                     name: listGems[0].name,
                     price: listGems[0].price,
-                    isFavourite: true,
                     onTapCallback: () {}),
               ],
             ),
-            SizedBox(height: 5.h)
+            SizedBox(height: 5.h),
+            GemCardWidget(
+                imagePath: listGems[0].imagePath,
+                name: listGems[0].name,
+                price: listGems[0].price,
+                onTapCallback: () {
+                  Navigator.pushNamed(context, Routes.kGemDetailView,
+                      arguments: listGems[0]);
+                }),
+            SizedBox(height: 5.h),
           ],
         ),
       ),
@@ -348,9 +355,7 @@ class _HomeViewState extends State<HomeView> {
         if (index == 0) {
           // Navigator.pushNamed(context, Routes.kIntroPage);
         } else if (index == 1) {
-        } else if (index == 2) {
-
-        }
+        } else if (index == 2) {}
         setState(() {});
       },
       letIndexChange: (page) => true,

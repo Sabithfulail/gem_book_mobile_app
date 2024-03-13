@@ -5,6 +5,12 @@ class AppColors {
   static const Color baseColor = Colors.black87;
   static const Color appWhiteColor = Colors.white;
   static const Color appTextGrayColor = Colors.black54;
+  static const Color appLightGrayColor = Color(0xffA7ABAD);
+  static const Color appBlackColor = Colors.black;
+  static const Color appTextDarkGray =Colors.black87;
+  static const Color appTextFieldFillColor = Color(0xffF0F2F3);
+  static const Color appSummaryTextDarkBlueColor = Color(0xff002538);
+
 
   static  LinearGradient primaryGradient =
   LinearGradient(colors: [baseColor.withOpacity(.7),baseColor]);
