@@ -36,7 +36,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: SvgPicture.asset(
             AppImages.icNotificationBell,
             height: 3.h,
-            color: AppColors.baseColor,
+            color: Colors.transparent,
           ),
           onPressed: () {}, // Call onTap function directly
         ),

@@ -356,6 +356,7 @@ class _HomeViewState extends State<HomeView> {
         if (index == 0) {
           // Navigator.pushNamed(context, Routes.kIntroPage);
         } else if (index == 1) {
+          Navigator.pushNamed(context, Routes.kAddPostView);
         } else if (index == 2) {}
         setState(() {});
       },

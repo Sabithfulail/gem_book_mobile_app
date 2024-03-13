@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/common_appbar.dart';
 import 'package:gem_book/features/presentation/widgets/gem.dart';
-import 'package:gem_book/units/app_images.dart';
-import 'package:gem_book/units/app_strings.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../utils/app_images.dart';
+import '../../../utils/app_strings.dart';
 
 class GemDetailView extends StatefulWidget {
   final Gem gem;
@@ -46,7 +47,7 @@ class _GemDetailViewState extends State<GemDetailView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.gem.name ?? "",
+                    widget.gem.name,
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -79,7 +80,7 @@ _gemDetailView(String title , String data){
                 color: Colors.black,
                 fontSize: 24,
                 fontWeight: FontWeight.bold)),
-        Text(data ?? "",
+        Text(data,
             style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,

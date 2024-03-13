@@ -19,8 +19,20 @@ class AppStrings {
   static const String profile = "Profile";
   static const String settings = "Settings";
   static const String price = "Price";
+  static const String type = "Type";
+  static const String weight = "Weight";
+  static const String shape = "Shape";
+  static const String colour = "Colour";
+  static const String treatment = "Treatment";
+  static const String enterPrice = "Enter Price";
+  static const String enterType = "Enter Type";
+  static const String enterWeight = "Enter Weight";
+  static const String enterShape = "Enter Shape";
+  static const String enterColour = "Enter Colour";
+  static const String enterTreatmentDetails = "Enter Treatment details";
   static const String addPost = "Add Post";
   static const String priceLKR = "Price (LKR)";
+  static const String addPostDescription = "Please fill below details about Gem Stone ";
 
 
 

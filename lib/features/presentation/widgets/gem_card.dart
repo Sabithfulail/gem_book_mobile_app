@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gem_book/units/app_strings.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../utils/app_strings.dart';
 class GemCardWidget extends StatelessWidget {
   final String imagePath;
   final String name;
@@ -61,7 +61,6 @@ class GemCardWidget extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
-
                       Text(
                         price,
                         style: const TextStyle(

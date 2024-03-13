@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/login/login_view.dart';
 
+import '../features/presentation/views/add_post/add_post_view.dart';
 import '../features/presentation/views/contact_us/contact_us.dart';
 import '../features/presentation/views/home_view/home_view.dart';
 import '../features/presentation/views/intro/intro_page.dart';
@@ -21,6 +22,7 @@ class Routes {
   static const String kContactUsPage = 'kContactUsPage';
   static const String kNotificationView = 'kNotificationView';
   static const String kGemDetailView = 'kGemDetailView';
+  static const String kAddPostView = 'kAddPostView';
 
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -66,6 +68,11 @@ class Routes {
           builder: (_) =>  GemDetailView(
             gem: settings.arguments as Gem,
           ),
+          settings: const RouteSettings(name: kGemDetailView),
+        );
+      case Routes.kAddPostView:
+        return MaterialPageRoute(
+          builder: (_) =>  const AddPostView(),
           settings: const RouteSettings(name: kGemDetailView),
         );
 

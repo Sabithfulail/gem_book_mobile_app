@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../units/app_images.dart';
+import '../../../utils/app_images.dart';
 
 
 
@@ -20,7 +18,7 @@ class ImageBorderView extends StatefulWidget {
   final String title;
 
   const ImageBorderView({
-    Key? key,
+    super.key,
     required this.onTapAction,
     this.color = Colors.red,
     this.strokeWidth = 1,
@@ -30,7 +28,7 @@ class ImageBorderView extends StatefulWidget {
     this.height = 150,
     this.isReject = false,
     this.title = "Open the camera and capture the image",
-  }) : super(key: key);
+  });
 
   @override
   State<ImageBorderView> createState() => _ImageBorderViewState();
