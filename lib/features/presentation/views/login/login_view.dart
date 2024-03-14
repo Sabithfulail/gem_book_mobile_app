@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:ui';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
 import 'package:gem_book/utils/app_strings.dart';
@@ -6,9 +10,19 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/routes.dart';
 import '../../widgets/btn_component.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   final bool obscurePassword = true;
+  String userName = "";
+  String pwd = "";
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,43 +57,29 @@ class LoginView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const CustomTextField(
+         CustomTextField(
           hintText: AppStrings.userName,
-          icon: Icon(Icons.person),
+          icon: const Icon(Icons.person),
+          onChanged: (value){
+            userName = value;
+          },
+
         ),
-        // TextField(
-        //   decoration: InputDecoration(
-        //       hintText: "Username",
-        //       border: OutlineInputBorder(
-        //           borderRadius: BorderRadius.circular(18),
-        //           borderSide: BorderSide.none),
-        //       fillColor: AppColors.baseColor.withOpacity(0.1),
-        //       filled: true,
-        //       prefixIcon: const Icon(Icons.person)),
-        // ),
         const SizedBox(height: 10),
         CustomTextField(
           hintText: AppStrings.password,
           icon: const Icon(Icons.remove_red_eye),
           obscureText: obscurePassword,
+          onChanged: (value){
+            pwd = value;
+          },
         ),
-        // TextField(
-        //   decoration: InputDecoration(
-        //     hintText: "Password",
-        //     border: OutlineInputBorder(
-        //         borderRadius: BorderRadius.circular(18),
-        //         borderSide: BorderSide.none),
-        //     fillColor: AppColors.baseColor.withOpacity(0.1),
-        //     filled: true,
-        //     prefixIcon: const Icon(Icons.password),
-        //   ),
-        //   obscureText: true,
-        // ),
         const SizedBox(height: 10),
         BtnComponent(
           title: AppStrings.login,
           onTap: () {
             Navigator.pushNamed(context, Routes.kHomeView);
+            // login();
           },
 
         ),
@@ -133,5 +133,92 @@ class LoginView extends StatelessWidget {
             ))
       ],
     );
+  }
+
+  showProgressBar(BuildContext? context) {
+      showGeneralDialog(
+          context: context!,
+          barrierDismissible: false,
+          transitionBuilder: (context, a1, a2, widget) {
+            return PopScope(
+              canPop: false,
+              child: Transform.scale(
+                scale: a1.value,
+                child: Opacity(
+                  opacity: a1.value,
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                    child: Container(
+                      alignment: FractionalOffset.center,
+                      child: Wrap(
+                        children: [
+                          Container(
+                            color: Colors.transparent,
+                            // child: SpinKitThreeBounce(
+                            //   color: source.baseColor,
+                            // ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 200),
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return const SizedBox.shrink();
+          });
+
+  }
+
+
+  Future<void> login() async {
+    showProgressBar(context);
+    final username =userName;
+    final password =pwd;
+
+    // Create the request body
+    final body = jsonEncode({
+      'username': username,
+      'password': password,
+    });
+
+    try {
+      final response = await http.post(
+        Uri.parse('https://dummyjson.com/auth/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        if (kDebugMode) {
+          print('Login successful!');
+        }
+        Navigator.pushNamed(context, '/home'); // Assuming a home screen
+      } else {
+        if (kDebugMode) {
+          print('Login failed: ${response.statusCode}');
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login failed!'),
+          ),
+        );
+      }
+    } catch (error) {
+      if (kDebugMode) {
+        print('Error logging in: $error');
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('An error occurred. Please try again.'),
+        ),
+      );
+    } finally {
+      Navigator.pop(context);
+    }
   }
 }
