@@ -10,6 +10,8 @@ class AppColors {
   static const Color appTextDarkGray =Colors.black87;
   static const Color appTextFieldFillColor = Color(0xffF0F2F3);
   static const Color appSummaryTextDarkBlueColor = Color(0xff002538);
+  static const Color appContainerRedColor = Color(0x59ff5555);
+  static const Color appRedColor = Colors.red;
 
 
   static  LinearGradient primaryGradient =

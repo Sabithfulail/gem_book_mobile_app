@@ -12,4 +12,8 @@ class AppImages {
   static const String iconCamera = '${kSVGImagePath}app_camera$kSVGType';
   static const String iconVisibilityShow = '${kSVGImagePath}visibility_show$kSVGType';
   static const String iconVisibilityHide = '${kSVGImagePath}visibility_hide$kSVGType';
+  static const String iconGallery = '${kSVGImagePath}icon_gallery$kSVGType';
+  static const String iconRemoveImage = '${kSVGImagePath}icon_remove_image$kSVGType';
+  static const String cameraSymbol = '${kSVGImagePath}camera_symbol$kSVGType';
+
 }

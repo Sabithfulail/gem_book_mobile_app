@@ -33,6 +33,18 @@ class AppStrings {
   static const String addPost = "Add Post";
   static const String priceLKR = "Price (LKR)";
   static const String addPostDescription = "Please fill below details about Gem Stone ";
+  static const String firstName = "First Name";
+  static const String enterFirstName = "Enter Fist Name";
+  static const String lastName = "Last Name";
+  static const String enterLastName = "Enter Last Name";
+  static const String contactNumber = "Contact Number";
+  static const String enterContactNumber = "Enter Contact Number";
+  static const String enterPassword = "Enter Password";
+  static const String enterUserName = "Enter User Name";
+  static const String conformPassword = "Conform Password";
+  static const String reEnterPassword = "Re-Enter Password";
+  static const String emailAddress = "Email Address";
+  static const String enterEmailAddress = "Enter Email Address";
 
 
 

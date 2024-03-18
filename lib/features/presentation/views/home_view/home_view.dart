@@ -278,23 +278,25 @@ class _HomeViewState extends State<HomeView> {
             title: Text(AppStrings.profile,
                 style: AppStyling.bold500TextSize16
                     .copyWith(color: AppColors.baseColor)),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.kProfileView);
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios,
             ),
           ),
-          ListTile(
-            leading: const SizedBox(
-              child: Icon(CupertinoIcons.settings),
-            ),
-            title: Text(AppStrings.settings,
-                style: AppStyling.bold500TextSize16
-                    .copyWith(color: AppColors.baseColor)),
-            onTap: () {},
-            trailing: const Icon(
-              Icons.arrow_forward_ios,
-            ),
-          ),
+          // ListTile(
+          //   leading: const SizedBox(
+          //     child: Icon(CupertinoIcons.settings),
+          //   ),
+          //   title: Text(AppStrings.settings,
+          //       style: AppStyling.bold500TextSize16
+          //           .copyWith(color: AppColors.baseColor)),
+          //   onTap: () {},
+          //   trailing: const Icon(
+          //     Icons.arrow_forward_ios,
+          //   ),
+          // ),
           ListTile(
             leading: const SizedBox(
               child: Icon(CupertinoIcons.phone),
@@ -322,6 +324,7 @@ class _HomeViewState extends State<HomeView> {
               showDialog(
                   context: context,
                   builder: (ctx) => CommonDialog(
+                      isTwoButton: true,
                       title: "Are sure",
                       buttonTitle1: "Logout",
                       buttonTitle2: "Cancel",
@@ -354,11 +357,12 @@ class _HomeViewState extends State<HomeView> {
       animationDuration: const Duration(milliseconds: 400),
       onTap: (index) {
         if (index == 0) {
-          // Navigator.pushNamed(context, Routes.kIntroPage);
+          Navigator.popUntil(context, ModalRoute.withName(Routes.kHomeView));
         } else if (index == 1) {
-          Navigator.pushNamed(context, Routes.kAddPostView);
-        } else if (index == 2) {}
-        setState(() {});
+          Navigator.pushNamed(context, Routes.kAddPostView,arguments: Gem(imagePath: '', name: '', price: "", type: ""));
+        } else if (index == 2) {
+          Navigator.pushNamed(context, Routes.kProfileView);
+        }
       },
       letIndexChange: (page) => true,
     );

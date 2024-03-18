@@ -9,6 +9,7 @@ import 'package:gem_book/utils/app_strings.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/routes.dart';
 import '../../widgets/btn_component.dart';
+import '../../widgets/common_snack_bar.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -33,7 +34,6 @@ class _LoginViewState extends State<LoginView> {
           children: [
             _header(context),
             _inputField(context),
-            _forgotPassword(context),
             _signup(context),
           ],
         ),
@@ -63,7 +63,6 @@ class _LoginViewState extends State<LoginView> {
           onChanged: (value){
             userName = value;
           },
-
         ),
         const SizedBox(height: 10),
         CustomTextField(
@@ -78,7 +77,11 @@ class _LoginViewState extends State<LoginView> {
         BtnComponent(
           title: AppStrings.login,
           onTap: () {
-            Navigator.pushNamed(context, Routes.kHomeView);
+           if(userName.isEmpty || pwd.isEmpty){
+             CustomSnackBar.show(context, 'Please enter login details');
+           }else{
+             Navigator.pushNamed(context, Routes.kHomeView);
+           }
             // login();
           },
 
@@ -106,15 +109,15 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  _forgotPassword(context) {
-    return TextButton(
-      onPressed: () {},
-      child: const Text(
-        "${AppStrings.forgotPassword}?",
-        style: TextStyle(color: AppColors.baseColor),
-      ),
-    );
-  }
+  // _forgotPassword(context) {
+  //   return TextButton(
+  //     onPressed: () {},
+  //     child: const Text(
+  //       "${AppStrings.forgotPassword}?",
+  //       style: TextStyle(color: AppColors.baseColor),
+  //     ),
+  //   );
+  // }
 
   _signup(context) {
     return Row(
@@ -197,21 +200,19 @@ class _LoginViewState extends State<LoginView> {
         if (kDebugMode) {
           print('Login successful!');
         }
-        Navigator.pushNamed(context, '/home'); // Assuming a home screen
+        // Assuming a home screen
       } else {
+        final responseBody = await jsonDecode(response.body);
         if (kDebugMode) {
           print('Login failed: ${response.statusCode}');
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login failed!'),
-          ),
-        );
+        CustomSnackBar.show(context, 'Login failed! ${responseBody['message']}');
       }
     } catch (error) {
       if (kDebugMode) {
         print('Error logging in: $error');
       }
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('An error occurred. Please try again.'),

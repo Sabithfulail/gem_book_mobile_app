@@ -3,9 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import '../../../utils/app_images.dart';
 
-
-
-
 class ImageBorderView extends StatefulWidget {
   final Color color;
   final double radius;
@@ -63,7 +60,7 @@ class _ImageBorderViewState extends State<ImageBorderView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(AppImages.iconCamera,
+                    SvgPicture.asset(AppImages.cameraSymbol,
                         color:  Colors.black),
                     SizedBox(
                       height: 1.5.h,
@@ -78,7 +75,7 @@ class _ImageBorderViewState extends State<ImageBorderView> {
                     SizedBox(
                       height: 0.7.h,
                     ),
-                    Text(widget.title,
+                    Text("or",
                         overflow: TextOverflow.fade,
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -88,6 +85,13 @@ class _ImageBorderViewState extends State<ImageBorderView> {
                     SizedBox(
                       height: 0.6.h,
                     ),
+                    Text("Upload from Gallery",
+                        overflow: TextOverflow.fade,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black)),
                     SizedBox(
                       height: 1.h,
                     ),

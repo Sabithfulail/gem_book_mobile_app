@@ -3,10 +3,12 @@ import 'package:gem_book/features/presentation/views/login/login_view.dart';
 
 import '../features/presentation/views/add_post/add_post_view.dart';
 import '../features/presentation/views/contact_us/contact_us.dart';
+import '../features/presentation/views/edit_post/edit_post.dart';
 import '../features/presentation/views/home_view/home_view.dart';
 import '../features/presentation/views/intro/intro_page.dart';
 import '../features/presentation/views/login/sign_up_view.dart';
 import '../features/presentation/views/notificaation/notification__view.dart';
+import '../features/presentation/views/profile/profile_view.dart';
 import '../features/presentation/views/splash/splash_view.dart';
 import '../features/presentation/widgets/gem.dart';
 import '../features/presentation/widgets/gem_details_view.dart';
@@ -23,6 +25,8 @@ class Routes {
   static const String kNotificationView = 'kNotificationView';
   static const String kGemDetailView = 'kGemDetailView';
   static const String kAddPostView = 'kAddPostView';
+  static const String kEditPostView = 'kEditPostView';
+  static const String kProfileView = 'kProfileView';
 
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -73,7 +77,17 @@ class Routes {
       case Routes.kAddPostView:
         return MaterialPageRoute(
           builder: (_) =>  const AddPostView(),
-          settings: const RouteSettings(name: kGemDetailView),
+          settings: const RouteSettings(name: kAddPostView),
+        );
+      case Routes.kEditPostView:
+        return MaterialPageRoute(
+          builder: (_) =>   EditPostView(gem: settings.arguments as Gem),
+          settings: const RouteSettings(name: kEditPostView),
+        );
+      case Routes.kProfileView:
+        return MaterialPageRoute(
+          builder: (_) =>   const ProfileView(),
+          settings: const RouteSettings(name: kProfileView),
         );
 
 

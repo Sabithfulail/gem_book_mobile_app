@@ -1,19 +1,36 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_strings.dart';
 import '../../../../utils/routes.dart';
+import '../../widgets/common_snack_bar.dart';
+import '../../widgets/custom_textfield.dart';
 
-class SignUpView extends StatelessWidget {
+class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
+
+  @override
+  State<SignUpView> createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
+  String firstName = '';
+  String lastName = '';
+  String contactNumber = '';
+  String emailAddress = '';
+  String userName = '';
+  String password = '';
+  String conformPassword = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height - 50,
-          width: double.infinity,
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.all(3.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,59 +56,105 @@ class SignUpView extends StatelessWidget {
               ),
               Column(
                 children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(
-                        hintText: "Username",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(18),
-                            borderSide: BorderSide.none),
-                        fillColor: AppColors.baseColor.withOpacity(0.1),
-                        filled: true,
-                        prefixIcon: const Icon(Icons.person)),
+                  CustomTextField(
+                    labelText: AppStrings.firstName,
+                    hintText: AppStrings.enterFirstName,
+                    fillColor: AppColors.baseColor,
+                    onChanged: (value) {
+                      setState(() {
+                        firstName = value;
+                      });
+                    },
                   ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    decoration: InputDecoration(
-                        hintText: "Email",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(18),
-                            borderSide: BorderSide.none),
-                        fillColor: AppColors.baseColor.withOpacity(0.1),
-                        filled: true,
-                        prefixIcon: const Icon(Icons.email)),
+                  SizedBox(height: 3.h),
+                  CustomTextField(
+                    labelText: AppStrings.lastName,
+                    hintText: AppStrings.enterLastName,
+                    fillColor: AppColors.baseColor,
+                    onChanged: (value) {
+                      setState(() {
+                        lastName = value;
+                      });
+                    },
                   ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide.none),
-                      fillColor: AppColors.baseColor.withOpacity(0.1),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.password),
-                    ),
-                    obscureText: true,
+                  SizedBox(height: 3.h),
+                  CustomTextField(
+                    labelText: AppStrings.contactNumber,
+                    hintText: AppStrings.contactNumber,
+                    fillColor: AppColors.baseColor,
+                    onChanged: (value) {
+                      setState(() {
+                        contactNumber = value;
+                      });
+                    },
                   ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: "Confirm Password",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide.none),
-                      fillColor: AppColors.baseColor.withOpacity(0.1),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.password),
-                    ),
-                    obscureText: true,
+                  SizedBox(height: 3.h),
+                  CustomTextField(
+                    labelText: AppStrings.emailAddress,
+                    hintText: AppStrings.enterEmailAddress,
+                    fillColor: AppColors.baseColor,
+                    onChanged: (value) {
+                      setState(() {
+                        emailAddress = value;
+                      });
+                    },
                   ),
+                  SizedBox(height: 3.h),
+                  CustomTextField(
+                    labelText: AppStrings.userName,
+                    hintText: AppStrings.enterUserName,
+                    fillColor: AppColors.baseColor,
+                    onChanged: (value) {
+                      setState(() {
+                        userName = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 3.h),
+                  CustomTextField(
+                    labelText: AppStrings.password,
+                    hintText: AppStrings.enterPassword,
+                    fillColor: AppColors.baseColor,
+                    onChanged: (value) {
+                      setState(() {
+                        password = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 3.h),
+                  CustomTextField(
+                    labelText: AppStrings.conformPassword,
+                    hintText: AppStrings.reEnterPassword,
+                    fillColor: AppColors.baseColor,
+                    onChanged: (value) {
+                      setState(() {
+                        conformPassword = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 3.h),
                 ],
               ),
               Container(
                   padding: const EdgeInsets.only(top: 3, left: 3),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (firstName.isEmpty ||
+                          lastName.isEmpty ||
+                          contactNumber.isEmpty ||
+                          emailAddress.isEmpty ||
+                          userName.isEmpty ||
+                          password.isEmpty ||
+                          conformPassword.isEmpty) {
+                        CustomSnackBar.show(context, 'Please fill all details');
+                      }else{
+                        if(password == conformPassword){
+                          Navigator.pushNamed(context, Routes.kHomeView);
+                        }else{
+                          CustomSnackBar.show(context, 'Password are not same');
+                        }
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -102,66 +165,23 @@ class SignUpView extends StatelessWidget {
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   )),
-              // const Center(child: Text("Or")),
-              // Container(
-              //   height: 45,
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(25),
-              //     border: Border.all(
-              //       color: AppColors.baseColor,
-              //     ),
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color: Colors.white.withOpacity(0.5),
-              //         spreadRadius: 1,
-              //         blurRadius: 1,
-              //         offset: const Offset(0, 1), // changes position of shadow
-              //       ),
-              //     ],
-              //   ),
-              //   child: TextButton(
-              //     onPressed: () {},
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: [
-              //         Container(
-              //           height: 30.0,
-              //           width: 30.0,
-              //           decoration: const BoxDecoration(
-              //             image: DecorationImage(
-              //                 image:   AssetImage('assets/images/login_signup/google.png'),
-              //                 fit: BoxFit.cover),
-              //             shape: BoxShape.circle,
-              //           ),
-              //         ),
-              //
-              //         const SizedBox(width: 18),
-              //
-              //         const Text("Sign In with Google",
-              //           style: TextStyle(
-              //             fontSize: 16,
-              //             color: AppColors.baseColor,
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text("Already have an account?"),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.popUntil(
-                            context, ModalRoute.withName(Routes.kLoginView));
-                      },
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(color: AppColors.baseColor),
-                      ))
-                ],
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text("Already have an account?"),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.popUntil(
+                              context, ModalRoute.withName(Routes.kLoginView));
+                        },
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(color: AppColors.baseColor),
+                        ))
+                  ],
+                ),
               )
             ],
           ),

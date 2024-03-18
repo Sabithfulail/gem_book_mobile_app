@@ -3,12 +3,14 @@ import 'package:sizer/sizer.dart';
 
 import '../../../utils/app_colors.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String? hintText;
   final String? labelText;
   final Icon? icon;
   final bool? obscureText;
   final void Function(String)? onChanged;
+  final String? initialValue;
+  final Color? fillColor;
 
   const CustomTextField({
     super.key,
@@ -16,16 +18,30 @@ class CustomTextField extends StatelessWidget {
     this.icon,
     this.obscureText,
     this.onChanged,
-    this.labelText
+    this.labelText,
+    this.initialValue,
+    this.fillColor
   });
 
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.text = widget.initialValue??"";
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        labelText !=null
-            ? Text(labelText??"",
+        widget.labelText !=null
+            ? Text(widget.labelText??"",
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color:AppColors.appBlackColor,
             fontWeight: FontWeight.bold,
@@ -33,17 +49,20 @@ class CustomTextField extends StatelessWidget {
             :Container(),
         SizedBox(height: 1.h),
         TextField(
+          controller: controller,
           decoration: InputDecoration(
-            hintText: hintText ?? "",
+            hintText: widget.hintText ?? "",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: const BorderSide(color: Colors.grey),
             ),
-            fillColor: Colors.white.withOpacity(0.1),
-            filled: true,
-            prefixIcon: icon,
+            fillColor: (widget.fillColor ?? Colors.white).withOpacity(0.1),
+            filled:true,
+            prefixIcon: widget.icon,
           ),
-          obscureText: obscureText ?? false,
+          obscureText: widget.obscureText ?? false,
+          onChanged: widget.onChanged,
+
         )
       ],
     );

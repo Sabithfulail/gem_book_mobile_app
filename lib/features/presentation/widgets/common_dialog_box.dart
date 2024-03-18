@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/app_colors.dart';
 
-class CommonDialog extends StatelessWidget {
+class CommonDialog extends StatefulWidget {
   const CommonDialog({
     super.key,
     required this.title,
@@ -14,6 +14,7 @@ class CommonDialog extends StatelessWidget {
     required this.buttonTitle2,
     required this.onPressBtn1,
     required this.onPressBtn2,
+    this.isTwoButton = false,
   });
 
   final String title;
@@ -23,7 +24,13 @@ class CommonDialog extends StatelessWidget {
   final Function() onPressBtn1;
   final Function() onPressBtn2;
   final Color? color;
+  final bool isTwoButton;
 
+  @override
+  State<CommonDialog> createState() => _CommonDialogState();
+}
+
+class _CommonDialogState extends State<CommonDialog> {
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
@@ -48,7 +55,7 @@ class CommonDialog extends StatelessWidget {
                       height: 21,
                     ),
                     Text(
-                      title,
+                      widget.title,
                       style:
                           Theme.of(context).textTheme.headlineMedium!.copyWith(
                                 color: AppColors.baseColor,
@@ -58,7 +65,7 @@ class CommonDialog extends StatelessWidget {
                       height: 21,
                     ),
                     Text(
-                      description ?? '',
+                      widget.description ?? '',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: AppColors.appTextGrayColor,
@@ -79,17 +86,19 @@ class CommonDialog extends StatelessWidget {
                                   color: AppColors.baseColor, width: 2)),
                           child: Center(
                             child: TextButton(
-                                onPressed: onPressBtn1,
+                                onPressed: widget.onPressBtn1,
                                 child: Text(
-                                  buttonTitle1,
+                                  widget.buttonTitle1,
                                   style: const TextStyle(color: Colors.black),
                                 )),
                           ),
                         ),
-                        const SizedBox(
+                        if(widget.isTwoButton)
+                          const SizedBox(
                           width: 18,
                         ),
-                        Container(
+                        if(widget.isTwoButton)
+                          Container(
                           width: 133,
                           height: 50,
                           decoration: BoxDecoration(
@@ -100,9 +109,9 @@ class CommonDialog extends StatelessWidget {
                           ),
                           child: Center(
                             child: TextButton(
-                                onPressed: onPressBtn2,
+                                onPressed: widget.onPressBtn2,
                                 child: Text(
-                                  buttonTitle2,
+                                  widget.buttonTitle2,
                                   style: const TextStyle(color: Colors.black),
                                 )),
                           ),
