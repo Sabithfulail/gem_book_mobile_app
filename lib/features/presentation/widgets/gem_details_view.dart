@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/common_appbar.dart';
-import 'package:gem_book/features/presentation/widgets/gem.dart';
 import 'package:sizer/sizer.dart';
-
+import '../../../utils/app_colors.dart';
 import '../../../utils/app_images.dart';
 import '../../../utils/app_strings.dart';
+import '../../../utils/routes.dart';
+import 'btn_component.dart';
+import 'common_dialog_box.dart';
+import 'gem_add.dart';
+
+class GemDetailArguments {
+  final GemAdd gemAdd;
+  final bool isEditable;
+
+  const GemDetailArguments({required this.gemAdd, this.isEditable = false});
+}
 
 class GemDetailView extends StatefulWidget {
-  final Gem gem;
+  final GemDetailArguments gemDetailArguments;
 
-  const GemDetailView({super.key, required this.gem});
+  const GemDetailView({super.key, required this.gemDetailArguments});
 
   @override
   State<GemDetailView> createState() => _GemDetailViewState();
@@ -23,9 +33,10 @@ class _GemDetailViewState extends State<GemDetailView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const CommonAppBar(
-        title: AppStrings.forgotPassword,
+        title: AppStrings.details,
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -47,16 +58,86 @@ class _GemDetailViewState extends State<GemDetailView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.gem.name,
+                    widget.gemDetailArguments.gemAdd.name,
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  _gemDetailView(AppStrings.priceLKR,widget.gem.price),
-                  _gemDetailView(AppStrings.priceLKR,widget.gem.name),
-                  SizedBox(height: 5.h)
+                  _gemDetailView(AppStrings.priceLKR,
+                      widget.gemDetailArguments.gemAdd.price),
+                  _gemDetailView(
+                      AppStrings.type, widget.gemDetailArguments.gemAdd.type),
+                  _gemDetailView(AppStrings.colour,
+                      widget.gemDetailArguments.gemAdd.color ?? ""),
+                  _gemDetailView(AppStrings.weight,
+                      widget.gemDetailArguments.gemAdd.weight),
+                  _gemDetailView(AppStrings.shape,
+                      widget.gemDetailArguments.gemAdd.shape??''),
+                  _gemDetailView(AppStrings.details,
+                      widget.gemDetailArguments.gemAdd.details),
+                  _gemDetailView(AppStrings.sellerName,
+                      widget.gemDetailArguments.gemAdd.sellerName??""),
+                  _gemDetailView(AppStrings.contactNumber,
+                      widget.gemDetailArguments.gemAdd.sellerContactNumber??""),
+                  SizedBox(height: 2.h),
+                  Center(
+                    child: Text(
+                      "Certificate Image",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.appBlackColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 1.h),
+                  Center(
+                    child: Container(
+                      width: 80.w,
+                      height: 30.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.appLightGrayColor),
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          fit: BoxFit.fitHeight,
+
+                          image: AssetImage(widget.gemDetailArguments.gemAdd.imageGem),
+                        )
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  if (widget.gemDetailArguments.isEditable == true)
+                    BtnComponent(
+                      title: AppStrings.edit,
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.kEditPostView,
+                        arguments: widget.gemDetailArguments.gemAdd);
+                      },
+                    ),
+                  if (widget.gemDetailArguments.isEditable == true)
+                    BtnComponent(
+                      title: AppStrings.delete,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => CommonDialog(
+                                isTwoButton: true,
+                                title: "Are sure",
+                                buttonTitle1: "Delete",
+                                buttonTitle2: "Cancel",
+                                onPressBtn1: () {
+                                  Navigator.pop(context);
+                                  Navigator.popUntil(
+                                      context, ModalRoute.withName(Routes.kHomeView));
+                                },
+                                onPressBtn2: () {
+                                  Navigator.pop(context);
+                                }));
+                      },
+                    ),
+                  SizedBox(height: 1.h),
                 ],
               ),
             )
@@ -67,15 +148,13 @@ class _GemDetailViewState extends State<GemDetailView> {
   }
 }
 
-_gemDetailView(String title , String data){
+_gemDetailView(String title, String data) {
   return Padding(
-    padding:  EdgeInsets.only(
-      bottom: 1.h
-    ),
+    padding: EdgeInsets.only(bottom: 1.h),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-         Text(title,
+        Text(title,
             style: const TextStyle(
                 color: Colors.black,
                 fontSize: 24,
@@ -89,5 +168,3 @@ _gemDetailView(String title , String data){
     ),
   );
 }
-
-

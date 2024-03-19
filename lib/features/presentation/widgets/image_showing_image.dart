@@ -7,9 +7,6 @@ import '../../../utils/app_colors.dart';
 class ImageShowingView extends StatefulWidget {
   final File file;
   final VoidCallback onTapAction;
-
-
-
   const ImageShowingView({super.key,
     required this.file,  required this.onTapAction,
    });

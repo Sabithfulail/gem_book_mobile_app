@@ -12,6 +12,8 @@ import '../../../../utils/app_styling.dart';
 import '../../../../utils/routes.dart';
 import '../../widgets/common_dialog_box.dart';
 import '../../widgets/gem.dart';
+import '../../widgets/gem_add.dart';
+import '../../widgets/gem_details_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -26,27 +28,34 @@ class _HomeViewState extends State<HomeView> {
   String agentId = "";
   String batchId = "";
   String mobileNumber = "077771234124";
-  List<Gem> listGems = [
-    Gem(
-        imagePath: AppImages.intoImg,
+  List<GemAdd> listGemAdds = [
+    GemAdd(
+        imageGem: AppImages.intoImg,
+        imageCertificate:AppImages.intoImg,
         name: 'Sapphire',
         price: '12000',
-        type: 'Sep'),
-    Gem(
-        imagePath: AppImages.intoImg,
-        name: 'Topaz ',
-        price: '300000',
-        type: 'Top'),
-    Gem(
-        imagePath: AppImages.intoImg,
-        name: 'Amethyst',
-        price: '1300',
-        type: 'Ame'),
-    Gem(
-        imagePath: AppImages.intoImg,
-        name: 'Aquamarine',
-        price: '14200',
-        type: 'Aqu'),
+        type: 'Sep',
+        color: "red",
+        details: "very good",
+        weight: "5"),
+    GemAdd(
+        imageGem: AppImages.intoImg,
+        imageCertificate:AppImages.intoImg,
+        name: 'Sapphire',
+        price: '12000',
+        type: 'Sep',
+        color: "red",
+        details: "very good",
+        weight: "5"),
+    GemAdd(
+        imageGem: AppImages.intoImg,
+        imageCertificate:AppImages.intoImg,
+        name: 'Sapphire',
+        price: '12000',
+        type: 'Sep',
+        color: "red",
+        details: "very good",
+        weight: "5"),
   ];
 
   @override
@@ -106,85 +115,16 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             SizedBox(height: 2.h),
-            // GridView.builder(
-            //   itemCount: listGems.length,
-            //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //     crossAxisCount: 2,
-            //   ),
-            //   itemBuilder: (BuildContext context, int index) {
-            //     GemCardWidget(
-            //       imagePath: listGems[index].imagePath,
-            //       name: listGems[index].name,
-            //       price: listGems[index].price,
-            //       onTapCallback: () {  },
-            //     );
-            //   },
-            //
-            // ),
-            // Container(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: GridView(
-            //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //         crossAxisCount: 2),
-            //     children: List.generate(
-            //         listGems.length,
-            //         (index) => GemCardWidget(
-            //               imagePath: listGems[index].imagePath,
-            //               name: listGems[index].name,
-            //               price: listGems[index].price,
-            //               onTapCallback: () {},
-            //             ),
-            //     ),
-            //   ),
-            // ),
-            Row(
-              children: [
-                GemCardWidget(
-                    imagePath: listGems[0].imagePath,
-                    name: listGems[0].name,
-                    price: listGems[0].price,
-                    onTapCallback: () {}),
-                GemCardWidget(
-                    imagePath: listGems[0].imagePath,
-                    name: listGems[0].name,
-                    price: listGems[0].price,
-                    onTapCallback: () {}),
-              ],
-            ),
-            Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    // setState(() {
-                    //   if(listGems[0].isFavourite == false){
-                    //     listGems[0].isFavourite =true;
-                    //   }else{
-                    //     listGems[0].isFavourite = false;
-                    //   }
-                    // });
-                  },
-                  child: GemCardWidget(
-                      imagePath: listGems[0].imagePath,
-                      name: listGems[0].name,
-                      price: listGems[0].price,
-                      onTapCallback: () {}),
-                ),
-                GemCardWidget(
-                    imagePath: listGems[0].imagePath,
-                    name: listGems[0].name,
-                    price: listGems[0].price,
-                    onTapCallback: () {}),
-              ],
-            ),
-            SizedBox(height: 5.h),
+
             GemCardWidget(
-                imagePath: listGems[0].imagePath,
-                name: listGems[0].name,
-                price: listGems[0].price,
+                imagePath: listGemAdds[0].imageGem,
+                name: listGemAdds[0].name,
+                price: listGemAdds[0].price,
                 onTapCallback: () {
                   Navigator.pushNamed(context, Routes.kGemDetailView,
-                      arguments: listGems[0]);
+                      arguments:GemDetailArguments( gemAdd: listGemAdds[0]));
                 }),
+            SizedBox(height: 5.h),
             SizedBox(height: 5.h),
           ],
         ),
@@ -359,7 +299,8 @@ class _HomeViewState extends State<HomeView> {
         if (index == 0) {
           Navigator.popUntil(context, ModalRoute.withName(Routes.kHomeView));
         } else if (index == 1) {
-          Navigator.pushNamed(context, Routes.kAddPostView,arguments: Gem(imagePath: '', name: '', price: "", type: ""));
+          Navigator.pushNamed(context, Routes.kAddPostView,
+              arguments: Gem(imagePath: '', name: '', price: "", type: ""));
         } else if (index == 2) {
           Navigator.pushNamed(context, Routes.kProfileView);
         }

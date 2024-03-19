@@ -3,6 +3,7 @@ class GemAdd {
   final String imageCertificate;
   final String name;
   final String price;
+  final String? shape;
   final String type;
   final String? color;
   final String details;
@@ -20,6 +21,7 @@ class GemAdd {
     this.weight = "",
     this.color,
     this.sellerName,
+    this.shape,
     this.sellerContactNumber,
   });
 }

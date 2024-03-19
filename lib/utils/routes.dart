@@ -10,7 +10,7 @@ import '../features/presentation/views/login/sign_up_view.dart';
 import '../features/presentation/views/notificaation/notification__view.dart';
 import '../features/presentation/views/profile/profile_view.dart';
 import '../features/presentation/views/splash/splash_view.dart';
-import '../features/presentation/widgets/gem.dart';
+import '../features/presentation/widgets/gem_add.dart';
 import '../features/presentation/widgets/gem_details_view.dart';
 
 
@@ -70,7 +70,7 @@ class Routes {
       case Routes.kGemDetailView:
         return MaterialPageRoute(
           builder: (_) =>  GemDetailView(
-            gem: settings.arguments as Gem,
+            gemDetailArguments: settings.arguments as GemDetailArguments,
           ),
           settings: const RouteSettings(name: kGemDetailView),
         );
@@ -81,7 +81,7 @@ class Routes {
         );
       case Routes.kEditPostView:
         return MaterialPageRoute(
-          builder: (_) =>   EditPostView(gem: settings.arguments as Gem),
+          builder: (_) =>   EditPostView(gemAdd: settings.arguments as GemAdd),
           settings: const RouteSettings(name: kEditPostView),
         );
       case Routes.kProfileView:

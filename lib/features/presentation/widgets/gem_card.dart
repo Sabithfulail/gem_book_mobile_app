@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../utils/app_strings.dart';
+
 class GemCardWidget extends StatelessWidget {
   final String imagePath;
   final String name;

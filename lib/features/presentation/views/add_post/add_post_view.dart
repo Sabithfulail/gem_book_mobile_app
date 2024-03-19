@@ -31,7 +31,9 @@ class _AddPostViewState extends State<AddPostView> {
   String weight = '';
   String shape = '';
   String colour = '';
-  String treatment = '';
+  String details = '';
+  String price = '';
+  String name ="";
 
   Uint8List? gemPicBytesImage;
   bool isGemImageFileSelected = false;
@@ -100,6 +102,14 @@ class _AddPostViewState extends State<AddPostView> {
                       ),
                 SizedBox(height: 2.h),
                 CustomTextField(
+                  labelText: AppStrings.name,
+                  hintText: AppStrings.enterName,
+                  onChanged: (value) {
+                    name = value;
+                  },
+                ),
+                SizedBox(height: 3.h),
+                CustomTextField(
                   labelText: AppStrings.type,
                   hintText: AppStrings.enterType,
                   onChanged: (value) {
@@ -112,6 +122,14 @@ class _AddPostViewState extends State<AddPostView> {
                   hintText: AppStrings.enterWeight,
                   onChanged: (value) {
                     weight = value;
+                  },
+                ),
+                SizedBox(height: 3.h),
+                CustomTextField(
+                  labelText: AppStrings.priceLKR,
+                  hintText: AppStrings.enterPrice,
+                  onChanged: (value) {
+                    price = value;
                   },
                 ),
                 SizedBox(height: 3.h),
@@ -132,10 +150,10 @@ class _AddPostViewState extends State<AddPostView> {
                 ),
                 SizedBox(height: 3.h),
                 CustomTextField(
-                  labelText: AppStrings.treatment,
-                  hintText: AppStrings.enterTreatmentDetails,
+                  labelText: AppStrings.details,
+                  hintText: AppStrings.enterDetails,
                   onChanged: (value) {
-                    treatment = value;
+                    details = value;
                   },
                 ),
                 SizedBox(height: 3.h),
@@ -168,7 +186,7 @@ class _AddPostViewState extends State<AddPostView> {
                         weight.isEmpty ||
                         shape.isEmpty ||
                         colour.isEmpty ||
-                        treatment.isEmpty ||
+                        details.isEmpty ||
                         isCertificateImageFileSelected == false) {
                       CustomSnackBar.show(context, 'Please fill all details');
                     }else{

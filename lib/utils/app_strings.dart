@@ -8,6 +8,10 @@ class AppStrings {
   static const String userName = "Username";
   static const String password = "Password";
   static const String login = "Login";
+  static const String edit = "Edit";
+  static const String delete = "Delete";
+  static const String name = "Name";
+  static const String enterName = "Enter Name";
   static const String logout = "Logout";
   static const String introDescription ="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse";
   static const String register = "Register";
@@ -21,6 +25,9 @@ class AppStrings {
   static const String price = "Price";
   static const String type = "Type";
   static const String weight = "Weight";
+  static const String details = "Details";
+  static const String sellerName = "Seller Name";
+  static const String sellerContactNumber = "Seller Contact Number";
   static const String shape = "Shape";
   static const String colour = "Colour";
   static const String treatment = "Treatment";
@@ -30,9 +37,11 @@ class AppStrings {
   static const String enterShape = "Enter Shape";
   static const String enterColour = "Enter Colour";
   static const String enterTreatmentDetails = "Enter Treatment details";
+  static const String enterDetails = "Enter details";
   static const String addPost = "Add Post";
   static const String priceLKR = "Price (LKR)";
   static const String addPostDescription = "Please fill below details about Gem Stone ";
+  static const String editPostDescription = "You can edit below details";
   static const String firstName = "First Name";
   static const String enterFirstName = "Enter Fist Name";
   static const String lastName = "Last Name";
