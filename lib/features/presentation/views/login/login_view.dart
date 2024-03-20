@@ -22,7 +22,6 @@ class _LoginViewState extends State<LoginView> {
   String userName = "";
   String pwd = "";
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,31 +56,48 @@ class _LoginViewState extends State<LoginView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-         CustomTextField(
+        CustomTextField(
           hintText: AppStrings.userName,
           icon: const Icon(Icons.person),
-          onChanged: (value){
+          onChanged: (value) {
             userName = value;
           },
-
         ),
         const SizedBox(height: 10),
         CustomTextField(
           hintText: AppStrings.password,
           icon: const Icon(Icons.remove_red_eye),
           obscureText: obscurePassword,
-          onChanged: (value){
+          onChanged: (value) {
             pwd = value;
           },
         ),
         const SizedBox(height: 10),
         BtnComponent(
           title: AppStrings.login,
-          onTap: () {
-            Navigator.pushNamed(context, Routes.kHomeView);
+          onTap: () async {
+            try {
+              final response = await http.post(
+                // Uri.parse('https://dummyjson.com/products/add'),
+                // http://localhost:8080/api/v1/user
+                Uri.parse('http://10.0.2.2:8080/api/v1/user'),
+                headers: {'Content-Type': 'application/json'},
+                // body: body,
+              );
+              if (response.statusCode == 200) {
+                print("login successful");
+                print(response.body);
+                Navigator.pushNamed(context, Routes.kHomeView);
+              }
+              print(response.body);
+            }catch(e){
+              print(e);
+            }
+
+            // Navigator.pushNamed(context, Routes.kHomeView);
+            // login();
             // login();
           },
-
         ),
         // ElevatedButton(
         //   onPressed: () {
@@ -120,12 +136,10 @@ class _LoginViewState extends State<LoginView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Dont have an account? "),
+        const Text("Don not have an account? "),
         TextButton(
             onPressed: () {
-              Navigator.pushNamed(
-                context,
-                Routes.kIntroPage);
+              Navigator.pushNamed(context, Routes.kIntroPage);
             },
             child: const Text(
               "Sign Up",
@@ -136,49 +150,47 @@ class _LoginViewState extends State<LoginView> {
   }
 
   showProgressBar(BuildContext? context) {
-      showGeneralDialog(
-          context: context!,
-          barrierDismissible: false,
-          transitionBuilder: (context, a1, a2, widget) {
-            return PopScope(
-              canPop: false,
-              child: Transform.scale(
-                scale: a1.value,
-                child: Opacity(
-                  opacity: a1.value,
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                    child: Container(
-                      alignment: FractionalOffset.center,
-                      child: Wrap(
-                        children: [
-                          Container(
-                            color: Colors.transparent,
-                            // child: SpinKitThreeBounce(
-                            //   color: source.baseColor,
-                            // ),
-                          ),
-                        ],
-                      ),
+    showGeneralDialog(
+        context: context!,
+        barrierDismissible: false,
+        transitionBuilder: (context, a1, a2, widget) {
+          return PopScope(
+            canPop: false,
+            child: Transform.scale(
+              scale: a1.value,
+              child: Opacity(
+                opacity: a1.value,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                  child: Container(
+                    alignment: FractionalOffset.center,
+                    child: Wrap(
+                      children: [
+                        Container(
+                          color: Colors.transparent,
+                          // child: SpinKitThreeBounce(
+                          //   color: source.baseColor,
+                          // ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-            );
-          },
-          transitionDuration: const Duration(milliseconds: 200),
-          pageBuilder: (BuildContext context, Animation<double> animation,
-              Animation<double> secondaryAnimation) {
-            return const SizedBox.shrink();
-          });
-
+            ),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 200),
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return const SizedBox.shrink();
+        });
   }
-
 
   Future<void> login() async {
     showProgressBar(context);
-    final username =userName;
-    final password =pwd;
+    final username = userName;
+    final password = pwd;
 
     // Create the request body
     final body = jsonEncode({
@@ -187,17 +199,33 @@ class _LoginViewState extends State<LoginView> {
     });
 
     try {
-      final response = await http.post(
-        Uri.parse('https://dummyjson.com/auth/login'),
+      final response = await http.get(
+        // Uri.parse('https://dummyjson.com/auth/login'),
+        Uri.parse('https://dummyjson.com/products'),
         headers: {'Content-Type': 'application/json'},
-        body: body,
+        // body: body,
       );
 
       if (response.statusCode == 200) {
         if (kDebugMode) {
           print('Login successful!');
+          print(response.body);
+          showDialog(context: context, builder: (context) {
+            return Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(color: Colors.red),
+            );
+          });
+          Navigator.pushNamed(context, Routes.kHomeView);
         }
         Navigator.pushNamed(context, '/home'); // Assuming a home screen
+      } else if (response.statusCode == 400) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Something went wrong!'),
+          ),
+        );
       } else {
         if (kDebugMode) {
           print('Login failed: ${response.statusCode}');
