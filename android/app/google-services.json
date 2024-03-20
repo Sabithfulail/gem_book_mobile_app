@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "30090219759",
-    "project_id": "gem-book-y3",
-    "storage_bucket": "gem-book-y3.appspot.com"
+    "project_number": "442868986357",
+    "project_id": "gem-book-y3-8df25",
+    "storage_bucket": "gem-book-y3-8df25.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:30090219759:android:7f1a35b27843e477c7cb1a",
+        "mobilesdk_app_id": "1:442868986357:android:5b533b3f6c8c6ab65630bc",
         "android_client_info": {
           "package_name": "com.example.gem_book"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDW3tB8ium_-90pHEyJR4OKwm-h_zGO_Ao"
+          "current_key": "AIzaSyAFqEgCbNMgaAf4RfKrb_zgYtDqVrZZowQ"
         }
       ],
       "services": {

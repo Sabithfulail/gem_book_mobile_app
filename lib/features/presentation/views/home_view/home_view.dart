@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +17,8 @@ import '../../widgets/gem_add.dart';
 import '../../widgets/gem_details_view.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  final User user;
+  const HomeView({super.key, required this.user});
 
   @override
   State<HomeView> createState() => _HomeViewState();
