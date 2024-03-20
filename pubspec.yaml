@@ -43,8 +43,9 @@ dependencies:
   http: ^1.2.1
   image_picker: ^1.0.7
   image_cropper: ^5.0.1
-  flutter_native_image: ^0.0.6
-
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
+  cloud_firestore: ^4.15.9
 
 dev_dependencies:
   flutter_test:
