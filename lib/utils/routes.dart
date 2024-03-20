@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/login/login_view.dart';
 
@@ -44,7 +45,7 @@ class Routes {
         );
       case Routes.kHomeView:
         return MaterialPageRoute(
-          builder: (_) => const HomeView(),
+          builder: (_) =>  HomeView(user: settings.arguments as User,),
           settings: const RouteSettings(name: kHomeView),
         );
       case Routes.kSignUpView:

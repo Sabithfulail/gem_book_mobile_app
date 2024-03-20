@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "442868986357",
+    "project_id": "gem-book-y3-8df25",
+    "storage_bucket": "gem-book-y3-8df25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442868986357:android:5b533b3f6c8c6ab65630bc",
+        "android_client_info": {
+          "package_name": "com.example.gem_book"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFqEgCbNMgaAf4RfKrb_zgYtDqVrZZowQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

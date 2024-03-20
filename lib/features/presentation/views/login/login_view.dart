@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _LoginViewState extends State<LoginView> {
            if(userName.isEmpty || pwd.isEmpty){
              CustomSnackBar.show(context, 'Please enter login details');
            }else{
-             Navigator.pushNamed(context, Routes.kHomeView);
+             loginAndRedirectToHome(userName,pwd,context);
            }
             // login();
           },
@@ -220,6 +221,30 @@ class _LoginViewState extends State<LoginView> {
       );
     } finally {
       Navigator.pop(context);
+    }
+  }
+}
+
+Future<void> loginAndRedirectToHome(String email, String password, BuildContext context) async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    // If login is successful, navigate to HomeView with the user
+    Navigator.pushNamed(context, Routes.kHomeView , arguments: userCredential.user!);
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => HomeView(user: userCredential.user!),
+    //   ),
+    // );
+  } on FirebaseAuthException catch (e) {
+    // Handle login errors
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
     }
   }
 }
