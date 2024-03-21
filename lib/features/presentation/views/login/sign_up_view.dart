@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -138,7 +139,7 @@ class _SignUpViewState extends State<SignUpView> {
               Container(
                   padding: const EdgeInsets.only(top: 3, left: 3),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (firstName.isEmpty ||
                           lastName.isEmpty ||
                           contactNumber.isEmpty ||
@@ -147,12 +148,41 @@ class _SignUpViewState extends State<SignUpView> {
                           password.isEmpty ||
                           conformPassword.isEmpty) {
                         CustomSnackBar.show(context, 'Please fill all details');
-                      }else{
-                        if(password == conformPassword){
-                          Navigator.pushNamed(context, Routes.kHomeView);
-                        }else{
-                          CustomSnackBar.show(context, 'Password are not same');
+                        return; // Exit if any field is empty
+                      }
+
+                      if (password != conformPassword) {
+                        CustomSnackBar.show(context, 'Passwords do not match');
+                        return;
+                      }
+
+                      try {
+                        final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          email: emailAddress,
+                          password: password,
+                        );
+
+                        final uid = credential.user!.uid;
+
+                        await FirebaseFirestore.instance.collection('users').doc(uid).set({
+                          'firstName': firstName,
+                          'lastName': lastName,
+                          'contactNumber': contactNumber,
+                          'email': emailAddress,
+                          'uid': uid,
+                        });
+                        CustomSnackBar.show(context, 'Registration successful!');
+                        Navigator.pushNamed(context, Routes.kLoginView); // Assuming HomeView
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          CustomSnackBar.show(context, 'The password is too weak.');
+                        } else if (e.code == 'email-already-in-use') {
+                          CustomSnackBar.show(context, 'The email is already in use.');
+                        } else {
+                          CustomSnackBar.show(context, e.message!); // Display generic error
                         }
+                      } catch (e) {
+                        CustomSnackBar.show(context, 'An error occurred. Please try again.');
                       }
                     },
                     style: ElevatedButton.styleFrom(

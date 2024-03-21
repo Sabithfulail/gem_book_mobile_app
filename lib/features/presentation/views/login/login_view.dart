@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gem_book/utils/app_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/custom_textfield.dart';
@@ -11,6 +13,7 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/routes.dart';
 import '../../widgets/btn_component.dart';
 import '../../widgets/common_snack_bar.dart';
+import '../../widgets/user.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -23,6 +26,7 @@ class _LoginViewState extends State<LoginView> {
   final bool obscurePassword = true;
   String userName = "";
   String pwd = "";
+   AppUser retrievedUser = AppUser();
 
 
   @override
@@ -223,28 +227,55 @@ class _LoginViewState extends State<LoginView> {
       Navigator.pop(context);
     }
   }
-}
 
-Future<void> loginAndRedirectToHome(String email, String password, BuildContext context) async {
-  try {
-    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    // If login is successful, navigate to HomeView with the user
-    Navigator.pushNamed(context, Routes.kHomeView , arguments: userCredential.user!);
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => HomeView(user: userCredential.user!),
-    //   ),
-    // );
-  } on FirebaseAuthException catch (e) {
-    // Handle login errors
-    if (e.code == 'user-not-found') {
-      print('No user found for that email.');
-    } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
+  Future<void> loginAndRedirectToHome(String email, String password, BuildContext context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final uid = user.uid;
+
+        // Access user data using uid
+        final docRef = await FirebaseFirestore.instance.collection('users').doc(uid);
+        docRef.get().then((docSnapshot) {
+          if (docSnapshot.exists) {
+            // Extract user data
+            final userData = docSnapshot.data() as Map<String, dynamic>;
+            retrievedUser = AppUser(
+              firstName: userData['firstName'],
+              lastName: userData['lastName'],
+              emailAddress: userData['email'],
+              contactNumber: userData['contact'],
+              uid: uid, // Already retrieved from FirebaseAuth
+            );
+            kUser = retrievedUser;
+          } else {
+            print('No user document found for uid: $uid');
+          }
+        }).catchError((error) => CustomSnackBar.show(context, 'Error getting user data: $error'));
+
+      }
+
+
+      Navigator.pushNamed(context, Routes.kHomeView , arguments: retrievedUser);
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        CustomSnackBar.show(context, 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        CustomSnackBar.show(context, 'Wrong password provided for that user.');
+      }
     }
   }
+
+
+
+
 }
+
+

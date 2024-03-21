@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/gem_add.dart';
 import 'package:gem_book/utils/app_colors.dart';
@@ -6,6 +7,7 @@ import '../../../../utils/app_images.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_styling.dart';
 import '../../../../utils/routes.dart';
+import '../../../services/database_service.dart';
 import '../../widgets/common_appbar.dart';
 import '../../widgets/gem_card.dart';
 import '../../widgets/gem_details_view.dart';
@@ -50,6 +52,9 @@ class _ProfileViewState extends State<ProfileView> {
         details: "very good",
         weight: "5"),
   ];
+
+  final DatabaseService dbService = DatabaseService();
+  List<GemAdd> listAdds = [];
 
   @override
   Widget build(BuildContext context) {
@@ -147,25 +152,84 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 85.h, // Set a fixed height for the list view
-              child: ListView.builder(
-                itemCount: listGems.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return GemCardWidget(
-                    imagePath: listGems[index].imageGem,
-                    name: listGems[index].name,
-                    price: listGems[index].price,
-                    onTapCallback: () {
-                      Navigator.pushNamed(context, Routes.kGemDetailView,
-                      arguments: GemDetailArguments( gemAdd: listGems[index],isEditable: true));
+            StreamBuilder<QuerySnapshot>(
+              stream: dbService.getAdds(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');}
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                List<dynamic> documents = snapshot.data!.docs;
+                for (var item in documents) {
+                  var name = item['name'];
+                  var type = item['type'];
+                  var price = item['price'];
+                  var shape = item['shape'];
+                  var details = item['details'];
+                  var weight = item['weight'];
+                  var sellerName = item['sellerName'];
+                  var contactNumber = item['contactNumber'];
+                  var colour = item['colour'];
+                  var imageGem = item['imageGem'];
+                  var imageCert = item['imageCerti'];
+                  var uid = item['addID'];
+
+                  GemAdd gemAdd = GemAdd(
+                      imageGem: imageGem,
+                      imageCertificate: imageCert,
+                      name: name,
+                      price: price,
+                      type: type,
+                      color: colour,
+                      weight: weight,
+                      details: details,
+                      sellerContactNumber: contactNumber,
+                      sellerName: sellerName,
+                      shape: shape,
+                      uid: uid);
+                  listAdds.add(gemAdd);
+                }
+                return  SizedBox(
+                  height: 85.h, // Set a fixed height for the list view
+                  child: ListView.builder(
+                    itemCount: listAdds.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return GemCardWidget(
+                        imagePath: listAdds[index].imageGem,
+                        name: listAdds[index].name,
+                        price: listAdds[index].price,
+                        onTapCallback: () {
+                          Navigator.pushNamed(context, Routes.kGemDetailView,
+                              arguments: GemDetailArguments( gemAdd: listAdds[index] , isEditable:  true));
+                        },
+                      );
                     },
-                  );
-                },
-              ),
+                  ),
+                );
+
+
+                // Filter documents based on search query
+                // List<DocumentSnapshot> filteredDocuments = documents.where((doc) {
+                //   Add add = Add.fromJson(doc.data());
+                //   return add.name.toLowerCase().contains(searchController.text.toLowerCase());
+                // }).toList();
+
+                // return _buildListView(filteredDocuments);
+              },
             ),
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.kAddPostView);
+        },
+        backgroundColor: Colors.red,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
         ),
       ),
     );

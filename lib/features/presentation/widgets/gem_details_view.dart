@@ -1,12 +1,16 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/common_appbar.dart';
 import 'package:sizer/sizer.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/app_images.dart';
 import '../../../utils/app_strings.dart';
 import '../../../utils/routes.dart';
+import '../../services/database_service.dart';
 import 'btn_component.dart';
 import 'common_dialog_box.dart';
+import 'common_snack_bar.dart';
 import 'gem_add.dart';
 
 class GemDetailArguments {
@@ -26,7 +30,17 @@ class GemDetailView extends StatefulWidget {
 }
 
 class _GemDetailViewState extends State<GemDetailView> {
+  final DatabaseService dbService = DatabaseService();
+  Uint8List?  imageGem;
+  Uint8List?  imageCert;
   int itemCount = 0;
+  @override
+  void initState() {
+    super.initState();
+    imageGem = base64Decode(widget.gemDetailArguments.gemAdd.imageGem);
+    imageCert = base64Decode(widget.gemDetailArguments.gemAdd.imageCertificate);
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +61,9 @@ class _GemDetailViewState extends State<GemDetailView> {
                   borderRadius: BorderRadius.vertical(
                       bottom: Radius.elliptical(
                           MediaQuery.of(context).size.width, 140.0)),
-                  image: const DecorationImage(
-                      image: AssetImage(AppImages.intoImg))),
+                  image:  DecorationImage(
+                    image: MemoryImage(imageGem!),
+                  ),),
             ),
             const SizedBox(height: 16),
             Padding(
@@ -102,7 +117,7 @@ class _GemDetailViewState extends State<GemDetailView> {
                         image: DecorationImage(
                           fit: BoxFit.fitHeight,
 
-                          image: AssetImage(widget.gemDetailArguments.gemAdd.imageGem),
+                          image:MemoryImage(imageCert!),
                         )
                       ),
                     ),
@@ -127,8 +142,13 @@ class _GemDetailViewState extends State<GemDetailView> {
                                 title: "Are sure",
                                 buttonTitle1: "Delete",
                                 buttonTitle2: "Cancel",
-                                onPressBtn1: () {
-                                  Navigator.pop(context);
+                                onPressBtn1: () async {
+                                  try{
+                                     dbService.deleteAdd(widget.gemDetailArguments.gemAdd.addID??"");
+                                  }catch(e){
+                                    CustomSnackBar.show(context, 'error : $e');
+                                  }
+
                                   Navigator.popUntil(
                                       context, ModalRoute.withName(Routes.kHomeView));
                                 },
