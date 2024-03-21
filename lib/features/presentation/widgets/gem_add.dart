@@ -10,9 +10,12 @@ class GemAdd {
   final String weight;
   final String? sellerName;
   final String? sellerContactNumber;
+  final String? uid;
+  final String? addID;
 
   GemAdd({
     required this.imageGem,
+    this.uid,
     required this.imageCertificate,
     required this.name,
     required this.price,
@@ -23,5 +26,6 @@ class GemAdd {
     this.sellerName,
     this.shape,
     this.sellerContactNumber,
+    this.addID,
   });
 }

@@ -1,17 +1,17 @@
-class User {
+class AppUser {
   final String? firstName;
   final String? lastName;
   final String? emailAddress;
   final String? contactNumber;
-  final String? userName;
   final String? password;
+  final String? uid;
 
-  User({
+  AppUser({
     this.firstName,
     this.lastName,
     this.emailAddress,
     this.contactNumber,
-    this.userName,
     this.password,
+    this.uid,
   });
 }

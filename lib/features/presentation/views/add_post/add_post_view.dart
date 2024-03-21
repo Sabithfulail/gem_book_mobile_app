@@ -2,14 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gem_book/features/presentation/models/gem_add.dart';
 import 'package:gem_book/features/presentation/widgets/common_appbar.dart';
 import 'package:gem_book/utils/routes.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_constants.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_styling.dart';
+import '../../../services/database_service.dart';
 import '../../widgets/btn_component.dart';
 import '../../widgets/choose_image_component.dart';
 import '../../widgets/common_snack_bar.dart';
@@ -33,7 +37,10 @@ class _AddPostViewState extends State<AddPostView> {
   String colour = '';
   String details = '';
   String price = '';
-  String name ="";
+  String name = "";
+  String imageGem = "";
+  String imageCerti = "";
+  final DatabaseService dbService = DatabaseService();
 
   Uint8List? gemPicBytesImage;
   bool isGemImageFileSelected = false;
@@ -180,7 +187,7 @@ class _AddPostViewState extends State<AddPostView> {
                 SizedBox(height: 3.h),
                 BtnComponent(
                   title: "Post",
-                  onTap: () {
+                  onTap: () async {
                     if (isGemImageFileSelected == false ||
                         type.isEmpty ||
                         weight.isEmpty ||
@@ -189,8 +196,36 @@ class _AddPostViewState extends State<AddPostView> {
                         details.isEmpty ||
                         isCertificateImageFileSelected == false) {
                       CustomSnackBar.show(context, 'Please fill all details');
-                    }else{
-                      Navigator.pushNamed(context, Routes.kHomeView);
+                    } else {
+                      Add add = Add(
+                          imageGem: imageGem,
+                          imageCerti: imageCerti,
+                          name: name,
+                          price: price,
+                          shape: shape,
+                          type: type,
+                          colour: colour,
+                          details: details,
+                          weight: weight,
+                          sellerName: kUser.lastName ?? "",
+                          contactNumber: kUser.contactNumber ?? "",
+                          email: kUser.emailAddress ?? "",
+                          addID: "",
+                          uid: kUser.uid??"");
+                      try {
+                        showProgressBar(context);
+                         DocumentReference docRef =await dbService.addAGemAdd(add);
+                         await docRef.update({'addID': docRef.id});
+                         Navigator.pop(context);
+                      } on FirebaseException catch (e) {
+                        CustomSnackBar.show(context, 'Error adding gem: ${e.message}');
+                        Navigator.pop(context);
+                      } catch (e) {
+                        CustomSnackBar.show(context, 'An unexpected error occurred: $e');
+                        Navigator.pop(context);
+                      }
+                      CustomSnackBar.show(context, 'Gem added successfully!');
+                      Navigator.popUntil(context, ModalRoute.withName(Routes.kHomeView));
                     }
                   },
                 ),
@@ -344,6 +379,7 @@ class _AddPostViewState extends State<AddPostView> {
           gemImageData = gemImagePathBase64.toString();
           gemBytesImage = base64Decode(gemImageData!);
           gemPicBytesImage = gemBytesImage;
+          imageGem = gemImageData!;
           isGemImageFileSelected = true;
         });
       }
@@ -394,6 +430,7 @@ class _AddPostViewState extends State<AddPostView> {
         gemImageFilePath = picture.path;
         gemImagePathBase64 = base64Encode(File(picture.path).readAsBytesSync());
         gemImageData = gemImagePathBase64.toString();
+        imageGem = gemImageData!;
         gemBytesImage = base64Decode(gemImageData!);
         gemPicBytesImage = gemBytesImage;
         isGemImageFileSelected = true;
@@ -543,6 +580,7 @@ class _AddPostViewState extends State<AddPostView> {
           certificateImagePathBase64 =
               base64Encode(File(pictureFile.path).readAsBytesSync());
           certificateImageData = certificateImagePathBase64.toString();
+          imageCerti = certificateImageData!;
           certificateBytesImage = base64Decode(certificateImageData!);
           certificatePicBytesImage = certificateBytesImage;
           isCertificateImageFileSelected = true;
@@ -596,6 +634,7 @@ class _AddPostViewState extends State<AddPostView> {
         certificateImagePathBase64 =
             base64Encode(File(picture.path).readAsBytesSync());
         certificateImageData = certificateImagePathBase64.toString();
+        imageCerti = certificateImageData!;
         certificateBytesImage = base64Decode(certificateImageData!);
         certificatePicBytesImage = certificateBytesImage;
         isCertificateImageFileSelected = true;
@@ -604,6 +643,46 @@ class _AddPostViewState extends State<AddPostView> {
       CustomSnackBar.show(context, "Capture image exceeds 5MB in size.");
     }
   }
+
+  showProgressBar(BuildContext? context) {
+    showGeneralDialog(
+        context: context!,
+        barrierDismissible: false,
+        transitionBuilder: (context, a1, a2, widget) {
+          return PopScope(
+            canPop: false,
+            child: Transform.scale(
+              scale: a1.value,
+              child: Opacity(
+                opacity: a1.value,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                  child: Container(
+                    alignment: FractionalOffset.center,
+                    child: Wrap(
+                      children: [
+                        Container(
+                          color: Colors.transparent,
+                          // child: SpinKitThreeBounce(
+                          //   color: source.baseColor,
+                          // ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 200),
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return const SizedBox.shrink();
+        });
+
+  }
+
 }
 
 //  Future _showCameraGemImage(String value) async {

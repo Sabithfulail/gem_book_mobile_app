@@ -1,8 +1,11 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import '../../../utils/app_strings.dart';
 
-class GemCardWidget extends StatelessWidget {
+class GemCardWidget extends StatefulWidget {
   final String imagePath;
   final String name;
   final String price;
@@ -17,9 +20,21 @@ class GemCardWidget extends StatelessWidget {
       });
 
   @override
+  State<GemCardWidget> createState() => _GemCardWidgetState();
+}
+
+class _GemCardWidgetState extends State<GemCardWidget> {
+
+  @override
   Widget build(BuildContext context) {
+    Uint8List?  decodedBytes = base64Decode(widget.imagePath);
+    // try{
+    //    decodedBytes = base64Decode(widget.imagePath);
+    // }catch(e){
+    //
+    // }
     return InkWell(
-      onTap: () => onTapCallback(),
+      onTap: () => widget.onTapCallback(),
       child: Padding(
         padding: EdgeInsets.only(left: 1.5.h,top: 1.5.h),
         child: Container(
@@ -33,8 +48,8 @@ class GemCardWidget extends StatelessWidget {
               padding: EdgeInsets.all(1.5.h),
               child: Column(
                 children: [
-                  Image.asset(
-                    imagePath,
+                  Image.memory(
+                    decodedBytes,
                     width: 40.w,
                     height: 40.w,
                   ),
@@ -42,7 +57,7 @@ class GemCardWidget extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      name,
+                      widget.name,
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -61,7 +76,7 @@ class GemCardWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        price,
+                        widget.price,
                         style: const TextStyle(
                             color: Color(0xffFF324B),
                             fontSize: 16,

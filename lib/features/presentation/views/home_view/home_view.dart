@@ -1,23 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gem_book/features/presentation/widgets/gem_card.dart';
 import 'package:gem_book/utils/app_strings.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_constants.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_styling.dart';
 import '../../../../utils/routes.dart';
+import '../../../services/database_service.dart';
 import '../../widgets/common_dialog_box.dart';
-import '../../widgets/gem.dart';
 import '../../widgets/gem_add.dart';
+import '../../widgets/gem_card.dart';
 import '../../widgets/gem_details_view.dart';
+import '../../widgets/user.dart';
 
 class HomeView extends StatefulWidget {
-  final User user;
+  final AppUser user;
   const HomeView({super.key, required this.user});
 
   @override
@@ -26,14 +28,12 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  String userName = "Abdhul Fathir";
-  String agentId = "";
-  String batchId = "";
-  String mobileNumber = "077771234124";
+  String userName = "${kUser.firstName}  ${kUser.lastName}";
+  String mobileNumber = "${kUser.contactNumber}";
   List<GemAdd> listGemAdds = [
     GemAdd(
         imageGem: AppImages.intoImg,
-        imageCertificate:AppImages.intoImg,
+        imageCertificate: AppImages.intoImg,
         name: 'Sapphire',
         price: '12000',
         type: 'Sep',
@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
         weight: "5"),
     GemAdd(
         imageGem: AppImages.intoImg,
-        imageCertificate:AppImages.intoImg,
+        imageCertificate: AppImages.intoImg,
         name: 'Sapphire',
         price: '12000',
         type: 'Sep',
@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
         weight: "5"),
     GemAdd(
         imageGem: AppImages.intoImg,
-        imageCertificate:AppImages.intoImg,
+        imageCertificate: AppImages.intoImg,
         name: 'Sapphire',
         price: '12000',
         type: 'Sep',
@@ -59,6 +59,17 @@ class _HomeViewState extends State<HomeView> {
         details: "very good",
         weight: "5"),
   ];
+  TextEditingController searchController = TextEditingController();
+
+  final DatabaseService dbService = DatabaseService();
+  List<GemAdd> listAdds = [];
+  @override
+  void initState() {
+    super.initState();
+    searchController.addListener(() {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,37 +108,75 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       )),
                 )),
-            _seeAllView(context, "Categories", () {}),
-            SizedBox(
-              height: 130,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                  _categoriesView(AppImages.icGem, "Ruby"),
-                ],
-              ),
-            ),
-            SizedBox(height: 2.h),
+            StreamBuilder<QuerySnapshot>(
+              stream: dbService.getAdds(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');}
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                List<dynamic> documents = snapshot.data!.docs;
+                for (var item in documents) {
+                  var name = item['name'];
+                  var type = item['type'];
+                  var price = item['price'];
+                  var shape = item['shape'];
+                  var details = item['details'];
+                  var weight = item['weight'];
+                  var sellerName = item['sellerName'];
+                  var contactNumber = item['contactNumber'];
+                  var colour = item['colour'];
+                  var imageGem = item['imageGem'];
+                  var imageCert = item['imageCerti'];
+                  var uid = item['imageCerti'];
+                  var addID = item['addID'];
 
-            GemCardWidget(
-                imagePath: listGemAdds[0].imageGem,
-                name: listGemAdds[0].name,
-                price: listGemAdds[0].price,
-                onTapCallback: () {
-                  Navigator.pushNamed(context, Routes.kGemDetailView,
-                      arguments:GemDetailArguments( gemAdd: listGemAdds[0]));
-                }),
-            SizedBox(height: 5.h),
-            SizedBox(height: 5.h),
+                  GemAdd gemAdd = GemAdd(
+                      imageGem: imageGem,
+                      imageCertificate: imageCert,
+                      name: name,
+                      price: price,
+                      type: type,
+                      color: colour,
+                      weight: weight,
+                      details: details,
+                      sellerContactNumber: contactNumber,
+                      sellerName: sellerName,
+                      shape: shape,
+                      uid: uid,
+                      addID: addID);
+                  listAdds.add(gemAdd);
+                }
+                return  SizedBox(
+                  height: 85.h, // Set a fixed height for the list view
+                  child: ListView.builder(
+                    itemCount: listAdds.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return GemCardWidget(
+                        imagePath: listAdds[index].imageGem,
+                        name: listAdds[index].name,
+                        price: listAdds[index].price,
+                        onTapCallback: () {
+                          Navigator.pushNamed(context, Routes.kGemDetailView,
+                              arguments: GemDetailArguments( gemAdd: listAdds[index]));
+                        },
+                      );
+                    },
+                  ),
+                );
+
+
+                // Filter documents based on search query
+                // List<DocumentSnapshot> filteredDocuments = documents.where((doc) {
+                //   Add add = Add.fromJson(doc.data());
+                //   return add.name.toLowerCase().contains(searchController.text.toLowerCase());
+                // }).toList();
+
+                // return _buildListView(filteredDocuments);
+              },
+            ),
           ],
         ),
       ),
@@ -301,8 +350,7 @@ class _HomeViewState extends State<HomeView> {
         if (index == 0) {
           Navigator.popUntil(context, ModalRoute.withName(Routes.kHomeView));
         } else if (index == 1) {
-          Navigator.pushNamed(context, Routes.kAddPostView,
-              arguments: Gem(imagePath: '', name: '', price: "", type: ""));
+          Navigator.pushNamed(context, Routes.kAddPostView);
         } else if (index == 2) {
           Navigator.pushNamed(context, Routes.kProfileView);
         }
