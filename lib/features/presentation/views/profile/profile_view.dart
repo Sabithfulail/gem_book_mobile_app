@@ -161,6 +161,7 @@ class _ProfileViewState extends State<ProfileView> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 List<dynamic> documents = snapshot.data!.docs;
+                listAdds.clear();
                 for (var item in documents) {
                   var name = item['name'];
                   var type = item['type'];
@@ -173,7 +174,13 @@ class _ProfileViewState extends State<ProfileView> {
                   var colour = item['colour'];
                   var imageGem = item['imageGem'];
                   var imageCert = item['imageCerti'];
-                  var uid = item['addID'];
+                  var uid = item['imageCerti'];
+                  var gemAddID = item.id??"";
+
+                  print(""""""""""""""""""""""object""""""""""""""""""""""");
+                  print(item['addID'].toString());
+                  print(gemAddID);
+
 
                   GemAdd gemAdd = GemAdd(
                       imageGem: imageGem,
@@ -187,7 +194,8 @@ class _ProfileViewState extends State<ProfileView> {
                       sellerContactNumber: contactNumber,
                       sellerName: sellerName,
                       shape: shape,
-                      uid: uid);
+                      uid: uid,
+                      gemAddID: gemAddID);
                   listAdds.add(gemAdd);
                 }
                 return  SizedBox(
@@ -202,7 +210,7 @@ class _ProfileViewState extends State<ProfileView> {
                         price: listAdds[index].price,
                         onTapCallback: () {
                           Navigator.pushNamed(context, Routes.kGemDetailView,
-                              arguments: GemDetailArguments( gemAdd: listAdds[index] , isEditable:  true));
+                              arguments: GemDetailArguments( gemAdd: listAdds[index],isEditable: true));
                         },
                       );
                     },

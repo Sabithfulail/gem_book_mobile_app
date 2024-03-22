@@ -21,7 +21,7 @@ class _SignUpViewState extends State<SignUpView> {
   String lastName = '';
   String contactNumber = '';
   String emailAddress = '';
-  String userName = '';
+  String userName = '  ';
   String password = '';
   String conformPassword = '';
 
@@ -97,17 +97,6 @@ class _SignUpViewState extends State<SignUpView> {
                     onChanged: (value) {
                       setState(() {
                         emailAddress = value;
-                      });
-                    },
-                  ),
-                  SizedBox(height: 3.h),
-                  CustomTextField(
-                    labelText: AppStrings.userName,
-                    hintText: AppStrings.enterUserName,
-                    fillColor: AppColors.baseColor,
-                    onChanged: (value) {
-                      setState(() {
-                        userName = value;
                       });
                     },
                   ),

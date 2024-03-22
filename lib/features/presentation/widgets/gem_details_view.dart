@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/common_appbar.dart';
 import 'package:sizer/sizer.dart';
@@ -96,6 +95,8 @@ class _GemDetailViewState extends State<GemDetailView> {
                       widget.gemDetailArguments.gemAdd.sellerName??""),
                   _gemDetailView(AppStrings.contactNumber,
                       widget.gemDetailArguments.gemAdd.sellerContactNumber??""),
+                  _gemDetailView(AppStrings.contactNumber,
+                      widget.gemDetailArguments.gemAdd.gemAddID??""),
                   SizedBox(height: 2.h),
                   Center(
                     child: Text(
@@ -144,8 +145,10 @@ class _GemDetailViewState extends State<GemDetailView> {
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () async {
                                   try{
-                                     dbService.deleteAdd(widget.gemDetailArguments.gemAdd.addID??"");
+                                     dbService.deleteAdd(widget.gemDetailArguments.gemAdd.gemAddID??"");
+                                     CustomSnackBar.show(context, 'Successfully deleted');
                                   }catch(e){
+                                    print(e);
                                     CustomSnackBar.show(context, 'error : $e');
                                   }
 

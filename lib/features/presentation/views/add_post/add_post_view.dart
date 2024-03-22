@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/models/gem_add.dart';
 import 'package:gem_book/features/presentation/widgets/common_appbar.dart';
@@ -31,6 +32,46 @@ class AddPostView extends StatefulWidget {
 }
 
 class _AddPostViewState extends State<AddPostView> {
+
+
+  Future<void> _uploadImage(File _imageFile,String name) async {
+    final firebaseStorage = FirebaseStorage.instance;
+    final reference = firebaseStorage.ref().child('images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+    try {
+      await reference.putFile(_imageFile);
+      final downloadUrl = await reference.getDownloadURL();
+      print('Image uploaded successfully: $downloadUrl');
+    } catch (error) {
+      print('Error uploading image: $error');
+    }
+  }
+
+
+  Future<void> uploadGemImage(File file,String name) async {
+    final firebaseStorage = FirebaseStorage.instance;
+    final reference = firebaseStorage.ref().child('images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+    try {
+      await reference.putFile(file);
+      final downloadUrl = await reference.getDownloadURL();
+      print('Image uploaded successfully: $downloadUrl');
+    } catch (error) {
+      print('Error uploading image: $error');
+    }
+
+  }
+
+  // Future<String> uploadCertificateImage(File imageFile) async {
+  //
+  //     Reference ref = storage.ref().child('certificates').child('certificate_image_${DateTime.now().millisecondsSinceEpoch}.jpg');
+  //     UploadTask uploadTask = ref.putFile(imageFile);
+  //     TaskSnapshot snapshot = await uploadTask;
+  //     String downloadUrl = await snapshot.ref.getDownloadURL();
+  //     return downloadUrl;
+  // }
+
+
   String type = '';
   String weight = '';
   String shape = '';
@@ -197,6 +238,8 @@ class _AddPostViewState extends State<AddPostView> {
                         isCertificateImageFileSelected == false) {
                       CustomSnackBar.show(context, 'Please fill all details');
                     } else {
+                        uploadGemImage(gemImageFile,gemImageFileName);
+                        uploadGemImage(certificateImageFile,certificateImageFileName);
                       Add add = Add(
                           imageGem: imageGem,
                           imageCerti: imageCerti,
@@ -214,8 +257,7 @@ class _AddPostViewState extends State<AddPostView> {
                           uid: kUser.uid??"");
                       try {
                         showProgressBar(context);
-                         DocumentReference docRef =await dbService.addAGemAdd(add);
-                         await docRef.update({'addID': docRef.id});
+                         dbService.addAGemAdd(add);
                          Navigator.pop(context);
                       } on FirebaseException catch (e) {
                         CustomSnackBar.show(context, 'Error adding gem: ${e.message}');
@@ -366,7 +408,7 @@ class _AddPostViewState extends State<AddPostView> {
 
     if (pictureFile != null) {
       if (pictureFile.path != "") {
-        setState(() {
+        setState(() async {
           gemImageController.clear();
           isGemImageFileSelected = false;
           gemImageFileCamera = true;
@@ -381,6 +423,7 @@ class _AddPostViewState extends State<AddPostView> {
           gemPicBytesImage = gemBytesImage;
           imageGem = gemImageData!;
           isGemImageFileSelected = true;
+          await uploadGemImage(gemImageFile,gemImageFileName);
         });
       }
     } else {

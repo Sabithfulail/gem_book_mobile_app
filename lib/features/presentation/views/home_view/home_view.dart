@@ -117,6 +117,7 @@ class _HomeViewState extends State<HomeView> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 List<dynamic> documents = snapshot.data!.docs;
+                listAdds.clear();
                 for (var item in documents) {
                   var name = item['name'];
                   var type = item['type'];
@@ -130,7 +131,8 @@ class _HomeViewState extends State<HomeView> {
                   var imageGem = item['imageGem'];
                   var imageCert = item['imageCerti'];
                   var uid = item['imageCerti'];
-                  var addID = item['addID'];
+                  var gemAddID = item.id;
+
 
                   GemAdd gemAdd = GemAdd(
                       imageGem: imageGem,
@@ -145,7 +147,7 @@ class _HomeViewState extends State<HomeView> {
                       sellerName: sellerName,
                       shape: shape,
                       uid: uid,
-                      addID: addID);
+                      gemAddID: gemAddID);
                   listAdds.add(gemAdd);
                 }
                 return  SizedBox(

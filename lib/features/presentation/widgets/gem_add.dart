@@ -11,7 +11,7 @@ class GemAdd {
   final String? sellerName;
   final String? sellerContactNumber;
   final String? uid;
-  final String? addID;
+  final String? gemAddID;
 
   GemAdd({
     required this.imageGem,
@@ -26,6 +26,6 @@ class GemAdd {
     this.sellerName,
     this.shape,
     this.sellerContactNumber,
-    this.addID,
+    this.gemAddID,
   });
 }

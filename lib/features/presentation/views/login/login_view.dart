@@ -63,7 +63,7 @@ class _LoginViewState extends State<LoginView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
          CustomTextField(
-          hintText: AppStrings.userName,
+          hintText: AppStrings.emailAddress,
           icon: const Icon(Icons.person),
           onChanged: (value){
             userName = value;
@@ -183,54 +183,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
 
-  Future<void> login() async {
-    showProgressBar(context);
-    final username =userName;
-    final password =pwd;
 
-    // Create the request body
-    final body = jsonEncode({
-      'username': username,
-      'password': password,
-    });
-
-    try {
-      final response = await http.post(
-        Uri.parse('https://dummyjson.com/auth/login'),
-        headers: {'Content-Type': 'application/json'},
-        body: body,
-      );
-
-      if (response.statusCode == 200) {
-        if (kDebugMode) {
-          print('Login successful!');
-        }
-        // Assuming a home screen
-      } else {
-        final responseBody = await jsonDecode(response.body);
-        if (kDebugMode) {
-          print('Login failed: ${response.statusCode}');
-        }
-        CustomSnackBar.show(context, 'Login failed! ${responseBody['message']}');
-      }
-    } catch (error) {
-      if (kDebugMode) {
-        print('Error logging in: $error');
-      }
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('An error occurred. Please try again.'),
-        ),
-      );
-    } finally {
-      Navigator.pop(context);
-    }
-  }
 
   Future<void> loginAndRedirectToHome(String email, String password, BuildContext context) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -244,7 +201,6 @@ class _LoginViewState extends State<LoginView> {
         final docRef = await FirebaseFirestore.instance.collection('users').doc(uid);
         docRef.get().then((docSnapshot) {
           if (docSnapshot.exists) {
-            // Extract user data
             final userData = docSnapshot.data() as Map<String, dynamic>;
             retrievedUser = AppUser(
               firstName: userData['firstName'],
@@ -271,11 +227,55 @@ class _LoginViewState extends State<LoginView> {
         CustomSnackBar.show(context, 'Wrong password provided for that user.');
       }
     }
+    CustomSnackBar.show(context, 'Wrong password or email provided for that user.');
   }
 
 
 
-
+  // Future<void> login() async {
+  //   showProgressBar(context);
+  //   final username =userName;
+  //   final password =pwd;
+  //
+  //   // Create the request body
+  //   final body = jsonEncode({
+  //     'username': username,
+  //     'password': password,
+  //   });
+  //
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse('https://dummyjson.com/auth/login'),
+  //       headers: {'Content-Type': 'application/json'},
+  //       body: body,
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       if (kDebugMode) {
+  //         print('Login successful!');
+  //       }
+  //       // Assuming a home screen
+  //     } else {
+  //       final responseBody = await jsonDecode(response.body);
+  //       if (kDebugMode) {
+  //         print('Login failed: ${response.statusCode}');
+  //       }
+  //       CustomSnackBar.show(context, 'Login failed! ${responseBody['message']}');
+  //     }
+  //   } catch (error) {
+  //     if (kDebugMode) {
+  //       print('Error logging in: $error');
+  //     }
+  //
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('An error occurred. Please try again.'),
+  //       ),
+  //     );
+  //   } finally {
+  //     Navigator.pop(context);
+  //   }
+  // }
 }
 
 
