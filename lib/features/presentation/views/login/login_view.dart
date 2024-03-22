@@ -250,7 +250,7 @@ class _LoginViewState extends State<LoginView> {
               firstName: userData['firstName'],
               lastName: userData['lastName'],
               emailAddress: userData['email'],
-              contactNumber: userData['contact'],
+              contactNumber: userData['contactNumber'],
               uid: uid, // Already retrieved from FirebaseAuth
             );
             kUser = retrievedUser;

@@ -29,36 +29,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String userName = "${kUser.firstName}  ${kUser.lastName}";
-  String mobileNumber = "${kUser.contactNumber}";
-  List<GemAdd> listGemAdds = [
-    GemAdd(
-        imageGem: AppImages.intoImg,
-        imageCertificate: AppImages.intoImg,
-        name: 'Sapphire',
-        price: '12000',
-        type: 'Sep',
-        color: "red",
-        details: "very good",
-        weight: "5"),
-    GemAdd(
-        imageGem: AppImages.intoImg,
-        imageCertificate: AppImages.intoImg,
-        name: 'Sapphire',
-        price: '12000',
-        type: 'Sep',
-        color: "red",
-        details: "very good",
-        weight: "5"),
-    GemAdd(
-        imageGem: AppImages.intoImg,
-        imageCertificate: AppImages.intoImg,
-        name: 'Sapphire',
-        price: '12000',
-        type: 'Sep',
-        color: "red",
-        details: "very good",
-        weight: "5"),
-  ];
+  String mobileNumber = kUser.contactNumber??"0777123456";
   TextEditingController searchController = TextEditingController();
 
   final DatabaseService dbService = DatabaseService();
@@ -117,6 +88,7 @@ class _HomeViewState extends State<HomeView> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 List<dynamic> documents = snapshot.data!.docs;
+                listAdds.clear();
                 for (var item in documents) {
                   var name = item['name'];
                   var type = item['type'];
@@ -146,7 +118,9 @@ class _HomeViewState extends State<HomeView> {
                       shape: shape,
                       uid: uid,
                       addID: addID);
-                  listAdds.add(gemAdd);
+                  if(gemAdd.addID!.isNotEmpty) {
+                    listAdds.add(gemAdd);
+                  }
                 }
                 return  SizedBox(
                   height: 85.h, // Set a fixed height for the list view
