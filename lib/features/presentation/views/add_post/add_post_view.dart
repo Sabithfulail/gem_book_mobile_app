@@ -214,8 +214,7 @@ class _AddPostViewState extends State<AddPostView> {
                           uid: kUser.uid??"");
                       try {
                         showProgressBar(context);
-                         DocumentReference docRef =await dbService.addAGemAdd(add);
-                         await docRef.update({'addID': docRef.id});
+                          dbService.addAGemAdd(add);
                          Navigator.pop(context);
                       } on FirebaseException catch (e) {
                         CustomSnackBar.show(context, 'Error adding gem: ${e.message}');
@@ -336,7 +335,7 @@ class _AddPostViewState extends State<AddPostView> {
   Future _showCameraGemImage(String value) async {
     final pictureFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
-      imageQuality: 100,
+      imageQuality: 50,
       preferredCameraDevice: CameraDevice.rear,
     );
 

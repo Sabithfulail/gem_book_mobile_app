@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/widgets/gem_add.dart';
 import 'package:gem_book/utils/app_colors.dart';
+import 'package:gem_book/utils/app_constants.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../utils/app_images.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_styling.dart';
 import '../../../../utils/routes.dart';
@@ -20,38 +20,9 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  String userName = "Abdhul Fathir";
-  String mobileNumber = "0772536543";
-  String mailAddress = "GemSeller@gmail.com";
-  List<GemAdd> listGems = [
-    GemAdd(
-        imageGem: AppImages.intoImg,
-        imageCertificate: AppImages.intoImg,
-        name: 'Sapphire',
-        price: '12000',
-        type: 'Sep',
-        color: "red",
-        details: "very good",
-        weight: "5"),
-    GemAdd(
-        imageCertificate: AppImages.intoImg,
-        imageGem: AppImages.intoImg,
-        name: 'Sapphire',
-        price: '12000',
-        type: 'Sep',
-        color: "red",
-        details: "very good",
-        weight: "5"),
-    GemAdd(
-        imageCertificate: AppImages.intoImg,
-        imageGem: AppImages.intoImg,
-        name: 'Sapphire',
-        price: '12000',
-        type: 'Sep',
-        color: "red",
-        details: "very good",
-        weight: "5"),
-  ];
+  String userName = "${kUser.firstName} ${kUser.lastName}";
+  String mobileNumber = kUser.contactNumber??"0777123456";
+  String mailAddress = "${kUser.emailAddress}";
 
   final DatabaseService dbService = DatabaseService();
   List<GemAdd> listAdds = [];
@@ -161,6 +132,7 @@ class _ProfileViewState extends State<ProfileView> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 List<dynamic> documents = snapshot.data!.docs;
+                listAdds.clear();
                 for (var item in documents) {
                   var name = item['name'];
                   var type = item['type'];
@@ -173,7 +145,8 @@ class _ProfileViewState extends State<ProfileView> {
                   var colour = item['colour'];
                   var imageGem = item['imageGem'];
                   var imageCert = item['imageCerti'];
-                  var uid = item['addID'];
+                  var uid = item['imageCerti'];
+                  var addID = item['addID'];
 
                   GemAdd gemAdd = GemAdd(
                       imageGem: imageGem,
@@ -187,8 +160,11 @@ class _ProfileViewState extends State<ProfileView> {
                       sellerContactNumber: contactNumber,
                       sellerName: sellerName,
                       shape: shape,
-                      uid: uid);
-                  listAdds.add(gemAdd);
+                      uid: uid,
+                      addID: addID);
+                  if(gemAdd.addID!.isNotEmpty) {
+                    listAdds.add(gemAdd);
+                  }
                 }
                 return  SizedBox(
                   height: 85.h, // Set a fixed height for the list view
@@ -202,7 +178,7 @@ class _ProfileViewState extends State<ProfileView> {
                         price: listAdds[index].price,
                         onTapCallback: () {
                           Navigator.pushNamed(context, Routes.kGemDetailView,
-                              arguments: GemDetailArguments( gemAdd: listAdds[index] , isEditable:  true));
+                              arguments: GemDetailArguments( gemAdd: listAdds[index],isEditable: true));
                         },
                       );
                     },

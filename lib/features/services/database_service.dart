@@ -17,10 +17,10 @@ class DatabaseService {
     return addRef.snapshots();
   }
 
-  Future<DocumentReference> addAGemAdd(Add add) async {
+  void addAGemAdd(Add add) async {
     final DocumentReference docRef = await addRef.add(add);
     addRef.add(add);
-    return docRef;
+    await docRef.update({'addID': docRef.id});
   }
 
   void updateAdd(String addID,Add add){

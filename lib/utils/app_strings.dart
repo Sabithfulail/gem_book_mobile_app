@@ -24,7 +24,7 @@ class AppStrings {
   static const String settings = "Settings";
   static const String price = "Price";
   static const String type = "Type";
-  static const String weight = "Weight";
+  static const String weight = "Weight (carats)";
   static const String details = "Details";
   static const String sellerName = "Seller Name";
   static const String sellerContactNumber = "Seller Contact Number";

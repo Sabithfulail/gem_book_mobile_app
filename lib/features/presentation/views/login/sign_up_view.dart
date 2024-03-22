@@ -21,7 +21,6 @@ class _SignUpViewState extends State<SignUpView> {
   String lastName = '';
   String contactNumber = '';
   String emailAddress = '';
-  String userName = '';
   String password = '';
   String conformPassword = '';
 
@@ -102,17 +101,6 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   SizedBox(height: 3.h),
                   CustomTextField(
-                    labelText: AppStrings.userName,
-                    hintText: AppStrings.enterUserName,
-                    fillColor: AppColors.baseColor,
-                    onChanged: (value) {
-                      setState(() {
-                        userName = value;
-                      });
-                    },
-                  ),
-                  SizedBox(height: 3.h),
-                  CustomTextField(
                     labelText: AppStrings.password,
                     hintText: AppStrings.enterPassword,
                     fillColor: AppColors.baseColor,
@@ -144,7 +132,6 @@ class _SignUpViewState extends State<SignUpView> {
                           lastName.isEmpty ||
                           contactNumber.isEmpty ||
                           emailAddress.isEmpty ||
-                          userName.isEmpty ||
                           password.isEmpty ||
                           conformPassword.isEmpty) {
                         CustomSnackBar.show(context, 'Please fill all details');
