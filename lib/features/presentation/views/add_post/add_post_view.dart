@@ -392,7 +392,7 @@ class _AddPostViewState extends State<AddPostView> {
   Future _showGalleryGemImage(String value) async {
     final pictureFile = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        imageQuality: 100,
+        imageQuality: 50,
         preferredCameraDevice: CameraDevice.rear);
     // CroppedFile? picture = await ImageCropper().cropImage(
     //   sourcePath: pictureFile!.path,
@@ -539,7 +539,7 @@ class _AddPostViewState extends State<AddPostView> {
   Future _showCameraCertificateImage(String value) async {
     final pictureFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
-      imageQuality: 100,
+      imageQuality: 50,
       preferredCameraDevice: CameraDevice.rear,
     );
 
@@ -595,7 +595,7 @@ class _AddPostViewState extends State<AddPostView> {
   Future _showGalleryCertificateImage(String value) async {
     final pictureFile = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        imageQuality: 100,
+        imageQuality: 50,
         preferredCameraDevice: CameraDevice.rear);
     // CroppedFile? picture = await ImageCropper().cropImage(
     //   sourcePath: pictureFile!.path,
