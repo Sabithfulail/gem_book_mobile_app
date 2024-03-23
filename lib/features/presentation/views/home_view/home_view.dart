@@ -59,6 +59,7 @@ class _HomeViewState extends State<HomeView> {
                   right: 2.w,
                 ),
                 child: Container(
+                  height: 9.h,
                   decoration: const BoxDecoration(
                       color: Color(0xffF3F5F7),
                       borderRadius: BorderRadius.all(Radius.circular(24))),
@@ -123,7 +124,7 @@ class _HomeViewState extends State<HomeView> {
                   }
                 }
                 return  SizedBox(
-                  height: 85.h, // Set a fixed height for the list view
+                  height: 70.h, // Set a fixed height for the list view
                   child: ListView.builder(
                     itemCount: listAdds.length,
                     shrinkWrap: true,
@@ -151,6 +152,7 @@ class _HomeViewState extends State<HomeView> {
                 // return _buildListView(filteredDocuments);
               },
             ),
+            SizedBox(height: 3.h,)
           ],
         ),
       ),

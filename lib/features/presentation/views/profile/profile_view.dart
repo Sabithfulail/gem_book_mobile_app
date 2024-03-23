@@ -167,7 +167,7 @@ class _ProfileViewState extends State<ProfileView> {
                   }
                 }
                 return  SizedBox(
-                  height: 85.h, // Set a fixed height for the list view
+                  height: 70.h, // Set a fixed height for the list view
                   child: ListView.builder(
                     itemCount: listAdds.length,
                     shrinkWrap: true,
@@ -195,6 +195,7 @@ class _ProfileViewState extends State<ProfileView> {
                 // return _buildListView(filteredDocuments);
               },
             ),
+            SizedBox(height: 3.h,)
           ],
         ),
       ),

@@ -39,11 +39,11 @@ class _IntroPageState extends State<IntroPage> {
                 fontSize: 40,
               ),
             ),
-            SizedBox(height: 5.h),
-            const Text(
-              AppStrings.introDescription,
-              textAlign: TextAlign.center,
-            ),
+            // SizedBox(height: 5.h),
+            // const Text(
+            //   AppStrings.introDescription,
+            //   textAlign: TextAlign.center,
+            // ),
             SizedBox(height: 5.h),
             BtnComponent(
               title: AppStrings.login,

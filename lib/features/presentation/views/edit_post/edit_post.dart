@@ -450,6 +450,8 @@ class _AddPostViewState extends State<EditPostView> {
                                 onPressBtn2: () {
                                   Navigator.pop(context);
                                 }));
+                      }else{
+                        CustomSnackBar.show(context, 'Please fill all details');
                       }
                     }
                   },
