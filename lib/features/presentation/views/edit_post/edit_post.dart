@@ -252,7 +252,8 @@ class _AddPostViewState extends State<EditPostView> {
                             weight.isEmpty ||
                             shape.isEmpty ||
                             colour.isEmpty ||
-                            details.isEmpty
+                            details.isEmpty ||
+                            name.isEmpty
                         // || isCertificateImageFileSelected == false
                         ) {
                       CustomSnackBar.show(context, 'Please fill all details');
@@ -450,7 +451,7 @@ class _AddPostViewState extends State<EditPostView> {
                                 onPressBtn2: () {
                                   Navigator.pop(context);
                                 }));
-                      }else{
+                      } else {
                         CustomSnackBar.show(context, 'Please fill all details');
                       }
                     }
