@@ -6,6 +6,7 @@ import '../features/presentation/views/contact_us/contact_us.dart';
 import '../features/presentation/views/edit_post/edit_post.dart';
 import '../features/presentation/views/home_view/home_view.dart';
 import '../features/presentation/views/intro/intro_page.dart';
+import '../features/presentation/views/login/forgot_pw_view.dart';
 import '../features/presentation/views/login/sign_up_view.dart';
 import '../features/presentation/views/notificaation/notification__view.dart';
 import '../features/presentation/views/profile/profile_view.dart';
@@ -28,6 +29,7 @@ class Routes {
   static const String kAddPostView = 'kAddPostView';
   static const String kEditPostView = 'kEditPostView';
   static const String kProfileView = 'kProfileView';
+  static const String kForgotPasswordView = 'kForgotPasswordView';
 
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -89,6 +91,11 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) =>   const ProfileView(),
           settings: const RouteSettings(name: kProfileView),
+        );
+      case Routes.kForgotPasswordView:
+        return MaterialPageRoute(
+          builder: (_) =>   const ForgotPasswordView(),
+          settings: const RouteSettings(name: kForgotPasswordView),
         );
 
 
