@@ -39,6 +39,7 @@ class _LoginViewState extends State<LoginView> {
           children: [
             _header(context),
             _inputField(context),
+            _forgotPassword(context),
             _signup(context),
           ],
         ),
@@ -114,15 +115,17 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  // _forgotPassword(context) {
-  //   return TextButton(
-  //     onPressed: () {},
-  //     child: const Text(
-  //       "${AppStrings.forgotPassword}?",
-  //       style: TextStyle(color: AppColors.baseColor),
-  //     ),
-  //   );
-  // }
+  _forgotPassword(context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, Routes.kForgotPasswordView);
+      },
+      child: const Text(
+        "${AppStrings.forgotPassword}?",
+        style: TextStyle(color: AppColors.baseColor),
+      ),
+    );
+  }
 
   _signup(context) {
     return Row(
@@ -270,6 +273,22 @@ class _LoginViewState extends State<LoginView> {
         CustomSnackBar.show(context, 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
         CustomSnackBar.show(context, 'Wrong password provided for that user.');
+      }
+    }
+  }
+
+
+  Future<void> forgotPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: email,
+      );
+      CustomSnackBar.show(context, 'Password reset email sent! Please check your inbox.');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        CustomSnackBar.show(context, 'No user found for that email.');
+      } else {
+        CustomSnackBar.show(context, 'Error resetting password: ${e.message}');
       }
     }
   }
