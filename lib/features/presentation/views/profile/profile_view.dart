@@ -145,7 +145,7 @@ class _ProfileViewState extends State<ProfileView> {
                   var colour = item['colour'];
                   var imageGem = item['imageGem'];
                   var imageCert = item['imageCerti'];
-                  var uid = item['imageCerti'];
+                  var uid = item['uid'];
                   var addID = item['addID'];
 
                   GemAdd gemAdd = GemAdd(
@@ -162,7 +162,7 @@ class _ProfileViewState extends State<ProfileView> {
                       shape: shape,
                       uid: uid,
                       addID: addID);
-                  if(gemAdd.addID!.isNotEmpty) {
+                  if(gemAdd.addID!.isNotEmpty && (kUser.uid == gemAdd.uid)) {
                     listAdds.add(gemAdd);
                   }
                 }
