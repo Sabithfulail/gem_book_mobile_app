@@ -40,6 +40,7 @@ class _AddPostViewState extends State<EditPostView> {
   initState() {
     type = widget.gemAdd.type;
     name = widget.gemAdd.name;
+    price = widget.gemAdd.price;
     weight = widget.gemAdd.weight;
     shape = widget.gemAdd.shape ?? "";
     colour = widget.gemAdd.color ?? "";
@@ -143,49 +144,64 @@ class _AddPostViewState extends State<EditPostView> {
                   initialValue: name,
                   labelText: AppStrings.name,
                   hintText: AppStrings.enterName,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    name = value;
+                  },
                 ),
                 SizedBox(height: 3.h),
                 CustomTextField(
                   initialValue: type,
                   labelText: AppStrings.type,
                   hintText: AppStrings.enterType,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    type = value;
+                    setState(() {});
+                  },
                 ),
                 SizedBox(height: 3.h),
                 CustomTextField(
                   initialValue: weight,
                   labelText: AppStrings.weight,
                   hintText: AppStrings.enterWeight,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    weight = value;
+                  },
                 ),
                 SizedBox(height: 3.h),
                 CustomTextField(
                   initialValue: price,
                   labelText: AppStrings.priceLKR,
                   hintText: AppStrings.enterPrice,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    price = value;
+                  },
                 ),
                 SizedBox(height: 3.h),
                 CustomTextField(
                   initialValue: shape,
                   labelText: AppStrings.shape,
                   hintText: AppStrings.enterShape,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    shape = value;
+                  },
                 ),
                 SizedBox(height: 3.h),
                 CustomTextField(
                   initialValue: colour,
                   labelText: AppStrings.colour,
                   hintText: AppStrings.enterColour,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    colour = value;
+                  },
                 ),
                 SizedBox(height: 3.h),
                 CustomTextField(
                   initialValue: details,
                   labelText: AppStrings.details,
                   hintText: AppStrings.enterDetails,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    details = value;
+                  },
                 ),
                 SizedBox(height: 3.h),
                 Text(
@@ -229,59 +245,212 @@ class _AddPostViewState extends State<EditPostView> {
                 BtnComponent(
                   title: "Conform",
                   onTap: () {
-
+                    setState(() {});
                     if (
-                    // isGemImageFileSelected == false ||
+                        // isGemImageFileSelected == false ||
                         type.isEmpty ||
-                        weight.isEmpty ||
-                        shape.isEmpty ||
-                        colour.isEmpty ||
-                        details.isEmpty
-                            // || isCertificateImageFileSelected == false
-                    ) {
+                            weight.isEmpty ||
+                            shape.isEmpty ||
+                            colour.isEmpty ||
+                            details.isEmpty
+                        // || isCertificateImageFileSelected == false
+                        ) {
                       CustomSnackBar.show(context, 'Please fill all details');
                     } else {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => CommonDialog(
-                              isTwoButton: true,
-                              title: "Are sure",
-                              buttonTitle1: "Conform",
-                              buttonTitle2: "Cancel",
-                              onPressBtn1: () {
-                                Add add = Add(
-                                    imageGem: widget.gemAdd.imageCertificate,
-                                    imageCerti: widget.gemAdd.imageGem,
-                                    name: name,
-                                    price: price,
-                                    shape: shape,
-                                    type: type,
-                                    colour: colour,
-                                    details: details,
-                                    weight: weight,
-                                    sellerName: kUser.lastName ?? "",
-                                    contactNumber: kUser.contactNumber ?? "",
-                                    email: kUser.emailAddress ?? "",
-                                    addID: "",
-                                    uid: kUser.uid??"");
-                                try {
-                                  showProgressBar(context);
-                                  dbService.updateAdd(widget.gemAdd.addID??"",add);
+                      if (isEditedGem == false && isEditedCert == false) {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => CommonDialog(
+                                isTwoButton: true,
+                                title: "Are sure",
+                                buttonTitle1: "Conform",
+                                buttonTitle2: "Cancel",
+                                onPressBtn1: () {
+                                  Add add = Add(
+                                      imageGem: widget.gemAdd.imageCertificate,
+                                      imageCerti: widget.gemAdd.imageGem,
+                                      name: name,
+                                      price: price,
+                                      shape: shape,
+                                      type: type,
+                                      colour: colour,
+                                      details: details,
+                                      weight: weight,
+                                      sellerName: kUser.lastName ?? "",
+                                      contactNumber: kUser.contactNumber ?? "",
+                                      email: kUser.emailAddress ?? "",
+                                      addID: widget.gemAdd.imageCertificate,
+                                      uid: kUser.uid ?? "");
+                                  try {
+                                    showProgressBar(context);
+                                    dbService.updateAdd(
+                                        widget.gemAdd.addID ?? "", add);
+                                    Navigator.pop(context);
+                                  } on FirebaseException catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'Error adding gem: ${e.message}');
+                                    Navigator.pop(context);
+                                  } catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'An unexpected error occurred: $e');
+                                    Navigator.pop(context);
+                                  }
+                                  CustomSnackBar.show(
+                                      context, 'Gem added successfully!');
                                   Navigator.pop(context);
-                                } on FirebaseException catch (e) {
-                                  CustomSnackBar.show(context, 'Error adding gem: ${e.message}');
+                                  Navigator.popUntil(context,
+                                      ModalRoute.withName(Routes.kHomeView));
+                                },
+                                onPressBtn2: () {
                                   Navigator.pop(context);
-                                } catch (e) {
-                                  CustomSnackBar.show(context, 'An unexpected error occurred: $e');
+                                }));
+                      } else if (isEditedGem == true &&
+                          isGemImageFileSelected == true) {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => CommonDialog(
+                                isTwoButton: true,
+                                title: "Are sure",
+                                buttonTitle1: "Conform",
+                                buttonTitle2: "Cancel",
+                                onPressBtn1: () {
+                                  Add add = Add(
+                                      imageGem: widget.gemAdd.imageCertificate,
+                                      imageCerti: widget.gemAdd.imageGem,
+                                      name: name,
+                                      price: price,
+                                      shape: shape,
+                                      type: type,
+                                      colour: colour,
+                                      details: details,
+                                      weight: weight,
+                                      sellerName: kUser.lastName ?? "",
+                                      contactNumber: kUser.contactNumber ?? "",
+                                      email: kUser.emailAddress ?? "",
+                                      addID: widget.gemAdd.imageCertificate,
+                                      uid: kUser.uid ?? "");
+                                  try {
+                                    showProgressBar(context);
+                                    dbService.updateAdd(
+                                        widget.gemAdd.addID ?? "", add);
+                                    Navigator.pop(context);
+                                  } on FirebaseException catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'Error adding gem: ${e.message}');
+                                    Navigator.pop(context);
+                                  } catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'An unexpected error occurred: $e');
+                                    Navigator.pop(context);
+                                  }
+                                  CustomSnackBar.show(
+                                      context, 'Gem added successfully!');
                                   Navigator.pop(context);
-                                }
-                                CustomSnackBar.show(context, 'Gem added successfully!');
-                                Navigator.pop(context);
-                                Navigator.popUntil(context, ModalRoute.withName(Routes.kHomeView));
-                              },
-                              onPressBtn2: () {
-                                Navigator.pop(context);
-                              }));
+                                  Navigator.popUntil(context,
+                                      ModalRoute.withName(Routes.kHomeView));
+                                },
+                                onPressBtn2: () {
+                                  Navigator.pop(context);
+                                }));
+                      } else if (isEditedCert == true &&
+                          isCertificateImageFileSelected == true) {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => CommonDialog(
+                                isTwoButton: true,
+                                title: "Are sure",
+                                buttonTitle1: "Conform",
+                                buttonTitle2: "Cancel",
+                                onPressBtn1: () {
+                                  Add add = Add(
+                                      imageGem: widget.gemAdd.imageCertificate,
+                                      imageCerti: widget.gemAdd.imageGem,
+                                      name: name,
+                                      price: price,
+                                      shape: shape,
+                                      type: type,
+                                      colour: colour,
+                                      details: details,
+                                      weight: weight,
+                                      sellerName: kUser.lastName ?? "",
+                                      contactNumber: kUser.contactNumber ?? "",
+                                      email: kUser.emailAddress ?? "",
+                                      addID: widget.gemAdd.imageCertificate,
+                                      uid: kUser.uid ?? "");
+                                  try {
+                                    showProgressBar(context);
+                                    dbService.updateAdd(
+                                        widget.gemAdd.addID ?? "", add);
+                                    Navigator.pop(context);
+                                  } on FirebaseException catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'Error adding gem: ${e.message}');
+                                    Navigator.pop(context);
+                                  } catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'An unexpected error occurred: $e');
+                                    Navigator.pop(context);
+                                  }
+                                  CustomSnackBar.show(
+                                      context, 'Gem added successfully!');
+                                  Navigator.pop(context);
+                                  Navigator.popUntil(context,
+                                      ModalRoute.withName(Routes.kHomeView));
+                                },
+                                onPressBtn2: () {
+                                  Navigator.pop(context);
+                                }));
+                      } else if (isEditedCert == true &&
+                          isCertificateImageFileSelected == true &&
+                          isEditedGem == true &&
+                          isGemImageFileSelected == true) {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => CommonDialog(
+                                isTwoButton: true,
+                                title: "Are sure",
+                                buttonTitle1: "Conform",
+                                buttonTitle2: "Cancel",
+                                onPressBtn1: () {
+                                  Add add = Add(
+                                      imageGem: widget.gemAdd.imageCertificate,
+                                      imageCerti: widget.gemAdd.imageGem,
+                                      name: name,
+                                      price: price,
+                                      shape: shape,
+                                      type: type,
+                                      colour: colour,
+                                      details: details,
+                                      weight: weight,
+                                      sellerName: kUser.lastName ?? "",
+                                      contactNumber: kUser.contactNumber ?? "",
+                                      email: kUser.emailAddress ?? "",
+                                      addID: widget.gemAdd.imageCertificate,
+                                      uid: kUser.uid ?? "");
+                                  try {
+                                    showProgressBar(context);
+                                    dbService.updateAdd(
+                                        widget.gemAdd.addID ?? "", add);
+                                    Navigator.pop(context);
+                                  } on FirebaseException catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'Error adding gem: ${e.message}');
+                                    Navigator.pop(context);
+                                  } catch (e) {
+                                    CustomSnackBar.show(context,
+                                        'An unexpected error occurred: $e');
+                                    Navigator.pop(context);
+                                  }
+                                  CustomSnackBar.show(
+                                      context, 'Gem added successfully!');
+                                  Navigator.pop(context);
+                                  Navigator.popUntil(context,
+                                      ModalRoute.withName(Routes.kHomeView));
+                                },
+                                onPressBtn2: () {
+                                  Navigator.pop(context);
+                                }));
+                      }
                     }
                   },
                 ),
