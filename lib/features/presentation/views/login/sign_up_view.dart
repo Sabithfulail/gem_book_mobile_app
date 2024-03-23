@@ -90,6 +90,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   SizedBox(height: 3.h),
                   CustomTextField(
+
                     labelText: AppStrings.emailAddress,
                     hintText: AppStrings.enterEmailAddress,
                     fillColor: AppColors.baseColor,
@@ -101,6 +102,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   SizedBox(height: 3.h),
                   CustomTextField(
+                    obscureText: true,
                     labelText: AppStrings.password,
                     hintText: AppStrings.enterPassword,
                     fillColor: AppColors.baseColor,
@@ -112,6 +114,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   SizedBox(height: 3.h),
                   CustomTextField(
+                    obscureText: true,
                     labelText: AppStrings.conformPassword,
                     hintText: AppStrings.reEnterPassword,
                     fillColor: AppColors.baseColor,

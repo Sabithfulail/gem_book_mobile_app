@@ -63,7 +63,7 @@ class _LoginViewState extends State<LoginView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
          CustomTextField(
-          hintText: AppStrings.userName,
+          hintText: AppStrings.emailAddress,
           icon: const Icon(Icons.person),
           onChanged: (value){
             userName = value;
@@ -255,11 +255,12 @@ class _LoginViewState extends State<LoginView> {
             );
             kUser = retrievedUser;
           } else {
-            print('No user document found for uid: $uid');
+            CustomSnackBar.show(context, "Please check your login credential");
           }
         }).catchError((error) => CustomSnackBar.show(context, 'Error getting user data: $error'));
 
       }
+
 
 
       Navigator.pushNamed(context, Routes.kHomeView , arguments: retrievedUser);
