@@ -390,7 +390,7 @@ class _HomeViewState extends State<HomeView> {
       } else {
         filteredList = listAdds
             .where((item) =>
-                (item.name.toLowerCase() ?? '').contains(query.toLowerCase()))
+                (item.name.toLowerCase()).contains(query.toLowerCase()))
             .toList();
       }
     });
