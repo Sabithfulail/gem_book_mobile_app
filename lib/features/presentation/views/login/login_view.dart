@@ -245,18 +245,20 @@ class _LoginViewState extends State<LoginView> {
 
         // Access user data using uid
         final docRef = await FirebaseFirestore.instance.collection('users').doc(uid);
-        docRef.get().then((docSnapshot) {
+        await docRef.get().then((docSnapshot) async {
           if (docSnapshot.exists) {
             // Extract user data
-            final userData = docSnapshot.data() as Map<String, dynamic>;
-            retrievedUser = AppUser(
-              firstName: userData['firstName'],
-              lastName: userData['lastName'],
-              emailAddress: userData['email'],
-              contactNumber: userData['contactNumber'],
-              uid: uid, // Already retrieved from FirebaseAuth
-            );
-            kUser = retrievedUser;
+            final userData =await docSnapshot.data() as Map<String, dynamic>;
+            setState(() {
+              retrievedUser = AppUser(
+                firstName: userData['firstName'],
+                lastName: userData['lastName'],
+                emailAddress: userData['email'],
+                contactNumber: userData['contactNumber'],
+                uid: uid, // Already retrieved from FirebaseAuth
+              );
+              kUser = retrievedUser;
+            });
           } else {
             CustomSnackBar.show(context, "Please check your login credential");
           }
