@@ -8,6 +8,7 @@ import 'package:gem_book/features/presentation/models/gem_add.dart';
 import 'package:gem_book/features/presentation/widgets/common_appbar.dart';
 import 'package:gem_book/utils/routes.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
 import '../../../../utils/app_images.dart';
@@ -67,6 +68,37 @@ class _AddPostViewState extends State<AddPostView> {
   String? certificateImagePathBase64 = "";
   String? certificateImageData;
   Uint8List? certificateBytesImage;
+  Interpreter? interpreter;
+
+  @override
+  void initState() {
+    super.initState();
+    loadModel(); // Load the model in initState
+  }
+
+  Future<void> loadModel() async {
+    try {
+      interpreter = await Interpreter.fromAsset('assets/gemBook_model.tflite');
+    } on Exception catch (e) {
+      print('Error loading model: $e');
+    }
+  }
+
+  Future<String> runInference(File imageFile) async {
+    var imageData = await imageFile.readAsBytes();
+    var inputShape = interpreter!.getInputTensor(0).shape;
+    var outputShape = interpreter!.getOutputTensor(0).shape;
+    var numElements = inputShape[0] * inputShape[1] * inputShape[2];
+    var inputList = List<double>.generate(numElements, (i) => imageData[i] / 255.0); // Normalize image data
+    var outputList = List<double>.filled(outputShape[0], 0);
+    interpreter!.run(inputList, outputList);
+    print("***************************`${outputList.toString()}`*********************************");
+    return outputList.toString();
+  }
+
+  String getGemTypeFromOutput(List<num> output) {
+    return "Replace with your logic to get gem type from output";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -381,6 +413,7 @@ class _AddPostViewState extends State<AddPostView> {
           imageGem = gemImageData!;
           isGemImageFileSelected = true;
         });
+         await runInference(gemImageFile);
       }
     } else {
       gemImageFileName = "No File Selected";
@@ -434,6 +467,7 @@ class _AddPostViewState extends State<AddPostView> {
         gemPicBytesImage = gemBytesImage;
         isGemImageFileSelected = true;
       });
+      runInference(gemImageFile);
     } else {
       CustomSnackBar.show(context, "Capture image exceeds 5MB in size.");
     }
