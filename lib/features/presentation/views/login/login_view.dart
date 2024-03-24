@@ -232,6 +232,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Future<void> loginAndRedirectToHome(String email, String password, BuildContext context) async {
+    showProgressBar(context);
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -259,7 +260,9 @@ class _LoginViewState extends State<LoginView> {
               );
               kUser = retrievedUser;
             });
+            Navigator.pop(context);
           } else {
+            Navigator.pop(context);
             CustomSnackBar.show(context, "Please check your login credential");
           }
         }).catchError((error) => CustomSnackBar.show(context, 'Error getting user data: $error'));

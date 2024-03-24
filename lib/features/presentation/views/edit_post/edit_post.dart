@@ -306,7 +306,7 @@ class _AddPostViewState extends State<EditPostView> {
                                   Navigator.pop(context);
                                 }));
                       } else if (isEditedGem == true &&
-                          isGemImageFileSelected == true) {
+                          isGemImageFileSelected == true && isEditedCert == false) {
                         showDialog(
                             context: context,
                             builder: (ctx) => CommonDialog(
@@ -354,7 +354,7 @@ class _AddPostViewState extends State<EditPostView> {
                                   Navigator.pop(context);
                                 }));
                       } else if (isEditedCert == true &&
-                          isCertificateImageFileSelected == true) {
+                          isCertificateImageFileSelected == true && isEditedGem == false) {
                         showDialog(
                             context: context,
                             builder: (ctx) => CommonDialog(
