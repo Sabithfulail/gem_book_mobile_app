@@ -20,6 +20,7 @@ import '../../widgets/user.dart';
 
 class HomeView extends StatefulWidget {
   final AppUser user;
+
   const HomeView({super.key, required this.user});
 
   @override
@@ -28,17 +29,24 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  String userName = "${kUser.firstName}  ${kUser.lastName}";
+  String userName = "${kUser.firstName} ${kUser.lastName}";
   String mobileNumber = kUser.contactNumber??"0777123456";
+  String mailAddress = "${kUser.emailAddress}";
   TextEditingController searchController = TextEditingController();
 
   final DatabaseService dbService = DatabaseService();
   List<GemAdd> listAdds = [];
+  List<GemAdd> filteredList = [];
+
   @override
   void initState() {
     super.initState();
     searchController.addListener(() {
-      setState(() {});
+      kUser =widget.user;
+      setState(() {
+        userName = "${widget.user.firstName??""} ${widget.user.lastName??""}";
+        mailAddress = widget.user.emailAddress??"";
+      });
     });
   }
 
@@ -59,14 +67,16 @@ class _HomeViewState extends State<HomeView> {
                   right: 2.w,
                 ),
                 child: Container(
-                  height: 9.h,
                   decoration: const BoxDecoration(
                       color: Color(0xffF3F5F7),
                       borderRadius: BorderRadius.all(Radius.circular(24))),
-                  child: const TextField(
+                  child: TextField(
+                      onChanged: (value) {
+                        filterList(value);
+                      },
                       textAlignVertical: TextAlignVertical.center,
                       autofocus: false,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Search Category",
                         hintStyle: TextStyle(
@@ -84,7 +94,8 @@ class _HomeViewState extends State<HomeView> {
               stream: dbService.getAdds(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');}
+                  return Text('Error: ${snapshot.error}');
+                }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -119,29 +130,31 @@ class _HomeViewState extends State<HomeView> {
                       shape: shape,
                       uid: uid,
                       addID: addID);
-                  if(gemAdd.addID!.isNotEmpty) {
+                  if (gemAdd.addID!.isNotEmpty) {
                     listAdds.add(gemAdd);
                   }
+                  filteredList.clear();
+                  filteredList.addAll(listAdds);
                 }
-                return  SizedBox(
-                  height: 70.h, // Set a fixed height for the list view
+                return SizedBox(
+                  height: 66.h, // Set a fixed height for the list view
                   child: ListView.builder(
-                    itemCount: listAdds.length,
+                    itemCount: filteredList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return GemCardWidget(
-                        imagePath: listAdds[index].imageGem,
-                        name: listAdds[index].name,
-                        price: listAdds[index].price,
+                        imagePath: filteredList[index].imageGem,
+                        name: filteredList[index].name,
+                        price: filteredList[index].price,
                         onTapCallback: () {
                           Navigator.pushNamed(context, Routes.kGemDetailView,
-                              arguments: GemDetailArguments( gemAdd: listAdds[index]));
+                              arguments:
+                                  GemDetailArguments(gemAdd: filteredList[index]));
                         },
                       );
                     },
                   ),
                 );
-
 
                 // Filter documents based on search query
                 // List<DocumentSnapshot> filteredDocuments = documents.where((doc) {
@@ -152,7 +165,9 @@ class _HomeViewState extends State<HomeView> {
                 // return _buildListView(filteredDocuments);
               },
             ),
-            SizedBox(height: 3.h,)
+            SizedBox(
+              height: 3.h,
+            )
           ],
         ),
       ),
@@ -211,7 +226,7 @@ class _HomeViewState extends State<HomeView> {
                     Row(
                       children: [
                         Text(
-                          "Mobile Number",
+                          "email",
                           style: AppStyling.normalTextSize14
                               .copyWith(color: AppColors.appWhiteColor),
                         ),
@@ -227,7 +242,7 @@ class _HomeViewState extends State<HomeView> {
                           width: 10,
                         ),
                         Text(
-                          mobileNumber,
+                          mailAddress,
                           style: AppStyling.normalTextSize14
                               .copyWith(color: AppColors.appWhiteColor),
                         ),
@@ -367,4 +382,17 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  void filterList(String query) {
+    setState(() {
+      filteredList.clear();
+      if (query.isEmpty) {
+        filteredList.addAll(listAdds);
+      } else {
+        filteredList = listAdds
+            .where((item) =>
+                (item.name.toLowerCase() ?? '').contains(query.toLowerCase()))
+            .toList();
+      }
+    });
+  }
 }

@@ -82,6 +82,7 @@ class _SignUpViewState extends State<SignUpView> {
                     labelText: AppStrings.contactNumber,
                     hintText: AppStrings.contactNumber,
                     fillColor: AppColors.baseColor,
+                    isConatactNumber: true,
                     onChanged: (value) {
                       setState(() {
                         contactNumber = value;
