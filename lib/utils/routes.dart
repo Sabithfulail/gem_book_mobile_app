@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/features/presentation/views/login/login_view.dart';
 
+import '../features/presentation/views/add_post/add_post_view.dart';
 import '../features/presentation/views/contact_us/contact_us.dart';
 import '../features/presentation/views/edit_post/edit_post.dart';
 import '../features/presentation/views/home_view/home_view.dart';
@@ -74,11 +75,11 @@ class Routes {
           ),
           settings: const RouteSettings(name: kGemDetailView),
         );
-      // case Routes.kAddPostView:
-      //   return MaterialPageRoute(
-      //     builder: (_) =>  const AddPostView(),
-      //     settings: const RouteSettings(name: kAddPostView),
-      //   );
+      case Routes.kAddPostView:
+        return MaterialPageRoute(
+          builder: (_) =>  const AddPostView(),
+          settings: const RouteSettings(name: kAddPostView),
+        );
       case Routes.kEditPostView:
         return MaterialPageRoute(
           builder: (_) => EditPostView(gemAdd: settings.arguments as GemAdd),

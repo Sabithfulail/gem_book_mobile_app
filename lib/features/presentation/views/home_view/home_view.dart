@@ -30,7 +30,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String userName = "${kUser.firstName} ${kUser.lastName}";
-  String mobileNumber = kUser.contactNumber ?? "0777123456";
+  String mobileNumber = kUser.contactNumber??"0777123456";
   String mailAddress = "${kUser.emailAddress}";
   TextEditingController searchController = TextEditingController();
 
@@ -38,17 +38,14 @@ class _HomeViewState extends State<HomeView> {
   List<GemAdd> listAdds = [];
   List<GemAdd> filteredList = [];
 
-  bool isSearchBarActive = false;
-
   @override
   void initState() {
     super.initState();
     searchController.addListener(() {
-      kUser = widget.user;
+      kUser =widget.user;
       setState(() {
-        userName =
-            "${widget.user.firstName ?? ""} ${widget.user.lastName ?? ""}";
-        mailAddress = widget.user.emailAddress ?? "";
+        userName = "${widget.user.firstName??""} ${widget.user.lastName??""}";
+        mailAddress = widget.user.emailAddress??"";
       });
     });
   }
@@ -75,37 +72,7 @@ class _HomeViewState extends State<HomeView> {
                       borderRadius: BorderRadius.all(Radius.circular(24))),
                   child: TextField(
                       onChanged: (value) {
-                        GemAdd gemAdd = GemAdd(
-                            imageGem: "imageGem",
-                            imageCertificate: "imageCert",
-                            name: value,
-                            price: "price",
-                            type: "type",
-                            color: "colour",
-                            weight: "weight",
-                            details: "details",
-                            sellerContactNumber: "contactNumber",
-                            sellerName: "sellerName",
-                            shape: "shape",
-                            uid: "uid",
-                            addID: "addID");
-                        setState(() {
-                          filteredList.clear();
-                          isSearchBarActive = value.isNotEmpty;
-                          if (listAdds.any((element) {
-                            element.name == gemAdd.name;
-
-                            // filteredList.clear();
-                            filteredList.add(element);
-                            // print("filteredList.length");
-                            // print(filteredList.length);
-                            return true;
-                          })) {}
-                          print("filteredList.length");
-                          print(filteredList.length);
-                          print('Filtered List: $filteredList');
-                        });
-                        // filterList(value);
+                        filterList(value);
                       },
                       textAlignVertical: TextAlignVertical.center,
                       autofocus: false,
@@ -163,61 +130,30 @@ class _HomeViewState extends State<HomeView> {
                       shape: shape,
                       uid: uid,
                       addID: addID);
-                  if (gemAdd.addID!.isNotEmpty && !isSearchBarActive) {
+                  if (gemAdd.addID!.isNotEmpty) {
                     listAdds.add(gemAdd);
-                    // filteredList.add(gemAdd);
-                  } else {
-                    print('ghjk:${filteredList.length}');
-                    filteredList = filteredList;
                   }
-                  // filteredList.clear();
-
-                  // filteredList.addAll(filteredList);
-                  // filteredList.addAll(listAdds);
+                  filteredList.clear();
+                  filteredList.addAll(listAdds);
                 }
-                return Visibility(
-                  visible: true,
-                  child: isSearchBarActive
-                      ? SizedBox(
-                          height: 66.h, // Set a fixed height for the list view
-                          child: ListView.builder(
-                            itemCount: listAdds.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return GemCardWidget(
-                                imagePath: listAdds[index].imageGem,
-                                name: listAdds[index].name,
-                                price: listAdds[index].price,
-                                onTapCallback: () {
-                                  Navigator.pushNamed(
-                                      context, Routes.kGemDetailView,
-                                      arguments: GemDetailArguments(
-                                          gemAdd: listAdds[index]));
-                                },
-                              );
-                            },
-                          ),
-                        )
-                      : SizedBox(
-                          height: 66.h, // Set a fixed height for the list view
-                          child: ListView.builder(
-                            itemCount: filteredList.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return GemCardWidget(
-                                imagePath: filteredList[index].imageGem,
-                                name: filteredList[index].name,
-                                price: filteredList[index].price,
-                                onTapCallback: () {
-                                  Navigator.pushNamed(
-                                      context, Routes.kGemDetailView,
-                                      arguments: GemDetailArguments(
-                                          gemAdd: filteredList[index]));
-                                },
-                              );
-                            },
-                          ),
-                        ),
+                return SizedBox(
+                  height: 66.h, // Set a fixed height for the list view
+                  child: ListView.builder(
+                    itemCount: filteredList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return GemCardWidget(
+                        imagePath: filteredList[index].imageGem,
+                        name: filteredList[index].name,
+                        price: filteredList[index].price,
+                        onTapCallback: () {
+                          Navigator.pushNamed(context, Routes.kGemDetailView,
+                              arguments:
+                              GemDetailArguments(gemAdd: filteredList[index]));
+                        },
+                      );
+                    },
+                  ),
                 );
 
                 // Filter documents based on search query
@@ -365,7 +301,7 @@ class _HomeViewState extends State<HomeView> {
             ),
             title: Text(AppStrings.logout,
                 style:
-                    AppStyling.bold500TextSize16.copyWith(color: Colors.white)),
+                AppStyling.bold500TextSize16.copyWith(color: Colors.white)),
             onTap: () {
               showDialog(
                   context: context,
@@ -419,9 +355,9 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: AppColors.baseColor,
       title: const Center(
           child: Text(
-        AppStrings.welcome,
-        style: TextStyle(color: Colors.white),
-      )),
+            AppStrings.welcome,
+            style: TextStyle(color: Colors.white),
+          )),
       leading: IconButton(
         icon: Icon(
           Icons.menu,
@@ -454,10 +390,9 @@ class _HomeViewState extends State<HomeView> {
       } else {
         filteredList = listAdds
             .where((item) =>
-                (item.name.toLowerCase()).contains(query.toLowerCase()))
+            (item.name.toLowerCase()).contains(query.toLowerCase()))
             .toList();
       }
     });
-    print('Filtered List: $filteredList');
   }
 }
