@@ -4,6 +4,7 @@ class AppImages {
   /// PNG
   static const String intoImg = '${kPNGImagePath}intro_img$kPngType';
   static const String icGem = '${kPNGImagePath}ic_gem$kPngType';
+  static const String icSplash = '${kPNGImagePath}ic_splash$kPngType';
 
 
   /// SVG
