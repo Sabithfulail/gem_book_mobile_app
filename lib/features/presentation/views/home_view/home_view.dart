@@ -90,17 +90,22 @@ class _HomeViewState extends State<HomeView> {
                             uid: "uid",
                             addID: "addID");
                         setState(() {
+                          filteredList.clear();
                           isSearchBarActive = value.isNotEmpty;
-                          if (filteredList.any((element) {
+                          if (listAdds.any((element) {
                             element.name == gemAdd.name;
-                            filteredList.clear();
+
+                            // filteredList.clear();
                             filteredList.add(element);
+                            // print("filteredList.length");
+                            // print(filteredList.length);
                             return true;
                           })) {}
-
+                          print("filteredList.length");
+                          print(filteredList.length);
                           print('Filtered List: $filteredList');
                         });
-                        filterList(value);
+                        // filterList(value);
                       },
                       textAlignVertical: TextAlignVertical.center,
                       autofocus: false,
@@ -160,10 +165,10 @@ class _HomeViewState extends State<HomeView> {
                       addID: addID);
                   if (gemAdd.addID!.isNotEmpty && !isSearchBarActive) {
                     listAdds.add(gemAdd);
-                    filteredList.add(gemAdd);
-                  }else{
+                    // filteredList.add(gemAdd);
+                  } else {
                     print('ghjk:${filteredList.length}');
-                    filteredList=filteredList;
+                    filteredList = filteredList;
                   }
                   // filteredList.clear();
 
@@ -171,26 +176,48 @@ class _HomeViewState extends State<HomeView> {
                   // filteredList.addAll(listAdds);
                 }
                 return Visibility(
-                  visible: filteredList.isNotEmpty,
-                  child: SizedBox(
-                    height: 66.h, // Set a fixed height for the list view
-                    child: ListView.builder(
-                      itemCount: filteredList.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return GemCardWidget(
-                          imagePath: filteredList[index].imageGem,
-                          name: filteredList[index].name,
-                          price: filteredList[index].price,
-                          onTapCallback: () {
-                            Navigator.pushNamed(context, Routes.kGemDetailView,
-                                arguments: GemDetailArguments(
-                                    gemAdd: filteredList[index]));
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                  visible: true,
+                  child: isSearchBarActive
+                      ? SizedBox(
+                          height: 66.h, // Set a fixed height for the list view
+                          child: ListView.builder(
+                            itemCount: listAdds.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return GemCardWidget(
+                                imagePath: listAdds[index].imageGem,
+                                name: listAdds[index].name,
+                                price: listAdds[index].price,
+                                onTapCallback: () {
+                                  Navigator.pushNamed(
+                                      context, Routes.kGemDetailView,
+                                      arguments: GemDetailArguments(
+                                          gemAdd: listAdds[index]));
+                                },
+                              );
+                            },
+                          ),
+                        )
+                      : SizedBox(
+                          height: 66.h, // Set a fixed height for the list view
+                          child: ListView.builder(
+                            itemCount: filteredList.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return GemCardWidget(
+                                imagePath: filteredList[index].imageGem,
+                                name: filteredList[index].name,
+                                price: filteredList[index].price,
+                                onTapCallback: () {
+                                  Navigator.pushNamed(
+                                      context, Routes.kGemDetailView,
+                                      arguments: GemDetailArguments(
+                                          gemAdd: filteredList[index]));
+                                },
+                              );
+                            },
+                          ),
+                        ),
                 );
 
                 // Filter documents based on search query
