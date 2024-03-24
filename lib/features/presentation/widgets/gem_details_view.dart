@@ -33,21 +33,21 @@ class GemDetailView extends StatefulWidget {
 
 class _GemDetailViewState extends State<GemDetailView> {
   final DatabaseService dbService = DatabaseService();
-  Uint8List?  imageGem;
-  Uint8List?  imageCert;
+  Uint8List? imageGem;
+  Uint8List? imageCert;
   int itemCount = 0;
+
   @override
   void initState() {
     super.initState();
     imageGem = base64Decode(widget.gemDetailArguments.gemAdd.imageGem);
     imageCert = base64Decode(widget.gemDetailArguments.gemAdd.imageCertificate);
   }
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffd2d3d5),
       appBar: const CommonAppBar(
         title: AppStrings.details,
       ),
@@ -59,13 +59,15 @@ class _GemDetailViewState extends State<GemDetailView> {
               height: 40.h,
               width: double.maxFinite,
               decoration: BoxDecoration(
-                  color: const Color(0xffF3F5F7),
-                  borderRadius: BorderRadius.vertical(
-                      bottom: Radius.elliptical(
-                          MediaQuery.of(context).size.width, 140.0)),
-                  image:  DecorationImage(
-                    image: MemoryImage(imageGem!),
-                  ),),
+                color: const Color(0xffF3F5F7),
+                // borderRadius: BorderRadius.vertical(
+                //     bottom: Radius.elliptical(
+                //         MediaQuery.of(context).size.width, 80.0)),
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: MemoryImage(imageGem!),
+                ),
+              ),
             ),
             const SizedBox(height: 16),
             Padding(
@@ -91,21 +93,23 @@ class _GemDetailViewState extends State<GemDetailView> {
                   _gemDetailView(AppStrings.weight,
                       widget.gemDetailArguments.gemAdd.weight),
                   _gemDetailView(AppStrings.shape,
-                      widget.gemDetailArguments.gemAdd.shape??''),
+                      widget.gemDetailArguments.gemAdd.shape ?? ''),
                   _gemDetailView(AppStrings.details,
                       widget.gemDetailArguments.gemAdd.details),
                   _gemDetailView(AppStrings.sellerName,
-                      widget.gemDetailArguments.gemAdd.sellerName??""),
-                  _gemDetailView(AppStrings.contactNumber,
-                      widget.gemDetailArguments.gemAdd.sellerContactNumber??""),
+                      widget.gemDetailArguments.gemAdd.sellerName ?? ""),
+                  _gemDetailView(
+                      AppStrings.contactNumber,
+                      widget.gemDetailArguments.gemAdd.sellerContactNumber ??
+                          ""),
                   SizedBox(height: 2.h),
                   Center(
                     child: Text(
                       "Certificate Image",
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: AppColors.appBlackColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                            color: AppColors.appBlackColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                   ),
                   SizedBox(height: 1.h),
@@ -114,14 +118,13 @@ class _GemDetailViewState extends State<GemDetailView> {
                       width: 80.w,
                       height: 30.h,
                       decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.appLightGrayColor),
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          fit: BoxFit.fitHeight,
-
-                          image:MemoryImage(imageCert!),
-                        )
-                      ),
+                          border:
+                              Border.all(color: AppColors.appLightGrayColor),
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            fit: BoxFit.fitHeight,
+                            image: MemoryImage(imageCert!),
+                          )),
                     ),
                   ),
                   SizedBox(height: 5.h),
@@ -130,7 +133,7 @@ class _GemDetailViewState extends State<GemDetailView> {
                       title: AppStrings.edit,
                       onTap: () {
                         Navigator.pushNamed(context, Routes.kEditPostView,
-                        arguments: widget.gemDetailArguments.gemAdd);
+                            arguments: widget.gemDetailArguments.gemAdd);
                       },
                     ),
                   if (widget.gemDetailArguments.isEditable == true)
@@ -145,14 +148,16 @@ class _GemDetailViewState extends State<GemDetailView> {
                                 buttonTitle1: "Delete",
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () async {
-                                  try{
-                                     dbService.deleteAdd(widget.gemDetailArguments.gemAdd.addID??"");
-                                  }catch(e){
+                                  try {
+                                    dbService.deleteAdd(widget
+                                            .gemDetailArguments.gemAdd.addID ??
+                                        "");
+                                  } catch (e) {
                                     CustomSnackBar.show(context, 'error : $e');
                                   }
 
-                                  Navigator.popUntil(
-                                      context, ModalRoute.withName(Routes.kHomeView));
+                                  Navigator.popUntil(context,
+                                      ModalRoute.withName(Routes.kHomeView));
                                 },
                                 onPressBtn2: () {
                                   Navigator.pop(context);
@@ -172,21 +177,29 @@ class _GemDetailViewState extends State<GemDetailView> {
 
 _gemDetailView(String title, String data) {
   return Padding(
-    padding: EdgeInsets.only(bottom: 1.h),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title,
-            style: const TextStyle(
-                color: Colors.black,
-                fontSize: 24,
-                fontWeight: FontWeight.bold)),
-        Text(data,
-            style: const TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold)),
-      ],
+    padding: EdgeInsets.only(bottom: 0.6.h),
+    child: Container(
+      height: 8.h,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8), color: Color(0xffd2d3d5)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(title,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400)),
+            Text(data,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400)),
+          ],
+        ),
+      ),
     ),
   );
 }
