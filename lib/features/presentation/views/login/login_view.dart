@@ -271,7 +271,7 @@ class _LoginViewState extends State<LoginView> {
 
 
 
-      Navigator.pushNamed(context, Routes.kHomeView , arguments: retrievedUser);
+      Navigator.pushReplacementNamed(context, Routes.kHomeView , arguments: retrievedUser);
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
