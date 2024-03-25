@@ -292,7 +292,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
@@ -340,7 +340,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
@@ -388,7 +388,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
@@ -438,7 +438,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
