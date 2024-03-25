@@ -349,6 +349,7 @@ class _AddPostViewState extends State<AddPostView> {
     //     CropAspectRatioPreset.ratio4x3,
     //     CropAspectRatioPreset.ratio16x9
     //   ],
+    //
     //   uiSettings: [
     //     AndroidUiSettings(
     //         toolbarTitle: 'Cropper',
@@ -679,9 +680,7 @@ class _AddPostViewState extends State<AddPostView> {
             Animation<double> secondaryAnimation) {
           return const SizedBox.shrink();
         });
-
   }
-
 }
 
 //  Future _showCameraGemImage(String value) async {
