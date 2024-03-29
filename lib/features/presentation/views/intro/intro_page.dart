@@ -3,9 +3,7 @@ import 'package:gem_book/features/presentation/widgets/btn_component.dart';
 import 'package:gem_book/utils/app_images.dart';
 import 'package:gem_book/utils/app_strings.dart';
 import 'package:sizer/sizer.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../../../utils/app_colors.dart';
-import '../../../../utils/app_constants.dart';
+
 import '../../../../utils/routes.dart';
 
 class IntroPage extends StatefulWidget {
@@ -69,7 +67,6 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-
   _termsAndConditions(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +76,7 @@ class _IntroPageState extends State<IntroPage> {
               Navigator.pushNamed(context, Routes.kTermsAndConditionsView);
             },
             child: const Text(
-              "Terms and Conditions.",
+              "Terms and Conditions, Privacy Policy",
               style: TextStyle(color: Color(0xff0000ee)),
             ))
       ],
