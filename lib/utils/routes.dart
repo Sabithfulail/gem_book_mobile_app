@@ -11,6 +11,7 @@ import '../features/presentation/views/login/sign_up_view.dart';
 import '../features/presentation/views/notificaation/notification__view.dart';
 import '../features/presentation/views/profile/profile_view.dart';
 import '../features/presentation/views/splash/splash_view.dart';
+import '../features/presentation/views/terms_and_conditions/terms_and_condition_view.dart';
 import '../features/presentation/widgets/gem_add.dart';
 import '../features/presentation/widgets/gem_details_view.dart';
 import '../features/presentation/widgets/user.dart';
@@ -28,6 +29,7 @@ class Routes {
   static const String kEditPostView = 'kEditPostView';
   static const String kProfileView = 'kProfileView';
   static const String kForgotPasswordView = 'kForgotPasswordView';
+  static const String kTermsAndConditionsView = 'kTermsAndConditionsView';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -77,7 +79,7 @@ class Routes {
         );
       case Routes.kAddPostView:
         return MaterialPageRoute(
-          builder: (_) =>  const AddPostView(),
+          builder: (_) => const AddPostView(),
           settings: const RouteSettings(name: kAddPostView),
         );
       case Routes.kEditPostView:
@@ -94,6 +96,11 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => const ForgotPasswordView(),
           settings: const RouteSettings(name: kForgotPasswordView),
+        );
+      case Routes.kTermsAndConditionsView:
+        return MaterialPageRoute(
+          builder: (_) => const TermsAndConditionsView(),
+          settings: const RouteSettings(name: kTermsAndConditionsView),
         );
 
       default:
