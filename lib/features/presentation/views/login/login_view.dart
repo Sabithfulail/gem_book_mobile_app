@@ -239,17 +239,15 @@ class _LoginViewState extends State<LoginView> {
         password: password,
       );
 
-
-      final user = FirebaseAuth.instance.currentUser;
+      final user = userCredential.user;
       if (user != null) {
         final uid = user.uid;
-
         // Access user data using uid
         final docRef = await FirebaseFirestore.instance.collection('users').doc(uid);
         await docRef.get().then((docSnapshot) async {
           if (docSnapshot.exists) {
             // Extract user data
-            final userData =await docSnapshot.data() as Map<String, dynamic>;
+            final userData = docSnapshot.data() as Map<String, dynamic>;
             setState(() {
               retrievedUser = AppUser(
                 firstName: userData['firstName'],
@@ -260,27 +258,34 @@ class _LoginViewState extends State<LoginView> {
               );
               kUser = retrievedUser;
             });
-            Navigator.pop(context);
+            Navigator.pop(context); // Dismiss progress bar
+            Navigator.pushReplacementNamed(context, Routes.kHomeView, arguments: retrievedUser);
           } else {
-            Navigator.pop(context);
-            CustomSnackBar.show(context, "Please check your login credential");
+            Navigator.pop(context); // Dismiss progress bar
+            CustomSnackBar.show(context, "Please check your login credentials");
           }
-        }).catchError((error) => CustomSnackBar.show(context, 'Error getting user data: $error'));
-
+        }).catchError((error) {
+          Navigator.pop(context); // Dismiss progress bar
+          CustomSnackBar.show(context, 'Error getting user data: $error');
+        });
       }
-
-
-
-      Navigator.pushReplacementNamed(context, Routes.kHomeView , arguments: retrievedUser);
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        Navigator.pop(context); // D
         CustomSnackBar.show(context, 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
+        Navigator.pop(context); // D
         CustomSnackBar.show(context, 'Wrong password provided for that user.');
+      } else {
+        Navigator.pop(context); //
+        CustomSnackBar.show(context, 'Error: ${e.message}');
       }
+    } catch (e) {
+      Navigator.pop(context); // Dismiss progress bar
+      CustomSnackBar.show(context, 'An error occurred: $e');
     }
   }
+
 
 
   Future<void> forgotPassword(String email) async {
