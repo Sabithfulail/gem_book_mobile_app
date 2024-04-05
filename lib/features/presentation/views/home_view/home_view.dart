@@ -318,6 +318,7 @@ class _HomeViewState extends State<HomeView> {
                   builder: (ctx) => CommonDialog(
                       isTwoButton: true,
                       title: "Are you sure!",
+                      description: "Do you want to logout!",
                       buttonTitle1: "Logout",
                       buttonTitle2: "Cancel",
                       onPressBtn1: () {
