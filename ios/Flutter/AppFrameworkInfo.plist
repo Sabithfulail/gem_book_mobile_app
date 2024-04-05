@@ -12,7 +12,7 @@
                                                //<string>en</string>
                                                //<key>CFBundleExecutable</key>
                                                //<string>App</string>
-                                               //<key>CFBundleIdentifier</key>
+
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
