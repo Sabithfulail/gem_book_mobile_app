@@ -71,7 +71,7 @@ class TermsAndConditionsView extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
-                          fontWeight: FontWeight.w900)
+                          fontWeight: FontWeight.w900),
                     ),
                     SizedBox(height: 5),
                     Text("This privacy policy applies to the GemBook app  for mobile devices that was created by SDGB Y3 as a Free service. This service is intended for use gem stone buyers and sellers.Seller can add a post of agem and buyer can see the details of it and contact the seller."),
