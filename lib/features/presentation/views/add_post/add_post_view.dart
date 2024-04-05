@@ -327,17 +327,17 @@ class _AddPostViewState extends State<AddPostView> {
                                 _showCameraGemImage("");
                               },
                             ),
-                            // InkWell(
-                            //   child: const ChooseImageComponent(
-                            //       title: "Select from\nGallery",
-                            //       bgColor: AppColors.appWhiteColor,
-                            //       iconColor: AppColors.appTextGrayColor,
-                            //       image: AppImages.iconGallery),
-                            //   // onTap: () {
-                            //   //   Navigator.of(context).pop();
-                            //   //   _showGalleryGemImage("");
-                            //   // },
-                            // ),
+                            InkWell(
+                              child: const ChooseImageComponent(
+                                  title: "Select from\nGallery",
+                                  bgColor: AppColors.appWhiteColor,
+                                  iconColor: AppColors.appTextGrayColor,
+                                  image: AppImages.iconGallery),
+                              // onTap: () {
+                              //   Navigator.of(context).pop();
+                              //   _showGalleryGemImage("");
+                              // },
+                            ),
                             InkWell(
                               child: const ChooseImageComponent(
                                   title: "Remove\nPicture",
