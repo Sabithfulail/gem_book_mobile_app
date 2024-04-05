@@ -59,7 +59,9 @@ class _GemDetailViewState extends State<GemDetailView> {
               width: double.maxFinite,
               decoration: BoxDecoration(
                 color: const Color(0xffF3F5F7),
-
+                // borderRadius: BorderRadius.vertical(
+                //     bottom: Radius.elliptical(
+                //         MediaQuery.of(context).size.width, 80.0)),
                 image: DecorationImage(
                   fit: BoxFit.fill,
                   image: MemoryImage(imageGem!),
