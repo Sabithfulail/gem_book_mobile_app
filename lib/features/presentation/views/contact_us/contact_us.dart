@@ -30,7 +30,7 @@ class ContactUsPage extends StatelessWidget {
             const SizedBox(height: 20),
             _buildContactInfo(
                 icon: Icons.phone,
-                text: '+1 234-567-8900',
+                text: '+1 234-567-8911',
                 onTap: () => launch('tel:+12345678900')),
             const SizedBox(height: 10),
             _buildContactInfo(
