@@ -53,6 +53,7 @@ class AppStrings {
   static const String conformPassword = "Conform Password";
   static const String reEnterPassword = "Re-Enter Password";
   static const String emailAddress = "Email Address";
+  static const String termAndCon = "Terms & Conditions";
   static const String enterEmailAddress = "Enter Email Address";
 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gem_book/utils/app_strings.dart';
 
 import '../../widgets/common_appbar.dart';
 
@@ -29,7 +30,7 @@ class TermsAndConditionsView extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Terms & Conditions",
+                      AppStrings.termAndCon,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
