@@ -371,7 +371,29 @@ class _AddPostViewState extends State<AddPostView> {
       preferredCameraDevice: CameraDevice.rear,
     );
 
-    
+    // CroppedFile? picture = await ImageCropper().cropImage(
+    //   sourcePath: pictureFile!.path,
+    //   compressQuality: 100,
+    //   aspectRatioPresets: [
+    //     CropAspectRatioPreset.square,
+    //     CropAspectRatioPreset.ratio3x2,
+    //     CropAspectRatioPreset.original,
+    //     CropAspectRatioPreset.ratio4x3,
+    //     CropAspectRatioPreset.ratio16x9
+    //   ],
+    //   uiSettings: [
+    //     AndroidUiSettings(
+    //         toolbarTitle: 'Cropper',
+    //         toolbarColor: AppColors.appBlackColor,
+    //         activeControlsWidgetColor: AppColors.appRedColor,
+    //         initAspectRatio: CropAspectRatioPreset.original,
+    //         toolbarWidgetColor: AppColors.appWhiteColor,
+    //         lockAspectRatio: false),
+    //     IOSUiSettings(
+    //       title: 'Cropper',
+    //     ),
+    //   ],
+    // );
 
     if (pictureFile != null) {
       if (pictureFile.path != "") {
