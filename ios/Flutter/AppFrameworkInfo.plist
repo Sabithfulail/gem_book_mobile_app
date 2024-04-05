@@ -10,7 +10,7 @@
   <key>CFBundleIdentifier</key>
   <string>io.flutter.flutter.app</string>       // <key>CFBundleDevelopmentRegion</key>
                                                //<string>en</string>
-                                               //<key>CFBundleExecutable</key>
+
 
 
   <key>CFBundleInfoDictionaryVersion</key>
