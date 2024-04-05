@@ -307,7 +307,7 @@ class _HomeViewState extends State<HomeView> {
           ListTile(
             tileColor: AppColors.baseColor,
             leading: const SizedBox(
-              child: Icon(CupertinoIcons.arrow_down_left),
+              child: Icon(CupertinoIcons.arrow_left_to_line),
             ),
             title: Text(AppStrings.logout,
                 style:
