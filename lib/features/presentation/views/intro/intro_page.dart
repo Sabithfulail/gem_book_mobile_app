@@ -73,7 +73,7 @@ class _IntroPageState extends State<IntroPage> {
               Navigator.pushNamed(context, Routes.kTermsAndConditionsView);
             },
             child: const Text(
-              "Terms and Conditions, Privacy Policy",
+              AppStrings.tAndCPP,
               style: TextStyle(color: Color(0xff0000ee)),
             ))
       ],
