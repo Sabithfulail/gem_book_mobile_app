@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, screenType) {
         return MaterialApp(
           title: kAppName,
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(primarySwatch: Colors.blue),
           initialRoute: Routes.kSplashView,
           onGenerateRoute: Routes.generateRoute,

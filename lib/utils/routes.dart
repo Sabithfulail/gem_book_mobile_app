@@ -11,11 +11,10 @@ import '../features/presentation/views/login/sign_up_view.dart';
 import '../features/presentation/views/notificaation/notification__view.dart';
 import '../features/presentation/views/profile/profile_view.dart';
 import '../features/presentation/views/splash/splash_view.dart';
+import '../features/presentation/views/terms_and_conditions/terms_and_condition_view.dart';
 import '../features/presentation/widgets/gem_add.dart';
 import '../features/presentation/widgets/gem_details_view.dart';
 import '../features/presentation/widgets/user.dart';
-
-
 
 class Routes {
   static const String kSplashView = 'kSplashView';
@@ -30,11 +29,10 @@ class Routes {
   static const String kEditPostView = 'kEditPostView';
   static const String kProfileView = 'kProfileView';
   static const String kForgotPasswordView = 'kForgotPasswordView';
-
+  static const String kTermsAndConditionsView = 'kTermsAndConditionsView';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name){
-
+    switch (settings.name) {
       case Routes.kSplashView:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
@@ -47,7 +45,9 @@ class Routes {
         );
       case Routes.kHomeView:
         return MaterialPageRoute(
-          builder: (_) =>  HomeView(user: settings.arguments as AppUser,),
+          builder: (_) => HomeView(
+            user: settings.arguments as AppUser,
+          ),
           settings: const RouteSettings(name: kHomeView),
         );
       case Routes.kSignUpView:
@@ -72,33 +72,36 @@ class Routes {
         );
       case Routes.kGemDetailView:
         return MaterialPageRoute(
-          builder: (_) =>  GemDetailView(
+          builder: (_) => GemDetailView(
             gemDetailArguments: settings.arguments as GemDetailArguments,
           ),
           settings: const RouteSettings(name: kGemDetailView),
         );
       case Routes.kAddPostView:
         return MaterialPageRoute(
-          builder: (_) =>  const AddPostView(),
+          builder: (_) => const AddPostView(),
           settings: const RouteSettings(name: kAddPostView),
         );
       case Routes.kEditPostView:
         return MaterialPageRoute(
-          builder: (_) =>   EditPostView(gemAdd: settings.arguments as GemAdd),
+          builder: (_) => EditPostView(gemAdd: settings.arguments as GemAdd),
           settings: const RouteSettings(name: kEditPostView),
         );
       case Routes.kProfileView:
         return MaterialPageRoute(
-          builder: (_) =>   const ProfileView(),
+          builder: (_) => const ProfileView(),
           settings: const RouteSettings(name: kProfileView),
         );
       case Routes.kForgotPasswordView:
         return MaterialPageRoute(
-          builder: (_) =>   const ForgotPasswordView(),
+          builder: (_) => const ForgotPasswordView(),
           settings: const RouteSettings(name: kForgotPasswordView),
         );
-
-
+      case Routes.kTermsAndConditionsView:
+        return MaterialPageRoute(
+          builder: (_) => const TermsAndConditionsView(),
+          settings: const RouteSettings(name: kTermsAndConditionsView),
+        );
 
       default:
         return MaterialPageRoute(
@@ -111,5 +114,3 @@ class Routes {
     }
   }
 }
-
-

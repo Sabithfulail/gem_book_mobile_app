@@ -236,12 +236,7 @@ class _AddPostViewState extends State<EditPostView> {
                           )
                         : const SizedBox.shrink(),
                 SizedBox(height: 3.h),
-                BtnComponent(
-                  title: "Cancel",
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
+
                 BtnComponent(
                   title: "Confirm",
                   onTap: () {
@@ -268,8 +263,8 @@ class _AddPostViewState extends State<EditPostView> {
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(
-                                      imageGem: widget.gemAdd.imageCertificate,
-                                      imageCerti: widget.gemAdd.imageGem,
+                                      imageGem: widget.gemAdd.imageGem,
+                                      imageCerti: widget.gemAdd.imageCertificate,
                                       name: name,
                                       price: price,
                                       shape: shape,
@@ -280,7 +275,7 @@ class _AddPostViewState extends State<EditPostView> {
                                       sellerName: kUser.lastName ?? "",
                                       contactNumber: kUser.contactNumber ?? "",
                                       email: kUser.emailAddress ?? "",
-                                      addID: widget.gemAdd.imageCertificate,
+                                      addID: widget.gemAdd.addID ?? "",
                                       uid: kUser.uid ?? "");
                                   try {
                                     showProgressBar(context);
@@ -297,7 +292,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
@@ -316,8 +311,8 @@ class _AddPostViewState extends State<EditPostView> {
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(
-                                      imageGem: widget.gemAdd.imageCertificate,
-                                      imageCerti: widget.gemAdd.imageGem,
+                                      imageGem: imageGem,
+                                      imageCerti: widget.gemAdd.imageCertificate,
                                       name: name,
                                       price: price,
                                       shape: shape,
@@ -345,7 +340,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
@@ -364,8 +359,8 @@ class _AddPostViewState extends State<EditPostView> {
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(
-                                      imageGem: widget.gemAdd.imageCertificate,
-                                      imageCerti: widget.gemAdd.imageGem,
+                                      imageGem: widget.gemAdd.imageGem,
+                                      imageCerti: imageCerti,
                                       name: name,
                                       price: price,
                                       shape: shape,
@@ -393,7 +388,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
@@ -414,8 +409,8 @@ class _AddPostViewState extends State<EditPostView> {
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(
-                                      imageGem: widget.gemAdd.imageCertificate,
-                                      imageCerti: widget.gemAdd.imageGem,
+                                      imageGem: imageGem,
+                                      imageCerti: imageCerti,
                                       name: name,
                                       price: price,
                                       shape: shape,
@@ -443,7 +438,7 @@ class _AddPostViewState extends State<EditPostView> {
                                     Navigator.pop(context);
                                   }
                                   CustomSnackBar.show(
-                                      context, 'Gem added successfully!');
+                                      context, 'Gem edited successfully!');
                                   Navigator.pop(context);
                                   Navigator.popUntil(context,
                                       ModalRoute.withName(Routes.kHomeView));
@@ -455,6 +450,11 @@ class _AddPostViewState extends State<EditPostView> {
                         CustomSnackBar.show(context, 'Please fill all details');
                       }
                     }
+                  },
+                ), BtnComponent(
+                  title: "Cancel",
+                  onTap: () {
+                    Navigator.pop(context);
                   },
                 ),
               ],

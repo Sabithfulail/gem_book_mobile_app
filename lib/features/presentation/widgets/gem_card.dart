@@ -36,19 +36,20 @@ class _GemCardWidgetState extends State<GemCardWidget> {
     return InkWell(
       onTap: () => widget.onTapCallback(),
       child: Padding(
-        padding: EdgeInsets.only(left: 1.5.h,top: 1.5.h),
+        padding: EdgeInsets.only(left: 2.h,top: 1.5.h,right: 2.h),
         child: Container(
           height: 68.w,
             width: 45.w,
             decoration: BoxDecoration(
               borderRadius:BorderRadius.circular(16.0),
-              color:  const Color(0xffF3F5F7),
+              color:  const Color(0xffe8ecf1),
             ),
             child: Padding(
               padding: EdgeInsets.all(1.5.h),
               child: Column(
                 children: [
                   Image.memory(
+                    fit: BoxFit.fill,
                     decodedBytes,
                     width: 40.w,
                     height: 40.w,

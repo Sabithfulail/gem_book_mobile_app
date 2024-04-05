@@ -33,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
   String mobileNumber = kUser.contactNumber??"0777123456";
   String mailAddress = "${kUser.emailAddress}";
   TextEditingController searchController = TextEditingController();
-
+  final FocusNode _searchFocusNode = FocusNode();
   final DatabaseService dbService = DatabaseService();
   List<GemAdd> listAdds = [];
   List<GemAdd> filteredList = [];
@@ -48,6 +48,12 @@ class _HomeViewState extends State<HomeView> {
         mailAddress = widget.user.emailAddress??"";
       });
     });
+  }
+
+  @override
+  void dispose() {
+    _searchFocusNode.dispose(); // Dispose the FocusNode
+    super.dispose();
   }
 
   @override
@@ -71,6 +77,10 @@ class _HomeViewState extends State<HomeView> {
                       color: Color(0xffF3F5F7),
                       borderRadius: BorderRadius.all(Radius.circular(24))),
                   child: TextField(
+                      focusNode: _searchFocusNode, // Step 2: Attach FocusNode to the TextField
+                      onTap: () {
+                        _searchFocusNode.requestFocus(); // Step 3: Request focus when tapped
+                      },
                       onChanged: (value) {
                         filterList(value);
                       },
@@ -149,7 +159,7 @@ class _HomeViewState extends State<HomeView> {
                         onTapCallback: () {
                           Navigator.pushNamed(context, Routes.kGemDetailView,
                               arguments:
-                                  GemDetailArguments(gemAdd: filteredList[index]));
+                              GemDetailArguments(gemAdd: filteredList[index]));
                         },
                       );
                     },
@@ -301,7 +311,7 @@ class _HomeViewState extends State<HomeView> {
             ),
             title: Text(AppStrings.logout,
                 style:
-                    AppStyling.bold500TextSize16.copyWith(color: Colors.white)),
+                AppStyling.bold500TextSize16.copyWith(color: Colors.white)),
             onTap: () {
               showDialog(
                   context: context,
@@ -355,9 +365,9 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: AppColors.baseColor,
       title: const Center(
           child: Text(
-        AppStrings.welcome,
-        style: TextStyle(color: Colors.white),
-      )),
+            AppStrings.welcome,
+            style: TextStyle(color: Colors.white),
+          )),
       leading: IconButton(
         icon: Icon(
           Icons.menu,
@@ -390,7 +400,7 @@ class _HomeViewState extends State<HomeView> {
       } else {
         filteredList = listAdds
             .where((item) =>
-                (item.name.toLowerCase()).contains(query.toLowerCase()))
+            (item.name.toLowerCase()).contains(query.toLowerCase()))
             .toList();
       }
     });

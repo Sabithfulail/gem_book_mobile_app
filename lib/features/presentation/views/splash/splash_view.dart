@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gem_book/utils/app_images.dart';
 import 'package:gem_book/utils/routes.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../../utils/app_images.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -45,10 +46,11 @@ class _SplashScreenState extends State<SplashScreen> {
               //   ),
               // ),
               child: Image.asset(
-                AppImages.icGem,
-                // color: AppColors.baseColor,
-                // colorBlendMode: BlendMode.color,
-              ),
+              // "images/pngs/ic_splash.png"
+                  AppImages.icSplash,
+                  // color: AppColors.baseColor,
+                  // colorBlendMode: BlendMode.color,
+                  ),
             ),
           ),
         ),

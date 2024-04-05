@@ -47,7 +47,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               onTap: () {
                 forgotPassword(email);
               },
-              title: "Send rest Link",
+              title: "Send reset Link",
             ),
           ],
         ),
