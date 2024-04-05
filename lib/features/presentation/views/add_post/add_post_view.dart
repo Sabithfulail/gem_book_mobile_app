@@ -415,9 +415,9 @@ class _AddPostViewState extends State<AddPostView> {
         });
         await runInference(gemImageFile);
       }
-    } else {
-      gemImageFileName = "No File Selected";
-      return;
+    // } else {
+    //   gemImageFileName = "No File Selected";
+    //   return;
     }
   }
 
