@@ -67,7 +67,7 @@ class TermsAndConditionsView extends StatelessWidget {
                     Text("Contact Us If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at aroos.20212195@iit.ac.lk."),
                     SizedBox(height: 10),
                     Text(
-                      AppStrings.privacyPolicy,
+                      "Privacy Policy",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
