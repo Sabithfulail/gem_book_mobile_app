@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gem_book/utils/app_strings.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 import '../../widgets/common_appbar.dart';
 
