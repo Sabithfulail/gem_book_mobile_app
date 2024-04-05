@@ -307,7 +307,7 @@ class _HomeViewState extends State<HomeView> {
           ListTile(
             tileColor: AppColors.baseColor,
             leading: const SizedBox(
-              child: Icon(CupertinoIcons.arrow_down_left),
+              child: Icon(CupertinoIcons.arrow_left_to_line),
             ),
             title: Text(AppStrings.logout,
                 style:
@@ -317,7 +317,8 @@ class _HomeViewState extends State<HomeView> {
                   context: context,
                   builder: (ctx) => CommonDialog(
                       isTwoButton: true,
-                      title: "Are sure",
+                      title: "Are you sure!",
+                      description: "Do you want to logout!",
                       buttonTitle1: "Logout",
                       buttonTitle2: "Cancel",
                       onPressBtn1: () {
