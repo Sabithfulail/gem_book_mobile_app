@@ -8,7 +8,7 @@
   <key>CFBundleExecutable</key>
   <string>App</string>
   <key>CFBundleIdentifier</key>
-  <string>io.flutter.flutter.app</string>       // <key>CFBundleDevelopmentRegion</key>
+  <string>io.flutter.flutter.app</string>
 
 
 
