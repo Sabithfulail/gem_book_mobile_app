@@ -40,7 +40,11 @@ class _IntroPageState extends State<IntroPage> {
               ),
             ),
 
-
+            // SizedBox(height: 5.h),
+            // const Text(
+            //   AppStrings.introDescription,
+            //   textAlign: TextAlign.center,
+            // ),
 
             SizedBox(height: 5.h),
             BtnComponent(
