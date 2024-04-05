@@ -55,6 +55,7 @@ class AppStrings {
   static const String emailAddress = "Email Address";
   static const String enterEmailAddress = "Enter Email Address";
   static const String tAndCPP = "Terms and Conditions, Privacy Policy";
+  static const String forgetPassword = "Forgot Password";
 
 
 

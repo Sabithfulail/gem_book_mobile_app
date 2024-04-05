@@ -22,7 +22,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: const CommonAppBar(
-        title: "Forgot Password",
+        title: AppStrings.forgotPassword,
       ),
       body: Container(
         margin: const EdgeInsets.all(24),
