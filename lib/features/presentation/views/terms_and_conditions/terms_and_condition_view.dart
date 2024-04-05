@@ -25,8 +25,7 @@ class TermsAndConditionsView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text("Terms And Condtions",style: TextStyle(color: Colors.black,fontSize: 24,fontWeight: FontWeight.w900),),
-                    SizedBox(
+                   SizedBox(
                       height: 10,
                     ),
                     Text(
