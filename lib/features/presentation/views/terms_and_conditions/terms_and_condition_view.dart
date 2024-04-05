@@ -67,11 +67,11 @@ class TermsAndConditionsView extends StatelessWidget {
                     Text("Contact Us If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at aroos.20212195@iit.ac.lk."),
                     SizedBox(height: 10),
                     Text(
-                      "Privacy Policy",
+                      AppStrings.privacyPolicy,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
-                          fontWeight: FontWeight.w900),
+                          fontWeight: FontWeight.w900)
                     ),
                     SizedBox(height: 5),
                     Text("This privacy policy applies to the GemBook app  for mobile devices that was created by SDGB Y3 as a Free service. This service is intended for use gem stone buyers and sellers.Seller can add a post of agem and buyer can see the details of it and contact the seller."),
