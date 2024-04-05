@@ -60,7 +60,7 @@ class _ProfileViewState extends State<ProfileView> {
                             Text(
                               "Mobile Number",
                               style: TextStyle(
-                                fontSize: 1.5.h,
+                                fontSize: 1.8.h,
                                 color: Colors.white,
                               ),
                             ),
@@ -70,7 +70,7 @@ class _ProfileViewState extends State<ProfileView> {
                             Text(
                               ":",
                               style: TextStyle(
-                                fontSize: 1.5.h,
+                                fontSize: 1.8.h,
                                 color: Colors.white,
                               ),
                             ),
@@ -80,7 +80,7 @@ class _ProfileViewState extends State<ProfileView> {
                             Text(
                               mobileNumber,
                               style: TextStyle(
-                                fontSize: 1.5.h,
+                                fontSize: 1.8.h,
                                 color: Colors.white,
                               ),
                             ),
@@ -91,7 +91,7 @@ class _ProfileViewState extends State<ProfileView> {
                             Text(
                               "Email Address",
                               style: TextStyle(
-                                fontSize: 1.5.h,
+                                fontSize: 1.8.h,
                                 color: Colors.white,
                               ),
                             ),
@@ -101,7 +101,7 @@ class _ProfileViewState extends State<ProfileView> {
                             Text(
                               ":",
                               style: TextStyle(
-                                fontSize: 1.5.h,
+                                fontSize: 1.8.h,
                                 color: Colors.white,
                               ),
                             ),
@@ -111,7 +111,7 @@ class _ProfileViewState extends State<ProfileView> {
                             Text(
                               mailAddress,
                               style: TextStyle(
-                                fontSize: 1.5.h,
+                                fontSize: 1.8.h,
                                 color: Colors.white,
                               ),
                             ),
