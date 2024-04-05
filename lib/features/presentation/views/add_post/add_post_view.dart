@@ -365,11 +365,11 @@ class _AddPostViewState extends State<AddPostView> {
   }
 
   Future _showCameraGemImage(String value) async {
-    // final pictureFile = await ImagePicker().pickImage(
-    //   source: ImageSource.camera,
-    //   imageQuality: 50,
-    //   preferredCameraDevice: CameraDevice.rear,
-    // );
+    final pictureFile = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+      preferredCameraDevice: CameraDevice.rear,
+    );
 
     // CroppedFile? picture = await ImageCropper().cropImage(
     //   sourcePath: pictureFile!.path,
