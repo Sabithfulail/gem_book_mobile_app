@@ -39,7 +39,7 @@ class _SignUpViewState extends State<SignUpView> {
                 children: <Widget>[
                   const SizedBox(height: 60.0),
                   const Text(
-                    "Sign up",
+                    "Sign Up",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -182,7 +182,7 @@ class _SignUpViewState extends State<SignUpView> {
                       backgroundColor: AppColors.baseColor,
                     ),
                     child: const Text(
-                      "Sign up",
+                      "Sign Up",
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   )),

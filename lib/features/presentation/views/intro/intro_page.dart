@@ -40,11 +40,8 @@ class _IntroPageState extends State<IntroPage> {
                 fontSize: 40,
               ),
             ),
-            // SizedBox(height: 5.h),
-            // const Text(
-            //   AppStrings.introDescription,
-            //   textAlign: TextAlign.center,
-            // ),
+
+
             SizedBox(height: 5.h),
             BtnComponent(
               title: AppStrings.login,
@@ -76,7 +73,7 @@ class _IntroPageState extends State<IntroPage> {
               Navigator.pushNamed(context, Routes.kTermsAndConditionsView);
             },
             child: const Text(
-              "Terms and Conditions, Privacy Policy",
+              AppStrings.tAndCPP,
               style: TextStyle(color: Color(0xff0000ee)),
             ))
       ],

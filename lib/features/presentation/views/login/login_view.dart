@@ -88,7 +88,7 @@ class _LoginViewState extends State<LoginView> {
           title: AppStrings.login,
           onTap: () {
            if(userName.isEmpty || pwd.isEmpty){
-             CustomSnackBar.show(context, 'Please enter login details');
+             CustomSnackBar.show(context, 'Please enter your login details');
            }else{
              loginAndRedirectToHome(userName,pwd,context);
            }
