@@ -127,7 +127,7 @@ class TermsAndConditionsView extends StatelessWidget {
                     Text(""),
                   ],
                 ),
-              ),
+              ),//
             ),
           ],
         ),
