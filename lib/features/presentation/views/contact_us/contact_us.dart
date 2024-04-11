@@ -14,12 +14,12 @@ class ContactUsPage extends StatelessWidget {
         title: AppStrings.contactUs,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(left: 20.0,right: 20,top: 20,bottom: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Get in Touch!',
+              'Get in Touch !!',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -30,7 +30,7 @@ class ContactUsPage extends StatelessWidget {
             const SizedBox(height: 20),
             _buildContactInfo(
                 icon: Icons.phone,
-                text: '+1 234-567-8900',
+                text: '+1 234-567-8911',
                 onTap: () => launch('tel:+12345678900')),
             const SizedBox(height: 10),
             _buildContactInfo(

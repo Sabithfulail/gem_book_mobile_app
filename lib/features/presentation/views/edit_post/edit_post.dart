@@ -259,7 +259,7 @@ class _AddPostViewState extends State<EditPostView> {
                             builder: (ctx) => CommonDialog(
                                 isTwoButton: true,
                                 title: "Are sure",
-                                buttonTitle1: "Conform",
+                                buttonTitle1: "Confirm",
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(
@@ -307,7 +307,7 @@ class _AddPostViewState extends State<EditPostView> {
                             builder: (ctx) => CommonDialog(
                                 isTwoButton: true,
                                 title: "Are sure",
-                                buttonTitle1: "Conform",
+                                buttonTitle1: "Confirm",
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(
@@ -355,7 +355,7 @@ class _AddPostViewState extends State<EditPostView> {
                             builder: (ctx) => CommonDialog(
                                 isTwoButton: true,
                                 title: "Are sure",
-                                buttonTitle1: "Conform",
+                                buttonTitle1: "Confirm",
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(
@@ -405,7 +405,7 @@ class _AddPostViewState extends State<EditPostView> {
                             builder: (ctx) => CommonDialog(
                                 isTwoButton: true,
                                 title: "Are sure",
-                                buttonTitle1: "Conform",
+                                buttonTitle1: "Confirm",
                                 buttonTitle2: "Cancel",
                                 onPressBtn1: () {
                                   Add add = Add(

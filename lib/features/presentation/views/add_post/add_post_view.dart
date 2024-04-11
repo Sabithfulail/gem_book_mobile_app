@@ -381,6 +381,7 @@ class _AddPostViewState extends State<AddPostView> {
     //     CropAspectRatioPreset.ratio4x3,
     //     CropAspectRatioPreset.ratio16x9
     //   ],
+    //
     //   uiSettings: [
     //     AndroidUiSettings(
     //         toolbarTitle: 'Cropper',
@@ -415,9 +416,9 @@ class _AddPostViewState extends State<AddPostView> {
         });
         await runInference(gemImageFile);
       }
-    } else {
-      gemImageFileName = "No File Selected";
-      return;
+    // } else {
+    //   gemImageFileName = "No File Selected";
+    //   return;
     }
   }
 
@@ -713,9 +714,7 @@ class _AddPostViewState extends State<AddPostView> {
             Animation<double> secondaryAnimation) {
           return const SizedBox.shrink();
         });
-
   }
-
 }
 
 //  Future _showCameraGemImage(String value) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gem_book/utils/app_strings.dart';
 
 import '../../widgets/common_appbar.dart';
 
@@ -29,7 +30,7 @@ class TermsAndConditionsView extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Terms & Conditions",
+                      AppStrings.termAndCon,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
@@ -66,7 +67,7 @@ class TermsAndConditionsView extends StatelessWidget {
                     Text("Contact Us If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at aroos.20212195@iit.ac.lk."),
                     SizedBox(height: 10),
                     Text(
-                      "Privacy Policy",
+                      AppStrings.privacyPolicy,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
@@ -126,7 +127,7 @@ class TermsAndConditionsView extends StatelessWidget {
                     Text(""),
                   ],
                 ),
-              ),
+              ),//
             ),
           ],
         ),

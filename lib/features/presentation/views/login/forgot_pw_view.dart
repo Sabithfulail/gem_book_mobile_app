@@ -22,7 +22,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: const CommonAppBar(
-        title: "Forgot Password",
+        title: AppStrings.forgotPassword,
       ),
       body: Container(
         margin: const EdgeInsets.all(24),
@@ -31,7 +31,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Enter your mail to send rest password",
+              "Enter your email to send rest password",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 3.h),

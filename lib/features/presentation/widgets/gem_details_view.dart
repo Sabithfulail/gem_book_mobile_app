@@ -79,7 +79,7 @@ class _GemDetailViewState extends State<GemDetailView> {
                     widget.gemDetailArguments.gemAdd.name,
                     style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 30,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
