@@ -33,15 +33,19 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _header(context),
-            _inputField(context),
-            _forgotPassword(context),
-            _signup(context),
-          ],
+        margin: const EdgeInsets.all(8),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const SizedBox(height: 80,),
+              _header(context),
+              const SizedBox(height: 20,),
+              _inputField(context),
+              _forgotPassword(context),
+              _signup(context),
+            ],
+          ),
         ),
       ),
     );

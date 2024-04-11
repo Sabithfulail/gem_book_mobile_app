@@ -41,40 +41,43 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        widget.labelText != null
-            ? Text(
-                widget.labelText ?? "",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: AppColors.appBlackColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-              )
-            : Container(),
-        SizedBox(height: 1.h),
-        TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: widget.hintText ?? "",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: const BorderSide(color: Colors.grey),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10,right: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          widget.labelText != null
+              ? Text(
+                  widget.labelText ?? "",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.appBlackColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                )
+              : Container(),
+          SizedBox(height: 1.h),
+          TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                hintText: widget.hintText ?? "",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: const BorderSide(color: Colors.grey),
+                ),
+                fillColor: (widget.fillColor ?? Colors.white).withOpacity(0.1),
+                filled: true,
+                prefixIcon: widget.icon,
               ),
-              fillColor: (widget.fillColor ?? Colors.white).withOpacity(0.1),
-              filled: true,
-              prefixIcon: widget.icon,
-            ),
-            obscureText: widget.obscureText ?? false,
-            onChanged: widget.onChanged,
-            inputFormatters: widget.isConatactNumber
-                ? [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(10),
-                  ]
-                : [])
-      ],
+              obscureText: widget.obscureText ?? false,
+              onChanged: widget.onChanged,
+              inputFormatters: widget.isConatactNumber
+                  ? [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(10),
+                    ]
+                  : [])
+        ],
+      ),
     );
   }
 }
